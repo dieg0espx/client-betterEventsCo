@@ -592,6 +592,10 @@ p {
     font-size: 20px;
     text-align: center;
   }
+  .home .container2 .inflatable #description {
+    border: 1px solid red;
+    max-width: 300px;
+  }
   .home .container2 .iconChev {
     display: none;
   }
