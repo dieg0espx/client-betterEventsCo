@@ -11,7 +11,7 @@ function Footer() {
         <p> <i className="bi bi-envelope-fill  iconMail"></i> example@mail.com </p>
       </div>
       <div id="right">
-            <p> <i class="bi bi-facebook iconFacebook"></i> <i class="bi bi-instagram iconInstagram"></i> </p>
+            <p> <i className="bi bi-facebook iconFacebook"></i> <i className="bi bi-instagram iconInstagram"></i> </p>
             <div className='menu'>
                 <Link className="footer-btn" to="/"> Home </Link>
                 <Link className="footer-btn" to="/"> Services </Link>

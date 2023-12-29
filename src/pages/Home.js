@@ -13,6 +13,7 @@ import Checks from '../components/Checks'
 import Comment from '../components/Comment'
 import Footer from '../components/Footer'
 import NewsLetter from '../components/NewsLetter'
+import Inflatables from '../components/Inflatables'
 
 function Home() {
   return (
@@ -22,6 +23,9 @@ function Home() {
         <h1> Better Events Co.</h1>
         <h2> Bouncing Smiles, Crafting Memories </h2>
         <ButtonContact />
+      </div>
+      <div className='container2'>
+        <Inflatables />
       </div>
       <div className='container3'>
           <img src={inflatable1} />

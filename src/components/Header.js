@@ -6,10 +6,6 @@ function Header() {
     const [page, setPage] = useState(1)
     const [mobileMenu, setMobileMenu] = useState(false)
 
-    useEffect(()=>{
-        console.log(page);
-    },[page])
-
   return (
     <div className="header">
         <img src={tempLogo} />
