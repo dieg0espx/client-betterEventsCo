@@ -1,3 +1,9 @@
+*{
+  box-sizing: border-box;
+  margin: 0;
+  padding: 0;
+}
+
 .App {
   text-align: center;
 }
@@ -35,4 +41,90 @@
   to {
     transform: rotate(360deg);
   }
+}
+
+/* =========== HEADER  =========  */
+
+.header {
+  display: grid;
+  grid-template-columns: 200px auto;
+  height: 80px;
+  align-items: center;
+  box-shadow: rgba(99, 99, 99, 0.2) 0px 2px 8px 0px;
+}
+.header img {
+  width: 100%;
+}
+.header .navBtns {
+  display: flex;
+  align-items: center;
+  justify-content: right;
+  gap: 1px;
+}
+.header .navBtns .btn  {
+  color: gray;
+  text-decoration: none;
+  font-weight: bold;
+  border-radius: 0px;
+  line-height: 80px;
+  background-color: white;
+  height: 80px;
+  padding: 0 30px;
+  border: none;
+}
+.header .navBtns .active, 
+.header .navBtns :hover  {
+  background-color: #0089BF;
+  color: white;
+}
+.nav-mobile-menu {
+  display: none;
+  border: none;
+  background-color: transparent;
+  width: fit-content;
+  margin-left: auto;
+  margin-right: 20px;
+  font-size: 30px;
+  color: gray;
+}
+.nav-mobile-menu :hover {
+  color: #0089BF;
+}
+.mobileMenu {
+  display: flex;
+  flex-direction: column;
+  background-color: white;
+  position: fixed;
+  top: 80px;
+  left: 0;
+  width: 100%;
+  border-bottom: 1px solid lightgray;
+}
+
+.mobileMenu .mobile-btn {
+  display: block;
+  width: 100%;
+  border-bottom: 1px solid lightgray;
+  padding: 10px 20px;
+  text-decoration: none;
+  color: gray;
+  font-weight: bold;
+}
+.header .mobileMenu .active, 
+.header .mobile-btn :hover {
+  background-color: #0089BF;
+  color: white;
+}
+
+
+ 
+@media screen and (max-width:800px) {
+  .header .navBtns, 
+  .header .mobileMenu {
+      display: none;
+    }
+    .nav-mobile-menu {
+      display: block;
+    }
+  
 }
