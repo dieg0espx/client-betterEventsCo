@@ -449,6 +449,20 @@ p {
   text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.8); /* Adjust the shadow values as needed */
 }
 
+.home .container2 {
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  gap: 10px;
+}
+.home .container2 .iconChev{
+  color: #0089BF;
+  font-size: 30px;
+}
+
+
+
+
 .home .container3 {
   width: 90%;
   margin: 60px auto;

@@ -3,7 +3,7 @@ import { getFirestore } from 'firebase/firestore';
 import { collection, getDocs } from "firebase/firestore";
 import app from '../Firbase'
 
-function Inflatables() {
+function Inflatables({ containerRef }) {
   const db = getFirestore(app);
   const [Inflatables, setInflatables] = useState([])
 
@@ -28,7 +28,7 @@ function Inflatables() {
   },[Inflatables])
 
   return (
-    <div className="inflatables">
+    <div className="inflatables" ref={containerRef}>
       {Inflatables.map((inflatable) => (
         <div className="inflatable">
           <img src={inflatable.image} />

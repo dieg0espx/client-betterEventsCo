@@ -1,4 +1,4 @@
-import React from 'react'
+import React , { useRef } from "react";
 import Header from '../components/Header'
 import stock1 from '../images/stock1.png'
 import stock2 from '../images/stock2.png'
@@ -16,6 +16,19 @@ import NewsLetter from '../components/NewsLetter'
 import Inflatables from '../components/Inflatables'
 
 function Home() {
+  const containerRef = useRef(null);
+
+  const handleScrollToLeft = () => {
+    if (containerRef.current) {
+      containerRef.current.scrollLeft += 50; // Adjust the scroll distance as needed
+    }
+  };
+  const handleScrollToRight= () => {
+    if (containerRef.current) {
+      containerRef.current.scrollLeft -= 50; // Adjust the scroll distance as needed
+    }
+  };
+
   return (
     <div className='home'>
       <Header />
@@ -25,7 +38,9 @@ function Home() {
         <ButtonContact />
       </div>
       <div className='container2'>
-        <Inflatables />
+        <i className="bi bi-chevron-compact-left iconChev" onClick={()=>handleScrollToLeft()}></i>
+        <Inflatables containerRef={containerRef} />
+        <i className="bi bi-chevron-compact-right iconChev" onClick={()=>handleScrollToRight()}></i>
       </div>
       <div className='container3'>
           <img src={inflatable1} />
