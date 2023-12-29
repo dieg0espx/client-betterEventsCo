@@ -576,10 +576,9 @@ p {
 @media screen and (max-width:800px) {
   .home {
     max-width: 100vw;
-    border: 1px solid red;
   }
   .home .container1 {
-    width: 90%;
+    width: 95%;
     padding: 20px;
     margin: -40px auto 40px auto;
     height: 300px;
