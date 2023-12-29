@@ -7,10 +7,12 @@ import stock4 from '../images/stock4.png'
 import stock5 from '../images/stock5.png'
 
 import inflatable1 from '../images/inflatable1.png'
-
 import ButtonContact from '../components/ButtonContact'
 import BtnLearnMore from '../components/BtnLearnMore'
 import Checks from '../components/Checks'
+import Comment from '../components/Comment'
+import Footer from '../components/Footer'
+import NewsLetter from '../components/NewsLetter'
 
 function Home() {
   return (
@@ -62,6 +64,16 @@ function Home() {
         <Checks title="Title 2" description="Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed tincidunt, erat in malesuada aliquam, est erat faucibus purus, eget viverra nulla sem vitae neque." />
         <Checks title="Title 3" description="Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed tincidunt, erat in malesuada aliquam, est erat faucibus purus, eget viverra nulla sem vitae neque." />
       </div>
+      <div className='container7'>
+          <h3> Customer Testimonials: Voices of Satisfaction </h3>
+          <div className='grid-comments'>
+            <Comment image={1} stars={5} name={"Emily Johnson"} comment={"Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed tincidunt, erat in malesuada aliquam, est erat faucibus purus, eget viverra nulla sem vitae neque. Quisque id sodales libero. In nec enim nisi."} />
+            <Comment image={2} stars={5} name={"Alexander Mitchell"} comment={"Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed tincidunt, erat in malesuada aliquam, est erat faucibus purus, eget viverra nulla sem vitae neque. Quisque id sodales libero. In nec enim nisi."} />
+            <Comment image={3} stars={5} name={"Jessica Davis"} comment={"Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed tincidunt, erat in malesuada aliquam, est erat faucibus purus, eget viverra nulla sem vitae neque. Quisque id sodales libero. In nec enim nisi."} />
+          </div>
+      </div>
+      <NewsLetter />
+      <Footer />
     </div>
   )
 }
