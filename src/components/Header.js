@@ -26,6 +26,14 @@ function Header() {
             <Link className={page == 3 ? "mobile-btn active":"mobile-btn"} onClick={()=>setPage(3)} to="/"> Inflatables </Link>
             <Link className={page == 4 ? "mobile-btn active":"mobile-btn"} onClick={()=>setPage(4)} to="/"> Contact </Link>
         </div>
+        <div className="grid-inflatables">
+            <Link className="inflatables-btns" to="/"> All Rentals </Link>
+            <Link className="inflatables-btns" to="/"> Bounce Houses </Link>
+            <Link className="inflatables-btns" to="/"> Combo Jumpers </Link>
+            <Link className="inflatables-btns" to="/"> Slides </Link>
+            <Link className="inflatables-btns" to="/"> Games & Obstacles </Link>
+            <Link className="inflatables-btns" to="/"> Extras </Link>
+        </div>
     </div>
   );
 }
