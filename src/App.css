@@ -227,6 +227,7 @@ p {
   width: 100%;
   white-space: nowrap;
   overflow-x: scroll;
+  padding-left: 10px;
 }
 
 .inflatable {
@@ -365,10 +366,12 @@ p {
   flex-direction: column;
   background-color: white;
   position: fixed;
-  top: 80px;
+  top: 60px;
   left: 0;
   width: 100%;
   border-bottom: 1px solid lightgray;
+  animation: mobileMenu 0.5s;
+  z-index: 1;
 }
 
 .mobileMenu .mobile-btn {
@@ -380,8 +383,8 @@ p {
   color: gray;
   font-weight: bold;
 }
-.header .mobileMenu .active, 
-.header .mobile-btn :hover {
+.mobileMenu .active, 
+.mobile-btn :hover {
   background-color: #0089BF;
   color: white;
 }
@@ -408,13 +411,29 @@ p {
  
 @media screen and (max-width:800px) {
   .header .navBtns, 
-  .header .mobileMenu {
+  .header .mobileMenu, 
+  .header .grid-inflatables {
       display: none;
-    }
-    .nav-mobile-menu {
-      display: block;
-    }
+  }
+  .header {
+    width: 100vw;
+    height: 60px;
+    grid-template-columns: 50% auto;
+  }
+  .nav-mobile-menu {
+    display: block;
+    margin-right: 30px;
+  }
   
+}
+
+@keyframes mobileMenu {
+  from {
+    top:-100%
+  }
+  to {
+    top:60px;
+  }
 }
 
 
@@ -552,4 +571,95 @@ p {
   max-width: 90%;
   margin: 40px auto;
   gap: 40px;
+}
+
+@media screen and (max-width:800px) {
+  .home {
+    max-width: 100vw;
+    border: 1px solid red;
+  }
+  .home .container1 {
+    width: 90%;
+    padding: 20px;
+    margin: -40px auto 40px auto;
+    height: 300px;
+    align-items: center;
+  }
+  .home .container1 h1 {
+    font-size: 30px;
+    text-align: center;
+  }
+  .home .container1 h2 {
+    font-size: 20px;
+    text-align: center;
+  }
+  .home .container2 .iconChev {
+    display: none;
+  }
+  .home .container3 {
+    display: block;
+    text-align: center;
+  }
+  .home .container3 .btn-contact {
+    margin: 40px auto 0 auto;
+  }
+  .home .container4 {
+    display: block;
+  }
+  .home .container4 .eventTypes {
+    margin-bottom: 30px;
+  }
+  .home .container5 {
+    display: block;
+  }
+  .home .container5 .txt-container5 {
+    align-items: center;
+    text-align: center;
+  }
+  .home .container5 .btn-contact {
+    margin-bottom: 20px;
+  }
+  .home .container6 {
+    display: block;
+  }
+  .home .container6 .check p {
+    margin: auto;
+    margin-bottom: 30px;
+  }
+  .home .container7 h3 {
+    font-size: 30px;
+  }
+  .home .container7 .grid-comments {
+    display: block;
+    max-width: 100%;
+  }
+  .home .container7 .grid-comments .comment{
+    margin-bottom: 30px;
+  }
+  .home .newsLetter {
+    text-align: center;
+  }
+  .home .newsLetter h2{
+    margin-top: -40px;
+  }
+  .home .newsLetter input {
+    width: 90%;
+  }
+
+  .footer{
+    display: block;
+  }
+  .footer #right {
+    text-align: left;
+    margin-top: 20px;
+  }
+  .footer .iconFacebook {
+    margin-left: 0;
+  }
+  .footer .menu {
+    gap: 0;
+    max-width: 100%;
+    justify-content: space-between;
+    margin-top: 20px;
+  }
 }

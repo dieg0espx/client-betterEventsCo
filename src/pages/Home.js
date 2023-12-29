@@ -20,12 +20,12 @@ function Home() {
 
   const handleScrollToLeft = () => {
     if (containerRef.current) {
-      containerRef.current.scrollLeft += 50; // Adjust the scroll distance as needed
+      containerRef.current.scrollLeft += 50;
     }
   };
   const handleScrollToRight= () => {
     if (containerRef.current) {
-      containerRef.current.scrollLeft -= 50; // Adjust the scroll distance as needed
+      containerRef.current.scrollLeft -= 50;
     }
   };
 

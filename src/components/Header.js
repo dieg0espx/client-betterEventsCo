@@ -7,6 +7,7 @@ function Header() {
     const [mobileMenu, setMobileMenu] = useState(false)
 
   return (
+    <div>
     <div className="header">
         <img src={tempLogo} />
         <div className="navBtns">
@@ -16,12 +17,7 @@ function Header() {
             <Link className={page == 4 ? "btn active":"btn"} onClick={()=>setPage(4)} to="/"> Contact </Link>
         </div>
         <button className="nav-mobile-menu" onClick={()=>setMobileMenu(!mobileMenu)}><i className="bi bi-list"></i> </button>
-        <div className="mobileMenu" style={{display: mobileMenu ? "flex":"none"}}>
-            <Link className={page == 1 ? "mobile-btn active":"mobile-btn"} onClick={()=>setPage(1)} to="/"> Home </Link>
-            <Link className={page == 2 ? "mobile-btn active":"mobile-btn"} onClick={()=>setPage(2)} to="/"> Services </Link>
-            <Link className={page == 3 ? "mobile-btn active":"mobile-btn"} onClick={()=>setPage(3)} to="/"> Inflatables </Link>
-            <Link className={page == 4 ? "mobile-btn active":"mobile-btn"} onClick={()=>setPage(4)} to="/"> Contact </Link>
-        </div>
+      
         <div className="grid-inflatables">
             <Link className="inflatables-btns" to="/"> All Rentals </Link>
             <Link className="inflatables-btns" to="/"> Bounce Houses </Link>
@@ -31,6 +27,14 @@ function Header() {
             <Link className="inflatables-btns" to="/"> Extras </Link>
         </div>
     </div>
+    <div className="mobileMenu" style={{display: mobileMenu ? "flex":"none"}}>
+            <Link className={page == 1 ? "mobile-btn active":"mobile-btn"} onClick={()=>setPage(1)} to="/"> Home </Link>
+            <Link className={page == 2 ? "mobile-btn active":"mobile-btn"} onClick={()=>setPage(2)} to="/"> Services </Link>
+            <Link className={page == 3 ? "mobile-btn active":"mobile-btn"} onClick={()=>setPage(3)} to="/"> Inflatables </Link>
+            <Link className={page == 4 ? "mobile-btn active":"mobile-btn"} onClick={()=>setPage(4)} to="/"> Contact </Link>
+        </div>
+    </div>
+
   );
 }
 
