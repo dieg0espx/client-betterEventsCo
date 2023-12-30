@@ -826,3 +826,75 @@ p {
     width: 90%;
   }
 }
+
+/*  ======== CONTACT  ========  */
+.contact .container1 {
+  width: 100%;
+  margin: 40px auto;
+  padding: 20px 5%;
+  display: grid;
+  grid-template-columns: 600px auto;
+  gap: 40px;
+  align-items: center;
+}
+.contact .container1 .phone-mail {
+  font-size: 30px;
+  font-weight: bold;
+  color: #0089BF;
+}
+
+.contact .container1 .form {
+  
+}
+.contact .container1 .form input{
+  display: block;
+  width: 100%;
+  height: 40px;
+  margin-bottom: 5px;
+  padding-left: 10px;
+  border: 1px solid lightgray;
+  border-radius: 10px;
+  outline: none;
+}
+.contact .container1 .form textarea{
+  display: block;
+  width: 100%;
+  height: 100px;
+  margin-bottom: 5px;
+  padding-left: 10px;
+  padding-top: 5px;
+  border: 1px solid lightgray;
+  border-radius: 10px;
+  resize: none;
+  outline: none;
+}
+.contact .container1 button {
+  display: block;
+  background-color: #0089BF;
+  color: white;
+  width: 200px;
+  height: 40px;
+  border: none;
+  border-radius: 10px;
+  margin-top: 20px;
+  box-shadow: rgba(99, 99, 99, 0.2) 0px 2px 8px 0px;
+}
+.contact .container1 button:hover {
+  background-color: white;
+  color: #0089BF;
+}
+.contact .container1 .details {
+  display: flex;
+  flex-direction: column;
+  gap: 30px;
+}
+.contact .map{
+  display: block;
+  width: 90%;
+  max-height: 300px;
+  object-fit: cover;
+  margin: auto;
+  margin-bottom: 50px;
+  border-radius: 20px;
+  box-shadow: rgba(99, 99, 99, 0.2) 0px 2px 8px 0px;
+}
