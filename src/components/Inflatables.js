@@ -10,9 +10,17 @@ function Inflatables({ containerRef }) {
   async function getInflatables() {
     let arrayInflatables = []
     const querySnapshot = await getDocs(collection(db, "inflatables"));
-    querySnapshot.forEach((doc) => {
-    //   console.log(doc.id, " => ", doc.data());
-      arrayInflatables.push(doc.data())
+    querySnapshot.forEach((doc) => {     
+      arrayInflatables.push({
+        id:doc.id, 
+        capacity: doc.data().capacity, 
+        description: doc.data().description, 
+        height: doc.data().height, 
+        image: doc.data().image, 
+        name: doc.data().name, 
+        price: doc.data().price,
+        width: doc.data().width
+      })
     });
     setInflatables(arrayInflatables)
   }
@@ -51,7 +59,7 @@ function Inflatables({ containerRef }) {
               <p className="type"> Kids</p>
             </div>
           </div>
-          <button> Read More </button>
+          <button onClick={() => window.location.href='/#/inflatable?id=' + inflatable.id}>Read More</button>
         </div>
       ))}
         {Inflatables.map((inflatable) => (
@@ -76,7 +84,7 @@ function Inflatables({ containerRef }) {
               <p className="type"> Kids</p>
             </div>
           </div>
-          <button> Read More </button>
+          <button onClick={() => window.location.href='/#/inflatable?id=' + inflatable.id}>Read More</button>
         </div>
       ))}
         {Inflatables.map((inflatable) => (
@@ -101,7 +109,7 @@ function Inflatables({ containerRef }) {
               <p className="type"> Kids</p>
             </div>
           </div>
-          <button> Read More </button>
+          <button onClick={() => window.location.href='/#/inflatable?id=' + inflatable.id}>Read More</button>
         </div>
       ))}
     </div>

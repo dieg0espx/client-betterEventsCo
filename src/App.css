@@ -930,3 +930,18 @@ p {
     height: 400px;
   }
 }
+
+
+
+/* ======== BOOKING INFLATABLE ========== */
+.booking-inflatable .main-container{
+  display: grid;
+  grid-template-columns: auto 500px;
+}
+.booking-inflatable .main-container #left{
+  padding: 10px;
+}
+.booking-inflatable .main-container #right{
+  border-left: 1px solid gray;
+  padding: 10px;
+}

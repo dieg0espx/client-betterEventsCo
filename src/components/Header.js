@@ -10,7 +10,7 @@ function Header() {
         let url = window.location.href
         if(url.includes('services')){
             setPage(2)
-        } else if(url.includes('inflatables')){
+        } else if(url.includes('inflatable')){
             setPage(3)
         } else if(url.includes('contact')){
             setPage(4)
