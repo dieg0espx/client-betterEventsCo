@@ -784,3 +784,45 @@ p {
   text-align: center;
   margin-bottom: 40px;
 }
+
+@media screen and (max-width:800px) {
+  .services .container1 {
+    display: block;
+    margin-top: -50px;
+    text-align: center;
+  }
+  .services .container1 img {
+    margin-bottom: 30px;
+  }
+  .services .container1 button {
+    margin: 20px auto;
+  }
+  .services .container2 {
+    margin-top: 30px;
+  }
+  .services .container2 .reasons {
+    display: block;
+  }
+  .services .container2 .subTitle {
+    font-size: 30px;
+  }
+  .services .container3 {
+    display: block;
+    text-align: center;
+  }
+  .services .container3 .btn-contact {
+    margin: 20px auto;
+  }
+  .services .container4 {
+    width: 100%;
+  }
+  .services .newsLetter {
+    text-align: center;
+  }
+  .services .newsLetter h2{
+    margin-top: -40px;
+  }
+  .services .newsLetter input {
+    width: 90%;
+  }
+}
