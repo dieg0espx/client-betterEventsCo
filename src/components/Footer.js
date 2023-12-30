@@ -14,9 +14,9 @@ function Footer() {
             <p> <i className="bi bi-facebook iconFacebook"></i> <i className="bi bi-instagram iconInstagram"></i> </p>
             <div className='menu'>
                 <Link className="footer-btn" to="/"> Home </Link>
-                <Link className="footer-btn" to="/"> Services </Link>
+                <Link className="footer-btn" to="/services"> Services </Link>
                 <Link className="footer-btn" to="/"> Inflatables </Link>
-                <Link className="footer-btn" to="/"> Contact </Link>
+                <Link className="footer-btn" to="/contact"> Contact </Link>
             </div>
       </div>
     </div>
