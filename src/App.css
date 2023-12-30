@@ -898,3 +898,35 @@ p {
   border-radius: 20px;
   box-shadow: rgba(99, 99, 99, 0.2) 0px 2px 8px 0px;
 }
+
+@media screen and (max-width:800px) {
+  .contact .container1 {
+    display: flex;
+    flex-direction: column-reverse;
+    width: 90%;
+    margin: 0 auto;
+    gap: 40px;
+    padding: 0;
+  }
+  .contact .container1 .details {
+    gap: 0px;
+    text-align: center;
+  }
+  .contact .container1 .details .phone-mail {
+    font-size: 20px;
+    text-align: center;
+  }
+  .contact .container1 .form {
+    width: 100%;
+    margin: 20px auto;
+  }
+  .contact .container1 .subTitle {
+    text-align: center;
+  }
+  .contact .container1 .form button {
+    width: 100%;
+  }
+  .contact .map {
+    height: 400px;
+  }
+}
