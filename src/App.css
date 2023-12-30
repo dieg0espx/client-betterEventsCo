@@ -436,6 +436,27 @@ p {
   }
 }
 
+.faq {
+  display: block;
+  padding: 10px 20px;
+  margin-bottom: 10px;
+  border-radius: 10px;
+  border: 1px solid transparent;
+  transition: 0.5s;
+  box-shadow: rgba(99, 99, 99, 0.2) 0px 2px 8px 0px;
+}
+.faq:hover {
+  border: 1px solid #0089BF;
+}
+.faq .question {
+  font-weight: bold;
+  color: #072A40;
+  font-size: 20px;
+  margin: 0;
+}
+.faq .answer {
+  margin: 0;
+}
 
 /* ======== HOME ========= */
 
@@ -667,4 +688,99 @@ p {
     justify-content: space-between;
     margin-top: 20px;
   }
+}
+
+
+
+/* ========= SERVICES ===========  */
+.services .container1 {
+  width: 100%;
+  margin: 0;
+  padding: 20px 5%;
+  display: grid;
+  grid-template-columns: 600px auto;
+  gap: 40px;
+  align-items: center;
+  background-color: #0089BF;
+}
+
+.services .container1 img {
+  width: 100%;
+}
+.services .container1  p {
+  color: white;
+}
+.services .container1 button {
+  display: block;
+  width: 220px;
+  height: 40px;
+  border: none;
+  background-color: white;
+  color: #0089BF;
+  border-radius: 10px;
+  font-size: 18px;
+  font-weight: bold;
+  text-align: center;
+  line-height: 40px;
+  text-decoration: none;
+  transition: 0.5s;
+  box-shadow: rgba(99, 99, 99, 0.2) 0px 2px 8px 0px;
+  margin-top: 20px;
+}
+.services .container1 button:hover {
+  background-color: #0089BF;
+  color: white;
+}
+
+
+.services .container2 {
+  width: 90%;
+  margin: 60px auto;
+  padding: 20px;
+}
+.services .container2 .subTitle {
+  text-align: center;
+  font-size: 40px;
+  margin: 0 auto 50px auto;
+}
+
+.services .container2 .reasons {
+  display: grid;
+  grid-template-columns: 1fr 1fr 1fr;
+  gap: 40px;
+  text-align: center;
+  margin: auto;
+}
+.services .container2 p {
+  max-width: 90%;
+  margin: auto;
+}
+.services .container2  .iconReason {
+  font-size: 70px;
+  color: #0089BF;
+}
+.services .container3 {
+  width: 100%;
+  margin: 0;
+  padding: 20px 5%;
+  display: grid;
+  grid-template-columns: auto 600px;
+  gap: 40px;
+  align-items: center;
+  text-align: right;
+}
+.services .container3 img {
+  width: 100%;
+}
+.services .container3 .btn-contact {
+  margin-left: auto;
+}
+.services .container4 {
+  width: 90%;
+  margin: 40px auto;
+  padding: 20px;
+}
+.services .container4 .subTitle {
+  text-align: center;
+  margin-bottom: 40px;
 }

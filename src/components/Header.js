@@ -12,7 +12,7 @@ function Header() {
         <img src={tempLogo} />
         <div className="navBtns">
             <Link className={page == 1 ? "btn active":"btn"} onClick={()=>setPage(1)} to="/"> Home </Link>
-            <Link className={page == 2 ? "btn active":"btn"} onClick={()=>setPage(2)} to="/"> Services </Link>
+            <Link className={page == 2 ? "btn active":"btn"} onClick={()=>setPage(2)} to="/services"> Services </Link>
             <Link className={page == 3 ? "btn active":"btn"} onClick={()=>setPage(3)} to="/"> Inflatables </Link>
             <Link className={page == 4 ? "btn active":"btn"} onClick={()=>setPage(4)} to="/"> Contact </Link>
         </div>
