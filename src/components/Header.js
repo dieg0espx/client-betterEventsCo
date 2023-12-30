@@ -9,7 +9,7 @@ function Header() {
   return (
     <div>
     <div className="header">
-        <img src={tempLogo} />
+        <img src={tempLogo} onClick={()=>window.location.href="/"}/>
         <div className="navBtns">
             <Link className={page == 1 ? "btn active":"btn"} onClick={()=>setPage(1)} to="/"> Home </Link>
             <Link className={page == 2 ? "btn active":"btn"} onClick={()=>setPage(2)} to="/services"> Services </Link>
