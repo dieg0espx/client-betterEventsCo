@@ -1,45 +1,60 @@
-import React, { useEffect, useState } from "react";
+import React, { useEffect, useState, useRef } from "react";
 import { getFirestore } from 'firebase/firestore';
 import { collection, getDocs } from "firebase/firestore";
-import app from '../Firbase'
+import app from '../Firbase';
 
-function Inflatables({ containerRef }) {
+function Inflatables() {
   const db = getFirestore(app);
-  const [Inflatables, setInflatables] = useState([])
+  const [inflatables, setInflatables] = useState([]);
+  const containerRef = useRef(null);
 
   async function getInflatables() {
-    let arrayInflatables = []
+    let arrayInflatables = [];
     const querySnapshot = await getDocs(collection(db, "inflatables"));
-    querySnapshot.forEach((doc) => {     
+    querySnapshot.forEach((doc) => {
       arrayInflatables.push({
-        id:doc.id, 
-        capacity: doc.data().capacity, 
-        description: doc.data().description, 
-        height: doc.data().height, 
-        image: doc.data().image, 
-        name: doc.data().name, 
+        id: doc.id,
+        capacity: doc.data().capacity,
+        description: doc.data().description,
+        height: doc.data().height,
+        image: doc.data().image,
+        name: doc.data().name,
         price: doc.data().price,
         width: doc.data().width
-      })
+      });
     });
-    setInflatables(arrayInflatables)
+    setInflatables(arrayInflatables);
   }
 
-  useEffect(()=>{
-    getInflatables()
-  },[])
+  useEffect(() => {
+    getInflatables();
+  }, []);
 
-  useEffect(()=>{
-    if(Inflatables.length > 0){
-        console.log(Inflatables);
-    }    
-  },[Inflatables])
+  useEffect(() => {
+    if (inflatables.length > 0) {
+      console.log(inflatables);
+    }
+  }, [inflatables]);
+
+  const handleScrollToLeft = () => {
+    if (containerRef.current) {
+      containerRef.current.scrollLeft -= 50;
+    }
+  };
+
+  const handleScrollToRight = () => {
+    if (containerRef.current) {
+      containerRef.current.scrollLeft += 50;
+    }
+  };
 
   return (
-    <div className="inflatables" ref={containerRef}>
-      {Inflatables.map((inflatable) => (
-        <div className="inflatable">
-          <img src={inflatable.image} />
+    <div className="carousel-inflatables">
+      <i className="bi bi-chevron-compact-left iconChev" onClick={handleScrollToLeft}></i>
+      <div className="inflatables" ref={containerRef}>
+        {inflatables.map((inflatable) => (
+          <div className="inflatable" key={inflatable.id}>
+            <img src={inflatable.image} />
           <div id="name-price">
             <p id="name">{inflatable.name}</p>
             <p id="price">${inflatable.price}</p>
@@ -60,11 +75,11 @@ function Inflatables({ containerRef }) {
             </div>
           </div>
           <button onClick={() => window.location.href='/#/inflatable?id=' + inflatable.id}>Read More</button>
-        </div>
-      ))}
-        {Inflatables.map((inflatable) => (
-        <div className="inflatable">
-          <img src={inflatable.image} />
+          </div>
+        ))}
+        {inflatables.map((inflatable) => (
+          <div className="inflatable" key={inflatable.id}>
+            <img src={inflatable.image} />
           <div id="name-price">
             <p id="name">{inflatable.name}</p>
             <p id="price">${inflatable.price}</p>
@@ -85,11 +100,11 @@ function Inflatables({ containerRef }) {
             </div>
           </div>
           <button onClick={() => window.location.href='/#/inflatable?id=' + inflatable.id}>Read More</button>
-        </div>
-      ))}
-        {Inflatables.map((inflatable) => (
-        <div className="inflatable">
-          <img src={inflatable.image} />
+          </div>
+        ))}
+        {inflatables.map((inflatable) => (
+          <div className="inflatable" key={inflatable.id}>
+            <img src={inflatable.image} />
           <div id="name-price">
             <p id="name">{inflatable.name}</p>
             <p id="price">${inflatable.price}</p>
@@ -110,10 +125,12 @@ function Inflatables({ containerRef }) {
             </div>
           </div>
           <button onClick={() => window.location.href='/#/inflatable?id=' + inflatable.id}>Read More</button>
-        </div>
-      ))}
+          </div>
+        ))}
+      </div>
+      <i className="bi bi-chevron-compact-right iconChev" onClick={handleScrollToRight}></i>
     </div>
-  )
+  );
 }
 
 export default Inflatables;

@@ -3,6 +3,9 @@
   margin: 0;
   padding: 0;
 }
+*::-webkit-scrollbar {
+  display: none;
+}
 
 .App {
   text-align: center;
@@ -227,7 +230,6 @@ p {
   width: 100%;
   white-space: nowrap;
   overflow-x: scroll;
-  padding-left: 10px;
 }
 
 .inflatable {
@@ -306,6 +308,170 @@ p {
   background-color: white;
   color: #0089BF;
 }
+
+
+.react-calendar {
+  min-width: 350px;
+  width: 350px;
+  max-width: 350px;
+  margin: auto;
+  margin-top: 20px;
+  margin-bottom: 40px;
+  max-width: 100%;
+  background: white;
+  line-height: 1.125em;
+  box-shadow: rgba(100, 100, 111, 0.2) 0px 7px 29px 0px;
+  border-radius: 20px;
+  padding: 20px;
+}
+.react-calendar--doubleView {
+  width: 700px;
+}
+.react-calendar--doubleView .react-calendar__viewContainer {
+  display: flex;
+  margin: -0.5em;
+}
+.react-calendar--doubleView .react-calendar__viewContainer > * {
+  width: 50%;
+  margin: 0.5em;
+}
+.react-calendar,
+.react-calendar *,
+.react-calendar *:before,
+.react-calendar *:after {
+  -moz-box-sizing: border-box;
+  -webkit-box-sizing: border-box;
+  box-sizing: border-box;
+}
+.react-calendar button {
+  margin: 0;
+  outline: none;
+}
+.react-calendar button:enabled:hover {
+  cursor: pointer;
+}
+.react-calendar__navigation {
+  height: 40px;
+  width: 100%;
+  display: grid;
+  grid-template-columns: auto auto auto auto auto;
+  /* background-color: #2c3e50; */
+  border-top-right-radius: 20px;
+  border-top-left-radius: 20px;
+}
+.react-calendar__navigation button {
+  background-color: transparent;
+  color: gray !important;
+  height: 100%;
+  font-size: 15px;
+  border: none;
+}
+.react-calendar__navigation button:enabled:hover,
+.react-calendar__navigation button:enabled:focus {
+  color: #0089BF !important;
+  
+}
+.react-calendar__navigation button[disabled] {
+  /* background-color: #2c3e50; */
+}
+.react-calendar__month-view__weekdays {
+  text-align: center;
+  /* text-transform: uppercase; */
+  font-weight: 400;
+  font-size: 15px;
+  /* background-color: #0089BF; */
+  color: gray;
+}
+
+abbr[title] {
+  text-decoration: none;
+  font-size: 13px;
+  margin-left: -5px;
+}
+.react-calendar__month-view__weekdays__weekday {
+  padding: 0.5em;
+}
+.react-calendar__month-view__weekNumbers {
+  font-weight: bold;
+}
+.react-calendar__month-view__weekNumbers .react-calendar__tile {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 15px;
+  padding: calc(0.75em / 0.75) calc(0.5em / 0.75);
+}
+/* .react-calendar__month-view__days__day--weekend {
+  color: #d10000;
+} */
+.react-calendar__month-view__days__day--neighboringMonth {
+  color: #757575;
+}
+.react-calendar__year-view .react-calendar__tile,
+.react-calendar__decade-view .react-calendar__tile,
+.react-calendar__century-view .react-calendar__tile {
+  padding: 2em 0.5em;
+}
+.react-calendar__tile {
+  max-width: 40px;
+  text-align: center;
+  padding: 5px 10px;
+  background: none;
+  /* border: 2px solid white; */
+  border: none;
+  font-size: 13px;
+  border-radius: 10px;
+  margin: 2px !important;
+  height: 30px;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  
+}
+.react-calendar__tile:disabled {
+  text-decoration:line-through;
+  background-color: rgb(244, 244, 244);
+  border: 1px solid white
+  /* color: red; */
+}
+.react-calendar__tile:enabled:hover,
+.react-calendar__tile:enabled:focus {
+  background-color: #e6e6e6;
+}
+.react-calendar__tile--now {
+  background: #ffff76 !important;
+}
+.react-calendar__tile--now:enabled:hover,
+.react-calendar__tile--now:enabled:focus {
+  background: #ffffa9;
+}
+.react-calendar__tile--hasActive {
+  background: #76baff;
+}
+.react-calendar__tile--hasActive:enabled:hover,
+.react-calendar__tile--hasActive:enabled:focus {
+  background: #a9d4ff;
+}
+.react-calendar__tile--active {
+  /* background: #2c3e50; */
+  color: #0089BF;
+  border: 1px solid #0089BF;
+}
+
+
+.react-calendar__tile--active:enabled:hover,
+.react-calendar__tile--active:enabled:focus {
+  background: #1087ff;
+  color: white;
+}
+.react-calendar--selectRange .react-calendar__tile--hover {
+  background-color: #e6e6e6;
+}
+
+ .prices {
+    font-size: 10px;
+  }
 
 
 /* =========== HEADER  =========  */
@@ -458,6 +624,19 @@ p {
   margin: 0;
 }
 
+.carousel-inflatables {
+  display: flex;
+  align-items: center;
+  position: relative;
+  left: 50%;
+  transform: translate(-50%);
+  width: calc(100% + 60px);
+}
+.carousel-inflatables .iconChev{
+  color: #0089BF;
+  font-size: 30px;
+}
+
 /* ======== HOME ========= */
 
 .home .container1 {
@@ -494,14 +673,12 @@ p {
   flex-direction: row;
   align-items: center;
   gap: 10px;
-}
-.home .container2 .iconChev{
-  color: #0089BF;
-  font-size: 30px;
+  
 }
 
-
-
+.home .container2 .carousel-inflatables {
+  width: 100%;
+}
 
 .home .container3 {
   width: 90%;
@@ -936,12 +1113,78 @@ p {
 /* ======== BOOKING INFLATABLE ========== */
 .booking-inflatable .main-container{
   display: grid;
-  grid-template-columns: auto 500px;
+  grid-template-columns: auto 400px;
+  padding: 20px;
+  height: calc(100vh - 90px);
 }
 .booking-inflatable .main-container #left{
-  padding: 10px;
+  padding: 0 10px;
+  overflow-y: scroll;
+  width: 90%;
+  margin: 0 auto;
 }
+.booking-inflatable .main-container #left img {
+  display: block;
+  margin: auto;
+  border: none;
+}
+.booking-inflatable .main-container #name {
+  font-size: 30px;
+  font-weight: bold;
+  color: #072A40;
+}
+.booking-inflatable .main-container #price {
+  background-color: #0089BF;
+  color: white;
+  width: fit-content;
+  padding: 5px 20px;
+  border-radius: 5px; 
+}
+.booking-inflatable .main-container .name-price {
+  display: flex;
+  width: 100%;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.booking-inflatable .main-container #dimentions {
+  display: grid;
+  grid-template-columns: 1fr 1fr 1fr;
+  gap: 8px;
+  max-width: 300px;
+  margin-bottom: 8px;
+}
+.booking-inflatable .main-container .dimention {
+  border: 1px solid lightgray;
+  border-radius: 5px;
+  text-align: center;
+}
+.booking-inflatable .main-container .dimention .value {
+  font-size: 15px;
+  margin: 0;
+}
+.booking-inflatable .main-container .dimention .type {
+  font-size: 15px;
+  color: #0089BF;
+  font-weight: bold;
+  margin-top: 0px;
+  margin-bottom: 0px;
+}
+
+
+
+
+
 .booking-inflatable .main-container #right{
-  border-left: 1px solid gray;
+  border-left: 1px solid rgb(228, 228, 228);
   padding: 10px;
+  overflow-y: scroll;
+  /* border:1px solid red; */
+}
+
+.booking-inflatable .recommendations {
+  max-width: 90%;
+  margin: 20px auto 100px auto;
+  border-top: 1px solid lightgray;
+  padding-top: 40px;
 }

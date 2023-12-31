@@ -3,6 +3,8 @@ import { getFirestore, doc, getDoc } from 'firebase/firestore'; // Adjust import
 import app from '../Firbase'
 import Header from '../components/Header'
 import Footer from '../components/Footer'
+import Calendar from 'react-calendar';
+import Inflatables from '../components/Inflatables'
 
 function Inflatable() {
   const [inflatable, setInflatable] = useState([])
@@ -14,7 +16,7 @@ function Inflatable() {
 
   const getInflatable = async () => {
     const db = getFirestore(app);
-    const docRef = doc(db, "inflatables", "0OOUQecSGREbZ3zsmkRV");
+    const docRef = doc(db, "inflatables", window.location.href.split('=')[1].toString());
     try {
       const docSnap = await getDoc(docRef);
       if (docSnap.exists()) {
@@ -34,13 +36,33 @@ function Inflatable() {
         <div className='main-container'>
           <div id="left">
             <img src={inflatable.image} />
-            <p> {inflatable.name} </p>
-            <p> {inflatable.description} </p>
-            
+            <div className='name-price'>
+              <p id="name"> {inflatable.name} </p>
+              <p id="price"> ${inflatable.price} USD </p>
+            </div>
+            <p id="description"> {inflatable.description}{inflatable.description}{inflatable.description}{inflatable.description} </p>
+            <div id="dimentions">
+              <div className="dimention">          
+                <p className="value">{inflatable.width} ft </p>
+                <p className="type"> Width</p>
+              </div>
+              <div className="dimention">          
+                <p className="value">{inflatable.height} ft </p>
+                <p className="type"> Height</p>
+              </div>
+              <div className="dimention">          
+                <p className="value"> {inflatable.capacity} </p>
+                <p className="type"> Kids</p>
+              </div>
+            </div>
           </div>
-          <div id="right">
-            right
+          <div id="right">  
+            <Calendar  selectRange={true}/>
           </div>
+        </div>
+        <div className='recommendations'>
+          <p className='subTitle'> You may also like ... </p>
+          <Inflatables />
         </div>
         <Footer />
     </div>

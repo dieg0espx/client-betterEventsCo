@@ -16,18 +16,7 @@ import NewsLetter from '../components/NewsLetter'
 import Inflatables from '../components/Inflatables'
 
 function Home() {
-  const containerRef = useRef(null);
 
-  const handleScrollToLeft = () => {
-    if (containerRef.current) {
-      containerRef.current.scrollLeft += 50;
-    }
-  };
-  const handleScrollToRight= () => {
-    if (containerRef.current) {
-      containerRef.current.scrollLeft -= 50;
-    }
-  };
 
   return (
     <div className='home'>
@@ -38,9 +27,7 @@ function Home() {
         <ButtonContact />
       </div>
       <div className='container2'>
-        <i className="bi bi-chevron-compact-left iconChev" onClick={()=>handleScrollToLeft()}></i>
-        <Inflatables containerRef={containerRef} />
-        <i className="bi bi-chevron-compact-right iconChev" onClick={()=>handleScrollToRight()}></i>
+        <Inflatables />
       </div>
       <div className='container3'>
           <img src={inflatable1} />
