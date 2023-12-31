@@ -1202,14 +1202,21 @@ abbr[title] {
   .booking-inflatable .main-container #left #dimentions{
     margin: auto;
   }
-  .booking-inflatable .recommendations {
+  .booking-inflatable .recommendations  {
     text-align: center;
-    width: 95%;
+    max-width: 100vw;
   }
-  .booking-inflatable .recommendations .inflatables{
+  .booking-inflatable .carousel-inflatables {
+    width: 100%;
+  }
+  .booking-inflatable .recommendations .carousel-inflatables .inflatables{
     padding-left: 20px;
   }
+  .booking-inflatable .recommendations .carousel-inflatables .inflatables .inflatable{
+    white-space: normal;
+  }  
   .booking-inflatable .recommendations .iconChev {
     display: none;
   }
 }
+
