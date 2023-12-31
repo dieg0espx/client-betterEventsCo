@@ -1171,10 +1171,6 @@ abbr[title] {
   margin-bottom: 0px;
 }
 
-
-
-
-
 .booking-inflatable .main-container #right{
   border-left: 1px solid rgb(228, 228, 228);
   padding: 10px;
@@ -1187,4 +1183,33 @@ abbr[title] {
   margin: 20px auto 100px auto;
   border-top: 1px solid lightgray;
   padding-top: 40px;
+}
+
+@media screen and (max-width:800px) {
+  .booking-inflatable .main-container {
+    display: block;
+    height: fit-content;
+    padding: 0;
+    
+  }
+  .booking-inflatable .main-container #left {
+    
+    margin-top: -40px;
+  }
+  .booking-inflatable .main-container #left img {
+    max-width: 100%;
+  }
+  .booking-inflatable .main-container #left #dimentions{
+    margin: auto;
+  }
+  .booking-inflatable .recommendations {
+    text-align: center;
+    width: 95%;
+  }
+  .booking-inflatable .recommendations .inflatables{
+    padding-left: 20px;
+  }
+  .booking-inflatable .recommendations .iconChev {
+    display: none;
+  }
 }
