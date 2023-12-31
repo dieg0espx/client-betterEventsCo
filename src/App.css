@@ -320,7 +320,7 @@ p {
   max-width: 100%;
   background: white;
   line-height: 1.125em;
-  box-shadow: rgba(100, 100, 111, 0.2) 0px 7px 29px 0px;
+  box-shadow: rgba(99, 99, 99, 0.2) 0px 2px 8px 0px;
   border-radius: 20px;
   padding: 20px;
 }
@@ -427,7 +427,7 @@ abbr[title] {
   flex-direction: column;
   justify-content: center;
   align-items: center;
-  
+  color: gray;
 }
 .react-calendar__tile:disabled {
   text-decoration:line-through;
