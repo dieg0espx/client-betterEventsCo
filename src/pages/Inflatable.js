@@ -58,6 +58,15 @@ function Inflatable() {
           </div>
           <div id="right">  
             <Calendar  selectRange={true}/>
+            <div className='form'>
+                <input type='text' placeholder='First Name' />
+                <input type='text' placeholder='Last Name' />
+                <input type='tel' placeholder='Phone Number' />
+                <input type='email' placeholder='Email Address' />
+                <input type='text' placeholder='Address' />
+                <input type='text' placeholder='Postal Code' />
+                <button className='btn-book'> Book Now </button>
+            </div>
           </div>
         </div>
         <div className='recommendations'>

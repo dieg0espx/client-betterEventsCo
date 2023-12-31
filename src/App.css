@@ -1184,6 +1184,47 @@ abbr[title] {
   border-top: 1px solid lightgray;
   padding-top: 40px;
 }
+.booking-inflatable #right .form {
+  width: 90%;
+  margin: auto;
+}
+.booking-inflatable #right .form input{
+  display: block;
+  width: 100%;
+  height: 40px;
+  margin-bottom: 5px;
+  padding-left: 10px;
+  border: 1px solid lightgray;
+  border-radius: 10px;
+  outline: none;
+}
+.booking-inflatable #right .form textarea{
+  display: block;
+  width: 100%;
+  height: 100px;
+  margin-bottom: 5px;
+  padding-left: 10px;
+  padding-top: 5px;
+  border: 1px solid lightgray;
+  border-radius: 10px;
+  resize: none;
+  outline: none;
+}
+.booking-inflatable #right .btn-book {
+  display: block;
+  background-color: #0089BF;
+  color: white;
+  width: 100%;
+  height: 40px;
+  border: none;
+  border-radius: 10px;
+  margin-top: 20px;
+  box-shadow: rgba(99, 99, 99, 0.2) 0px 2px 8px 0px;
+}
+.booking-inflatable #right .btn-book:hover {
+  background-color: white;
+  color: #0089BF;
+}
 
 @media screen and (max-width:800px) {
   .booking-inflatable .main-container {
