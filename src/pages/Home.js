@@ -23,7 +23,7 @@ function Home() {
       <Header />
       <div className='container1'>
         <h1> Better Events Co.</h1>
-        <h2> Bouncing Smiles, Crafting Memories </h2>
+        <h2> Let the Better Events begin </h2>
         <ButtonContact />
       </div>
       <div className='container2'>
@@ -32,8 +32,8 @@ function Home() {
       <div className='container3'>
           <img src={inflatable1} />
           <div>
-            <p className='subTitle'> Lorem Ipsum Dolor Siot Amer </p> 
-            <p> Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed tincidunt, erat in malesuada aliquam, est erat faucibus purus, eget viverra nulla sem vitae neque. Quisque id sodales libero. In nec enim nisi. Quisque aliquet a augue nec venenatis. Curabitur ullamcorper volutpat velit, et cursus tortor tempus at. Integer bibendum ullamcorper sagittis. Nulla facilisi. Integer sapien est, iaculis in quam in, aliquam bibendum libero. </p>
+            <p className='subTitle'> About Us </p> 
+            <p> Better Events is the premier party rental company in Northern Illinois, offering  superior bounce houses,combos, water slides, games, tent, tables, and chairs for your birthday or special event. Our range ofinflatables are conveniently delivered to the greater Rockford area and nearby suburbs. When in need ofan inflatable rental in Rockford, trust Better Events to be your reliable partner for your next specialoccasion. </p>
             <BtnLearnMore />
           </div>
       </div>
@@ -41,19 +41,19 @@ function Home() {
         <div className='eventTypes'>
           <img src={stock2} />
           <h3> School Events </h3>
-          <p> At Better Events Co, We recognize the significance of creating exceptional school events. Our commitment is to provide a premium experience, prioritizing both safety and peace of mind.</p>
+          <p> Better Events understands the importance of having the best school event. We deliver a high quality experience while focusing on safety and peace of mind. We take the safety and the health of all our customers and their guests very serious. </p>
           <BtnLearnMore />
         </div>
         <div className='eventTypes'>
           <img src={stock3} />
           <h3> Corporate Events </h3>
-          <p> We specialize in planning events like picnics, wellness sessions, and holiday parties. Corporate party planning can be overwhelming, but we make it seamless for you. </p>
+          <p> Understands the importance of planning a special event such as a picnic, wellness event or holiday party. The planning of a corporate party can be long and overwhelming. Better events will work with you to make this process as seamless as possible </p>
           <BtnLearnMore />
         </div>
         <div className='eventTypes'>
           <img src={stock4} />
           <h3> Birthday Parties </h3>
-          <p> We excels in crafting unforgettable birthday celebrations. Planning a perfect party can be overwhelming, but with us, it's seamless and enjoyable.  </p>
+          <p>Looking for a way to make your next birthday party even more special? Look no further than Better Events! We partner with Better Stays to offer full vacation home rentals that include inflatables for a fun and memorable celebration.</p>
           <BtnLearnMore />
         </div>
       </div>

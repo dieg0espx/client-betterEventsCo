@@ -25,7 +25,7 @@ function Services() {
                     <div className='reason'>
                         <i className="bi bi-stack iconReason"></i>
                         <h3> Wide Variety </h3>
-                        <p> From enchanting bouncy castles to thrilling inflatable slides, challenging obstacle courses, and engaging interactive games. </p>
+                        <p> From Magical bouncing castles to exciting inflatable slides, daredevil obstacle course, and entertaining interactive games, the otpions for fun are endless. </p>
                     </div>
                     <div className='reason'>
                         <i className="bi bi-person-fill-check iconReason"></i>
@@ -37,14 +37,12 @@ function Services() {
                         <h3> On-Time Delivery </h3>
                         <p> We understand the importance of punctuality. Trust Better Events Co. to deliver and set up your inflatables on time, allowing the fun to start promptly. </p>
                     </div>
-
-                   
                 </div>
             </div>
             <div className='container3'>
                 <div>
                     <p className='subTitle'> Delivery Area </p>
-                    <p> We proudly serve surrounding communities such as Cicero, Evanston, Glenview, Hinsdale, Skokie, Oak Park, River Forest, Wilmette, and Winnetka. If your specific community is not listed, please reach out to us at (123) 456-7890, and we'll gladly provide delivery information for your location. Delivery rates vary based on dates, locations, and types of equipment rented. Let Better Events Co. make your event extraordinary! </p>
+                    <p> We proudly serve surrounding communities such as Belvidere, Pingree Grove, Huntley, Madison, Janesville, Schaumburg, Arlington Heights and Elgin. If your specific community is not listed, please reach out to us at 630-370-7422, and we'll gladly provide delivery information for your location. Delivery rates vary based on dates, location, and types of equipment. Let Better Evens make your event extraordinary.  </p>
                     <ButtonContact />
                 </div>
                 <img src={map1} />

@@ -1,5 +1,5 @@
 import { useEffect, useState } from 'react';
-import { getFirestore, doc, getDoc } from 'firebase/firestore'; // Adjust import paths based on your setup
+import { getFirestore, doc, getDoc, updateDoc, collection, addDoc } from 'firebase/firestore';
 import app from '../Firbase'
 import Header from '../components/Header'
 import Footer from '../components/Footer'
@@ -8,6 +8,16 @@ import Inflatables from '../components/Inflatables'
 
 function Inflatable() {
   const [inflatable, setInflatable] = useState([])
+  const [name, setName] = useState('')
+  const [lastName, setLastName] = useState('')
+  const [phone, setPhone] = useState('')
+  const [email, setEmail] = useState('')
+  const [id, setId] = useState('')
+  const [address, setAddress] = useState('')
+  const [postCode, setPostalCode] = useState('')
+  const [dates, setDates] = useState([])
+
+  const db = getFirestore(app);
 
   useEffect(() => {
     getInflatable();
@@ -15,8 +25,8 @@ function Inflatable() {
 
 
   const getInflatable = async () => {
-    const db = getFirestore(app);
     const docRef = doc(db, "inflatables", window.location.href.split('=')[1].toString());
+    setId( window.location.href.split('=')[1].toString())
     try {
       const docSnap = await getDoc(docRef);
       if (docSnap.exists()) {
@@ -29,6 +39,20 @@ function Inflatable() {
       console.error("Error fetching document:", error);
     }
   };
+
+  async function createRerservation(){
+    let data = {name, lastName, phone, email,address, postCode, dates}
+    const docRef = await addDoc(collection(db, "bookings"), data);
+    console.log("New Reservation ID: " + docRef);
+    await addDates(dates)
+  }
+
+  async function addDates(dates){
+    const inflatableRef = doc(db, "inflatables", id);
+    await updateDoc(inflatableRef, {
+      dates:dates
+    });  
+  }
 
   return (
     <div className='booking-inflatable'>
@@ -57,15 +81,15 @@ function Inflatable() {
             </div>
           </div>
           <div id="right">  
-            <Calendar  selectRange={true}/>
+            <Calendar  selectRange={true} onChange={setDates} />
             <div className='form'>
-                <input type='text' placeholder='First Name' />
-                <input type='text' placeholder='Last Name' />
-                <input type='tel' placeholder='Phone Number' />
-                <input type='email' placeholder='Email Address' />
-                <input type='text' placeholder='Address' />
-                <input type='text' placeholder='Postal Code' />
-                <button className='btn-book'> Book Now </button>
+                <input onChange={(e)=>setName(e.target.value)} type='text' placeholder='First Name' />
+                <input onChange={(e)=>setLastName(e.target.value)} type='text' placeholder='Last Name' />
+                <input onChange={(e)=>setPhone(e.target.value)} type='tel' placeholder='Phone Number' />
+                <input onChange={(e)=>setEmail(e.target.value)} type='email' placeholder='Email Address' />
+                <input onChange={(e)=>setAddress(e.target.value)} type='text' placeholder='Address' />
+                <input onChange={(e)=>setPostalCode(e.target.value)} type='text' placeholder='Postal Code' />
+                <button className='btn-book' onClick={()=>createRerservation()}> Book Now </button>
             </div>
           </div>
         </div>

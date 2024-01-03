@@ -5,10 +5,10 @@ function Footer() {
   return (
     <div className='footer'> 
       <div>
-        <h1> Better Events Co. </h1>
-        <h2> Bouncing Smiles, Crafting Memories </h2>
-        <p> <i className="bi bi-telephone-fill iconPhone"></i> +1 (123) 456-7890 </p>
-        <p> <i className="bi bi-envelope-fill  iconMail"></i> example@mail.com </p>
+        <h1> Better Events </h1>
+        <h2> Let the Better Events begin. </h2>
+        <p> <i className="bi bi-telephone-fill iconPhone"></i>  +1 (630) 370-7422 </p>
+        <p> <i className="bi bi-envelope-fill  iconMail"></i> bettereventsnow@gmail.com </p>
       </div>
       <div id="right">
             <p> <i className="bi bi-facebook iconFacebook"></i> <i className="bi bi-instagram iconInstagram"></i> </p>
