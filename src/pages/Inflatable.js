@@ -1,5 +1,5 @@
 import { useEffect, useState } from 'react';
-import { getFirestore, doc, getDoc, updateDoc, collection, addDoc } from 'firebase/firestore';
+import { getFirestore, doc, getDoc, getDocs, updateDoc, collection, addDoc } from 'firebase/firestore';
 import app from '../Firbase'
 import Header from '../components/Header'
 import Footer from '../components/Footer'
@@ -8,29 +8,63 @@ import Inflatables from '../components/Inflatables'
 
 function Inflatable() {
   const [inflatable, setInflatable] = useState([])
-  const [name, setName] = useState('')
-  const [lastName, setLastName] = useState('')
-  const [phone, setPhone] = useState('')
-  const [email, setEmail] = useState('')
-  const [id, setId] = useState('')
-  const [address, setAddress] = useState('')
-  const [postCode, setPostalCode] = useState('')
+  const [name, setName] = useState('Diego')
+  const [lastName, setLastName] = useState('Espinosa')
+  const [phone, setPhone] = useState('+529999088639')
+  const [email, setEmail] = useState('espinosa9mx@gmail.com')
+  const [inflatableID, setInflatableID] = useState('')
+  const [address, setAddress] = useState('610 Granville St')
+  const [postCode, setPostalCode] = useState('V6C 3T3')
+
   const [dates, setDates] = useState([])
+  const [bookingDates, setBookingDates] = useState([])
+  const [busyDates, setBusyDates] = useState([])
 
   const db = getFirestore(app);
 
   useEffect(() => {
     getInflatable();
+    getBusyDates()
   }, []);
 
+  useEffect(() => {
+    let formattedDates = [];
+    for (let i = 0; i < dates.length; i++) {
+      formattedDates.push(formatDate(dates[i]))
+    }  
+    if (formattedDates.length >= 2) {
+      const startDate = formattedDates[0];
+      const endDate = formattedDates[1];
+      setBookingDates(getDatesBetween(startDate, endDate))
+    }
+  }, [dates])
+  
+  const getDatesBetween = (startDate, endDate) => {
+    const datesBetween = [];
+    let currentDate = new Date(startDate);
+  
+    while (currentDate <= new Date(endDate)) {
+      datesBetween.push(formatDate(new Date(currentDate)));
+      currentDate.setDate(currentDate.getDate() + 1);
+    }
+    return datesBetween;
+  }
+  
+  function formatDate(date){
+    return date.toLocaleString('en-US', {
+      month: '2-digit',
+      day: '2-digit',
+      year: 'numeric',
+    });
+  }
 
   const getInflatable = async () => {
     const docRef = doc(db, "inflatables", window.location.href.split('=')[1].toString());
-    setId( window.location.href.split('=')[1].toString())
+    setInflatableID( window.location.href.split('=')[1].toString())
     try {
       const docSnap = await getDoc(docRef);
       if (docSnap.exists()) {
-        console.log(docSnap.data());
+        // console.log(docSnap.data());
         setInflatable(docSnap.data())
       } else {
         alert("Inflatable Not Found")
@@ -41,18 +75,40 @@ function Inflatable() {
   };
 
   async function createRerservation(){
-    let data = {name, lastName, phone, email,address, postCode, dates}
+    let data = {name, lastName, phone, email,address, postCode, bookingDates, inflatableID}
     const docRef = await addDoc(collection(db, "bookings"), data);
     console.log("New Reservation ID: " + docRef);
-    await addDates(dates)
   }
 
-  async function addDates(dates){
-    const inflatableRef = doc(db, "inflatables", id);
-    await updateDoc(inflatableRef, {
-      dates:dates
-    });  
-  }
+  async function getBusyDates(){
+    let arrayDates = []
+    console.log("Checking Busy Dates ...");
+    const querySnapshot = await getDocs(collection(db, "bookings"));
+    querySnapshot.forEach((doc) => {
+      if(doc.data().inflatableID == window.location.href.split('=')[1].toString()){
+        for (let i = 0; i < doc.data().bookingDates.length; i++) {
+          arrayDates.push(new Date(doc.data().bookingDates[i]))
+        }
+      }
+    });
+    setBusyDates(arrayDates)
+  };
+
+  const tileDisabled = ({ date, view }) => {
+    // Disable dates only for the month view
+    if (view === 'month') {
+      // Check if the current date is in the busyDates array
+      return busyDates.some(busyDate => (
+        busyDate.getDate() === date.getDate() &&
+        busyDate.getMonth() === date.getMonth() &&
+        busyDate.getFullYear() === date.getFullYear()
+      ));
+    }
+    return false;
+  };
+
+
+
 
   return (
     <div className='booking-inflatable'>
@@ -81,14 +137,14 @@ function Inflatable() {
             </div>
           </div>
           <div id="right">  
-            <Calendar  selectRange={true} onChange={setDates} />
+            <Calendar  selectRange={true} onChange={setDates}  tileDisabled={tileDisabled} />
             <div className='form'>
-                <input onChange={(e)=>setName(e.target.value)} type='text' placeholder='First Name' />
-                <input onChange={(e)=>setLastName(e.target.value)} type='text' placeholder='Last Name' />
-                <input onChange={(e)=>setPhone(e.target.value)} type='tel' placeholder='Phone Number' />
-                <input onChange={(e)=>setEmail(e.target.value)} type='email' placeholder='Email Address' />
-                <input onChange={(e)=>setAddress(e.target.value)} type='text' placeholder='Address' />
-                <input onChange={(e)=>setPostalCode(e.target.value)} type='text' placeholder='Postal Code' />
+                <input value={name} onChange={(e)=>setName(e.target.value)} type='text' placeholder='First Name' />
+                <input value={lastName} onChange={(e)=>setLastName(e.target.value)} type='text' placeholder='Last Name' />
+                <input value={phone} onChange={(e)=>setPhone(e.target.value)} type='tel' placeholder='Phone Number' />
+                <input value={email} onChange={(e)=>setEmail(e.target.value)} type='email' placeholder='Email Address' />
+                <input value={address} onChange={(e)=>setAddress(e.target.value)} type='text' placeholder='Address' />
+                <input value={postCode} onChange={(e)=>setPostalCode(e.target.value)} type='text' placeholder='Postal Code' />
                 <button className='btn-book' onClick={()=>createRerservation()}> Book Now </button>
             </div>
           </div>
