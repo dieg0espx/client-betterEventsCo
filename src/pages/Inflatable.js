@@ -5,6 +5,7 @@ import Header from '../components/Header'
 import Footer from '../components/Footer'
 import Calendar from 'react-calendar';
 import Inflatables from '../components/Inflatables'
+import StripeContainer from '../components/StripeContainer';
 
 function Inflatable() {
   const [inflatable, setInflatable] = useState([])
@@ -147,6 +148,7 @@ function Inflatable() {
                 <input value={postCode} onChange={(e)=>setPostalCode(e.target.value)} type='text' placeholder='Postal Code' />
                 <button className='btn-book' onClick={()=>createRerservation()}> Book Now </button>
             </div>
+            <StripeContainer balance={100} />
           </div>
         </div>
         <div className='recommendations'>
