@@ -4,12 +4,6 @@ import tempLogo from '../images/tempLogo.png'
 import { useSearchParams } from 'react-router-dom'
 
 function PaymentGateway(props) {
-    
-    useEffect(()=>{
-        console.log(sessionStorage.getItem('name'));      
-    })
-
-
   return (
     <div className='paymentGateway'>
         <div className='payment-popup'>
