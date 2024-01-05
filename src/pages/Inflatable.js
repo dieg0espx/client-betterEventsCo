@@ -6,6 +6,7 @@ import Footer from '../components/Footer'
 import Calendar from 'react-calendar';
 import Inflatables from '../components/Inflatables'
 import StripeContainer from '../components/StripeContainer';
+import PaymentGateway from '../components/PaymentGateway';
 
 function Inflatable() {
   const [inflatable, setInflatable] = useState([])
@@ -20,6 +21,8 @@ function Inflatable() {
   const [dates, setDates] = useState([])
   const [bookingDates, setBookingDates] = useState([])
   const [busyDates, setBusyDates] = useState([])
+
+  const [popup, setPopup] = useState(false)
 
   const db = getFirestore(app);
 
@@ -75,10 +78,19 @@ function Inflatable() {
     }
   };
 
-  async function createRerservation(){
-    let data = {name, lastName, phone, email,address, postCode, bookingDates, inflatableID}
-    const docRef = await addDoc(collection(db, "bookings"), data);
-    console.log("New Reservation ID: " + docRef);
+  function createRerservation(){
+    let data = {name, lastName, phone, email, address, postCode, bookingDates, inflatableID}
+    sessionStorage.setItem('name', data.name)
+    sessionStorage.setItem('lastName', data.lastName)
+    sessionStorage.setItem('phone', data.phone)
+    sessionStorage.setItem('email', data.email)
+    sessionStorage.setItem('address', data.address)
+    sessionStorage.setItem('postalCode', data.postCode)
+    sessionStorage.setItem('bookingDates', data.bookingDates.join(", "))
+    sessionStorage.setItem('infatableID', data.inflatableID)
+    // const docRef = await addDoc(collection(db, "bookings"), data);
+    // console.log("New Reservation ID: " + docRef);
+    setPopup(true)
   }
 
   async function getBusyDates(){
@@ -107,6 +119,14 @@ function Inflatable() {
     }
     return false;
   };
+
+  useEffect(()=>{
+    if(popup){
+      document.body.style.overflow = 'hidden';
+    } else {
+      document.body.style.overflow = 'visible';
+    }
+  },[popup])
 
 
 
@@ -148,7 +168,10 @@ function Inflatable() {
                 <input value={postCode} onChange={(e)=>setPostalCode(e.target.value)} type='text' placeholder='Postal Code' />
                 <button className='btn-book' onClick={()=>createRerservation()}> Book Now </button>
             </div>
-            <StripeContainer balance={100} />
+            <div style={{display:popup? "block":"none"}}>
+              <div className="overlay" onClick={()=>setPopup(!popup)}/>
+              <PaymentGateway balance={inflatable.price * bookingDates.length} popup={popup}/>
+            </div>
           </div>
         </div>
         <div className='recommendations'>

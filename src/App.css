@@ -473,6 +473,65 @@ abbr[title] {
     font-size: 10px;
   }
 
+  .paymentGateway .payment-popup {
+    position: fixed;
+    left: 50%;
+    top: 50%;
+    transform: translate(-50%, -50%);
+    background-color: white;
+    width: 600px;
+    height: 500px;
+    border-radius: 20px;
+    padding: 20px 50px;
+  }
+  .paymentGateway .payment-popup img{
+    max-width: 300px;
+    display: block;
+    margin: 10px auto;
+  }
+  .paymentGateway .payment-popup h3 {
+    border-bottom: 1px solid lightgray;
+    color: gray;
+    font-size: 15px;
+    padding-bottom: 5px;
+
+  }
+  .paymentGateway .payment-popup p {
+    margin: 3px;
+    padding-bottom: 2.5px;
+  }
+
+  .overlay {
+    position: fixed;
+    left: 0;
+    top: 0;
+    width: 100vw;
+    height: 100vh;
+    background-color: rgba(0, 0, 0, 0.375);
+  }
+  .form-creditCard {
+    width: 100%;
+  }
+ 
+  .form-creditCard {
+    margin-top: 20px;
+  }
+  .form-creditCard #btnPay {
+    display: block;
+    margin: 30px auto 0 auto;
+    width: 50%;
+    height: 40px;
+    background-color: #0089BF;
+    color: white;
+    border: none;
+    border-radius: 10px;
+    box-shadow: rgba(99, 99, 99, 0.2) 0px 2px 8px 0px;
+  }
+  .form-creditCard #btnPay:hover {
+    background-color: white;
+    color: #0089BF;
+  }
+
 
 /* =========== HEADER  =========  */
 

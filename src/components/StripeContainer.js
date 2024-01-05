@@ -11,11 +11,11 @@ function StripeContainer(props) {
   },[props.balance])
 
   return (
-    <Elements stripe={stripeTestPromise}>
-        <PaymentForm 
-          balance={props.balance} 
-        />
-    </Elements>
+    <div className='form-creditCard'>
+      <Elements stripe={stripeTestPromise}>
+        <PaymentForm  balance={props.balance} />
+      </Elements>
+    </div>
   )
 }
 

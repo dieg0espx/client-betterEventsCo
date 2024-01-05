@@ -82,7 +82,7 @@ function PaymentForm(props) {
         </div>
         {!success ? 
         <form onSubmit={handleSubmit}>
-            <h3> Payment </h3>
+            <h3> Payment Details  </h3>
             <div className="card-details">
                 <fieldset className="FormGroup">
                     <div className="FormRow">
