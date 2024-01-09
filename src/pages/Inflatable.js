@@ -43,6 +43,18 @@ function Inflatable() {
       setBookingDates(getDatesBetween(startDate, endDate))
     }
   }, [dates])
+
+  useEffect(()=>{
+    console.log(bookingDates);
+    for (let i = 0; i < bookingDates.length; i++) {
+      for (let j = 0; j < busyDates.length; j++) {
+        if(new Date(bookingDates[i]) == busyDates){
+          alert("Some dates are not available")
+          break
+        }
+      }
+    }
+  },[bookingDates])
   
   const getDatesBetween = (startDate, endDate) => {
     const datesBetween = [];

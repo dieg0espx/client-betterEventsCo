@@ -481,7 +481,7 @@ abbr[title] {
     transform: translate(-50%, -50%);
     background-color: white;
     width: 600px;
-    height: 500px;
+    height: 520px;
     border-radius: 20px;
     padding: 20px 30px;
   }
@@ -505,10 +505,45 @@ abbr[title] {
     grid-template-columns: auto 60%;
     gap: 30px;
   }
-
   .paymentGateway .bookingDetails #inflatable{
     display: block;
     width: 100%;
+  }
+  .paymentConfirmation {
+    display: flex;
+    gap: 20px;
+  }
+  .paymentConfirmation #confirmation {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+  }
+  .paymentConfirmation #confirmation p{
+   line-height: 15px;
+  }
+  .paymentConfirmation .iconConfirmation {
+    color: #3bd304;
+    font-size: 80px;
+  }
+  .paymentGateway #failed {
+    color: red;
+    font-weight: bold;
+  }
+  #closePaymentGateway {
+    display: block;
+    width: 300px;
+    height: 35px;
+    margin: auto;
+    border: none;
+    border-radius: 10px;
+    background-color: #0089BF;
+    color: white;
+    box-shadow: rgba(99, 99, 99, 0.2) 0px 2px 8px 0px;
+    transition: 0.3s;
+  }
+  #closePaymentGateway:hover {
+    background-color: white;
+    color: #0089BF;
   }
   .overlay {
     position: fixed;

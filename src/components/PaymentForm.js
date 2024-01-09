@@ -36,6 +36,7 @@ function PaymentForm(props) {
     const [bookingDates, setBookingDates] = useState([]);
     const [imageUpload, setImageUpload] = useState(props.imageUpload)
     const [showLoader, setShowLoader] = useState(false)
+    const [reservationID, setReservationID] = useState('')
   
 
     useEffect(()=>{
@@ -44,6 +45,7 @@ function PaymentForm(props) {
 
 
   const handleSubmit = async (e) => {
+    setShowBtn(false)
     // ADD TWO-STEP VERIFICATION ON BUSY DATES HERE 
     // PROCESSING PAYMENT WITH STRPE
     e.preventDefault()
@@ -60,8 +62,8 @@ function PaymentForm(props) {
               amount: Math.floor(props.balance*100),
             })
             if (response.data.success) {
-              console.log("Payment Successfull !");
-              //  CREATE NEW RESERVATION HERE
+              setSuccess(true)
+              //  CREATING NEW RESERVATION - FIREBASE
               let data = {
                 name: sessionStorage.getItem('name'),
                 lastName: sessionStorage.getItem('lastName'),
@@ -73,11 +75,14 @@ function PaymentForm(props) {
                 inflatableID: sessionStorage.getItem('infatableID')
               }
               const docRef = await addDoc(collection(db, "bookings"), data);
+              setReservationID(docRef.id)
     
               //  SEND BOOKING CONFIMATION CLIENT & PROVIDER
             } else {
                 console.log("ERROR ON PAYMENT", response);
               // SHOW ALERT OF ERROR ON PAYMENT 
+              setShowBtn(true)
+              setFailed(true)
             }
         } catch (error) {
           console.log("Error", error)
@@ -106,18 +111,21 @@ function PaymentForm(props) {
                 </fieldset>
             </div>
             <div style={{display: failed? "block":"none"}}>
-                <p id="failed"> *Payment Failed </p>
+                <p id="failed"> *Payment Failed, try again. </p>
             </div>
-            <button id="btnPay" >Pay ${props.balance} USD</button>
- 
+            <button id="btnPay" style={{display: showBtn? "block":"none"}}>Pay ${props.balance} USD</button>
         </form>
         :
        <div>
            <div className="paymentConfirmation">
-                <i className="bi bi-check-circle-fill iconCheck"></i>
-                <p> Payment Approved </p>
-                <p> You Booking has been confirmed </p>
+                <i className="bi bi-check-circle-fill iconConfirmation"></i>
+                <div id="confirmation">
+                  <p> <b> Payment Approved </b></p>
+                  <p> You Booking has been confirmed </p>
+                  <p> <b> Confirmation: </b> {reservationID} </p>
+                </div>
            </div>
+           <button id="closePaymentGateway" onClick={()=>window.location.href = '/'}> Done  </button>
        </div> 
         }     
       </>
