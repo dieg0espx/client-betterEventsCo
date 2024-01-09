@@ -17,6 +17,7 @@ function Inflatable() {
   const [inflatableID, setInflatableID] = useState('')
   const [address, setAddress] = useState('610 Granville St')
   const [postCode, setPostalCode] = useState('V6C 3T3')
+  const [imageInflatable, setImageInflatable] = useState('')
 
   const [dates, setDates] = useState([])
   const [bookingDates, setBookingDates] = useState([])
@@ -70,6 +71,7 @@ function Inflatable() {
       if (docSnap.exists()) {
         // console.log(docSnap.data());
         setInflatable(docSnap.data())
+        setImageInflatable(docSnap.data().image)
       } else {
         alert("Inflatable Not Found")
       }
@@ -88,6 +90,7 @@ function Inflatable() {
     sessionStorage.setItem('postalCode', data.postCode)
     sessionStorage.setItem('bookingDates', data.bookingDates.join(", "))
     sessionStorage.setItem('infatableID', data.inflatableID)
+    sessionStorage.setItem('imageInflatable', imageInflatable)
     // const docRef = await addDoc(collection(db, "bookings"), data);
     // console.log("New Reservation ID: " + docRef);
     setPopup(true)
@@ -142,6 +145,19 @@ function Inflatable() {
               <p id="price"> ${inflatable.price} USD </p>
             </div>
             <p id="description"> {inflatable.description}{inflatable.description}{inflatable.description}{inflatable.description} </p>
+            
+            <div id='rentalInformation'>
+              <p> Rental Information </p>
+              <li> Our inflatable deliveries are between 8am - 1pm dayli.</li>
+              <li> Our inflatable pick-ups start after 7pm daily. (Units may be left over night for an additional fee) </li>
+              <li> Apon delivery, we set up and secure the unit with necessary tools. </li>
+              <li> All water hoses, blowers, stakes, and extension cords will be provided to set up inflatable. </li>
+              <li> We require all customers to have a dedicated power outlet for inflatable. </li>
+              <li> If the inflatable requires a water source, then, one must be provided. </li>
+              <li> We are prepared for all grass set ups. If your set up will be on concrete, we must know in advance to prepare accordingly to make sure the unit is safe and secure for all children.</li>
+            </div>
+
+
             <div id="dimentions">
               <div className="dimention">          
                 <p className="value">{inflatable.width} ft </p>
@@ -166,7 +182,8 @@ function Inflatable() {
                 <input value={email} onChange={(e)=>setEmail(e.target.value)} type='email' placeholder='Email Address' />
                 <input value={address} onChange={(e)=>setAddress(e.target.value)} type='text' placeholder='Address' />
                 <input value={postCode} onChange={(e)=>setPostalCode(e.target.value)} type='text' placeholder='Postal Code' />
-                <button className='btn-book' onClick={()=>createRerservation()}> Book Now </button>
+                <button className='btn-book' onClick={()=>createRerservation()} style={{display: bookingDates.length > 0?"block":"none"}}> Book Now </button>
+                <p style={{display: bookingDates.length == 0?"block":"none"}}> *Select an available date </p>
             </div>
             <div style={{display:popup? "block":"none"}}>
               <div className="overlay" onClick={()=>setPopup(!popup)}/>

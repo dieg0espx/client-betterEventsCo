@@ -310,6 +310,7 @@ p {
 }
 
 
+
 .react-calendar {
   min-width: 350px;
   width: 350px;
@@ -482,9 +483,9 @@ abbr[title] {
     width: 600px;
     height: 500px;
     border-radius: 20px;
-    padding: 20px 50px;
+    padding: 20px 30px;
   }
-  .paymentGateway .payment-popup img{
+  .paymentGateway .payment-popup #logo{
     max-width: 300px;
     display: block;
     margin: 10px auto;
@@ -494,13 +495,21 @@ abbr[title] {
     color: gray;
     font-size: 15px;
     padding-bottom: 5px;
-
   }
   .paymentGateway .payment-popup p {
     margin: 3px;
     padding-bottom: 2.5px;
   }
+  .paymentGateway .bookingDetails {
+    display: grid;
+    grid-template-columns: auto 60%;
+    gap: 30px;
+  }
 
+  .paymentGateway .bookingDetails #inflatable{
+    display: block;
+    width: 100%;
+  }
   .overlay {
     position: fixed;
     left: 0;
@@ -1272,6 +1281,16 @@ abbr[title] {
 .booking-inflatable #right .btn-book:hover {
   background-color: white;
   color: #0089BF;
+}
+
+.booking-inflatable #rentalInformation {
+  color: gray;
+  font-size: 1rem;
+  margin: 20px 0;
+}
+.booking-inflatable #rentalInformation p{
+  color: black;
+  font-weight: 600;
 }
 
 @media screen and (max-width:800px) {

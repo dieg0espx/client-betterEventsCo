@@ -108,11 +108,8 @@ function PaymentForm(props) {
             <div style={{display: failed? "block":"none"}}>
                 <p id="failed"> *Payment Failed </p>
             </div>
-            <div style={{display: showBtn? "block":"none"}}>
-                {/* <button id="btnPay" onClick={()=>setShowLoader(true)}>Pay ${props.balance} USD</button> */}
-                <button id="btnPay" >Pay ${props.balance} USD</button>
-            </div>
-
+            <button id="btnPay" >Pay ${props.balance} USD</button>
+ 
         </form>
         :
        <div>
