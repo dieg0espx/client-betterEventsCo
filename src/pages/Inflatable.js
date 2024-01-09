@@ -103,8 +103,6 @@ function Inflatable() {
     sessionStorage.setItem('bookingDates', data.bookingDates.join(", "))
     sessionStorage.setItem('infatableID', data.inflatableID)
     sessionStorage.setItem('imageInflatable', imageInflatable)
-    // const docRef = await addDoc(collection(db, "bookings"), data);
-    // console.log("New Reservation ID: " + docRef);
     setPopup(true)
   }
 
@@ -142,9 +140,6 @@ function Inflatable() {
       document.body.style.overflow = 'visible';
     }
   },[popup])
-
-
-
 
   return (
     <div className='booking-inflatable'>
