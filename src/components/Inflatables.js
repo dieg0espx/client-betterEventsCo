@@ -41,6 +41,13 @@ function Inflatables() {
       containerRef.current.scrollLeft += 50;
     }
   };
+  
+  function changeInflatable(id){
+    window.location.href = '/#/inflatable?id=' + id
+    if(window.location.href.includes('inflatable')){
+      window.location.reload()
+    }
+  }
 
   return (
     <div className="carousel-inflatables">
@@ -68,7 +75,7 @@ function Inflatables() {
               <p className="type"> Kids</p>
             </div>
           </div>
-          <button onClick={() => window.location.href='/#/inflatable?id=' + inflatable.id}>Read More</button>
+          <button onClick={()=>changeInflatable(inflatable.id)}> Read More</button>
           </div>
         ))}
         {inflatables.map((inflatable) => (

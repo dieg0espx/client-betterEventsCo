@@ -144,7 +144,7 @@ function Inflatable() {
             <p id="description"> {inflatable.description}{inflatable.description}{inflatable.description}{inflatable.description} </p>
             <div id='rentalInformation'>
               <p> Rental Information </p>
-              <li> Our inflatable deliveries are between 8am - 1pm dayli.</li>
+              <li> Our inflatable deliveries are between 8am - 1pm daily.</li>
               <li> Our inflatable pick-ups start after 7pm daily. (Units may be left over night for an additional fee) </li>
               <li> Apon delivery, we set up and secure the unit with necessary tools. </li>
               <li> All water hoses, blowers, stakes, and extension cords will be provided to set up inflatable. </li>
