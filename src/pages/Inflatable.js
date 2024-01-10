@@ -18,20 +18,16 @@ function Inflatable() {
   const [address, setAddress] = useState('610 Granville St')
   const [postCode, setPostalCode] = useState('V6C 3T3')
   const [imageInflatable, setImageInflatable] = useState('')
-
   const [dates, setDates] = useState([])
   const [bookingDates, setBookingDates] = useState([])
   const [busyDates, setBusyDates] = useState([])
-
   const [popup, setPopup] = useState(false)
-
   const db = getFirestore(app);
 
   useEffect(() => {
     getInflatable();
     getBusyDates()
   }, []);
-
   useEffect(() => {
     let formattedDates = [];
     for (let i = 0; i < dates.length; i++) {
@@ -43,19 +39,21 @@ function Inflatable() {
       setBookingDates(getDatesBetween(startDate, endDate))
     }
   }, [dates])
-
+  // DOUBLE CHECK THAT SELETED DATES ARE NOT BUSYq  
   useEffect(()=>{
-    console.log(bookingDates);
-    for (let i = 0; i < bookingDates.length; i++) {
-      for (let j = 0; j < busyDates.length; j++) {
-        if(new Date(bookingDates[i]) == busyDates){
-          alert("Some dates are not available")
-          break
+    if(bookingDates.length > 0 ){
+      for (let i = 0; i < bookingDates.length; i++) {
+        for (let j = 0; j < busyDates.length; j++) {
+         if(new Date(bookingDates[i]).toString() == busyDates[j].toString()){
+          alert("Some Dates Are Not Available")
+          setBookingDates([])
+          return
+         }
         }
       }
     }
   },[bookingDates])
-  
+
   const getDatesBetween = (startDate, endDate) => {
     const datesBetween = [];
     let currentDate = new Date(startDate);
@@ -66,7 +64,6 @@ function Inflatable() {
     }
     return datesBetween;
   }
-  
   function formatDate(date){
     return date.toLocaleString('en-US', {
       month: '2-digit',
@@ -74,7 +71,6 @@ function Inflatable() {
       year: 'numeric',
     });
   }
-
   const getInflatable = async () => {
     const docRef = doc(db, "inflatables", window.location.href.split('=')[1].toString());
     setInflatableID( window.location.href.split('=')[1].toString())
@@ -91,7 +87,6 @@ function Inflatable() {
       console.error("Error fetching document:", error);
     }
   };
-
   function createRerservation(){
     let data = {name, lastName, phone, email, address, postCode, bookingDates, inflatableID}
     sessionStorage.setItem('name', data.name)
@@ -105,7 +100,6 @@ function Inflatable() {
     sessionStorage.setItem('imageInflatable', imageInflatable)
     setPopup(true)
   }
-
   async function getBusyDates(){
     let arrayDates = []
     console.log("Checking Busy Dates ...");
@@ -119,7 +113,6 @@ function Inflatable() {
     });
     setBusyDates(arrayDates)
   };
-
   const tileDisabled = ({ date, view }) => {
     // Disable dates only for the month view
     if (view === 'month') {
@@ -152,7 +145,6 @@ function Inflatable() {
               <p id="price"> ${inflatable.price} USD </p>
             </div>
             <p id="description"> {inflatable.description}{inflatable.description}{inflatable.description}{inflatable.description} </p>
-            
             <div id='rentalInformation'>
               <p> Rental Information </p>
               <li> Our inflatable deliveries are between 8am - 1pm dayli.</li>
@@ -163,8 +155,6 @@ function Inflatable() {
               <li> If the inflatable requires a water source, then, one must be provided. </li>
               <li> We are prepared for all grass set ups. If your set up will be on concrete, we must know in advance to prepare accordingly to make sure the unit is safe and secure for all children.</li>
             </div>
-
-
             <div id="dimentions">
               <div className="dimention">          
                 <p className="value">{inflatable.width} ft </p>
@@ -181,7 +171,7 @@ function Inflatable() {
             </div>
           </div>
           <div id="right">  
-            <Calendar  selectRange={true} onChange={setDates}  tileDisabled={tileDisabled} />
+            <Calendar selectRange={true} onChange={setDates}  tileDisabled={tileDisabled} />
             <div className='form'>
                 <input value={name} onChange={(e)=>setName(e.target.value)} type='text' placeholder='First Name' />
                 <input value={lastName} onChange={(e)=>setLastName(e.target.value)} type='text' placeholder='Last Name' />
