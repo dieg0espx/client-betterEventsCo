@@ -30,12 +30,6 @@ function Inflatables() {
     getInflatables();
   }, []);
 
-  useEffect(() => {
-    if (inflatables.length > 0) {
-      console.log(inflatables);
-    }
-  }, [inflatables]);
-
   const handleScrollToLeft = () => {
     if (containerRef.current) {
       containerRef.current.scrollLeft -= 50;

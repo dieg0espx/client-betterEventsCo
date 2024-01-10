@@ -39,11 +39,6 @@ function PaymentForm(props) {
     const [reservationID, setReservationID] = useState('')
   
 
-    useEffect(()=>{
-      console.log("PAYMENT FORM: " + props.balance);
-    },[props.balance])
-
-
   const handleSubmit = async (e) => {
     setShowBtn(false)
     // ADD TWO-STEP VERIFICATION ON BUSY DATES HERE 

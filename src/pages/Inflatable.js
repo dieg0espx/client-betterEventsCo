@@ -39,8 +39,8 @@ function Inflatable() {
       setBookingDates(getDatesBetween(startDate, endDate))
     }
   }, [dates])
-  // DOUBLE CHECK THAT SELETED DATES ARE NOT BUSYq  
-  useEffect(()=>{
+  useEffect(()=> {
+    // DOUBLE CHECKING THAT SELETED DATES ARE NOT BUSY
     if(bookingDates.length > 0 ){
       for (let i = 0; i < bookingDates.length; i++) {
         for (let j = 0; j < busyDates.length; j++) {
@@ -102,7 +102,6 @@ function Inflatable() {
   }
   async function getBusyDates(){
     let arrayDates = []
-    console.log("Checking Busy Dates ...");
     const querySnapshot = await getDocs(collection(db, "bookings"));
     querySnapshot.forEach((doc) => {
       if(doc.data().inflatableID == window.location.href.split('=')[1].toString()){
@@ -114,9 +113,7 @@ function Inflatable() {
     setBusyDates(arrayDates)
   };
   const tileDisabled = ({ date, view }) => {
-    // Disable dates only for the month view
     if (view === 'month') {
-      // Check if the current date is in the busyDates array
       return busyDates.some(busyDate => (
         busyDate.getDate() === date.getDate() &&
         busyDate.getMonth() === date.getMonth() &&

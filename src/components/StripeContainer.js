@@ -6,10 +6,6 @@ import PaymentForm from './PaymentForm'
 function StripeContainer(props) {
   let stripeTestPromise = loadStripe('pk_test_51NJ0hELJsUTWMJlYFPcEXiY8E43Kfrj5ecnpYpKIACSLxPCqsdPhYPaaT0knoPmt4wFQERjyolMHJIPrkvnAH1VI00VHrT8oeq');
 
-  useEffect(()=>{
-    console.log("STRIPE CONTAINER: " + props.balance);
-  },[props.balance])
-
   return (
     <div className='form-creditCard'>
       <Elements stripe={stripeTestPromise}>
