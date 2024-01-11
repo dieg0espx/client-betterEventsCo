@@ -26,24 +26,24 @@ function Header() {
         <div className="navBtns">
             <Link className={page == 1 ? "btn active":"btn"} onClick={()=>setPage(1)} to="/"> Home </Link>
             <Link className={page == 2 ? "btn active":"btn"} onClick={()=>setPage(2)} to="/services"> Services </Link>
-            <Link className={page == 3 ? "btn active":"btn"} onClick={()=>setPage(3)} to="/"> Inflatables </Link>
+            <Link className={page == 3 ? "btn active":"btn"} onClick={()=>setPage(3)} to="/inflatables"> Inflatables </Link>
             <Link className={page == 4 ? "btn active":"btn"} onClick={()=>setPage(4)} to="/contact"> Contact </Link>
         </div>
         <button className="nav-mobile-menu" onClick={()=>setMobileMenu(!mobileMenu)}><i className="bi bi-list"></i> </button>
       
         <div className="grid-inflatables">
-            <Link className="inflatables-btns" to="/"> All Rentals </Link>
-            <Link className="inflatables-btns" to="/"> Bounce Houses </Link>
-            <Link className="inflatables-btns" to="/"> Combo Jumpers </Link>
-            <Link className="inflatables-btns" to="/"> Slides </Link>
-            <Link className="inflatables-btns" to="/"> Games & Obstacles </Link>
-            <Link className="inflatables-btns" to="/"> Extras </Link>
+            <Link className="inflatables-btns" to="/inflatables"> All Rentals </Link>
+            <Link className="inflatables-btns" to="/inflatables"> Bounce Houses </Link>
+            <Link className="inflatables-btns" to="/inflatables"> Combo Jumpers </Link>
+            <Link className="inflatables-btns" to="/inflatables"> Slides </Link>
+            <Link className="inflatables-btns" to="/inflatables"> Games & Obstacles </Link>
+            <Link className="inflatables-btns" to="/inflatables"> Extras </Link>
         </div>
     </div>
     <div className="mobileMenu" style={{display: mobileMenu ? "flex":"none"}}>
             <Link className={page == 1 ? "mobile-btn active":"mobile-btn"} onClick={()=>setPage(1)} to="/"> Home </Link>
             <Link className={page == 2 ? "mobile-btn active":"mobile-btn"} onClick={()=>setPage(2)} to="/services"> Services </Link>
-            <Link className={page == 3 ? "mobile-btn active":"mobile-btn"} onClick={()=>setPage(3)} to="/"> Inflatables </Link>
+            <Link className={page == 3 ? "mobile-btn active":"mobile-btn"} onClick={()=>setPage(3)} to="/inflatables"> Inflatables </Link>
             <Link className={page == 4 ? "mobile-btn active":"mobile-btn"} onClick={()=>setPage(4)} to="/contact"> Contact </Link>
         </div>
     </div>

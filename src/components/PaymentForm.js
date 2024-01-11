@@ -5,7 +5,6 @@ import cardGif from '../images/creditCard.gif'
 import { getFirestore, doc, getDoc, getDocs, updateDoc, collection, addDoc } from 'firebase/firestore';
 import app from '../Firbase'
 
-
 const CARD_OPTIONS = {
 	style: {
         base: {
@@ -38,56 +37,70 @@ function PaymentForm(props) {
     const [showLoader, setShowLoader] = useState(false)
     const [reservationID, setReservationID] = useState('')
   
-
-  const handleSubmit = async (e) => {
-    setShowBtn(false)
-    // ADD TWO-STEP VERIFICATION ON BUSY DATES HERE 
-    // PROCESSING PAYMENT WITH STRPE
-    e.preventDefault()
-    const {error, paymentMethod} = await stripe.createPaymentMethod({
-          type: "card",
-          card: elements.getElement(CardElement)
-    })
-    if(!error) {
-        try {
-            const {id} = paymentMethod
-            const response = await axios.post(stripeURL + "/paymentInflatables", {
-              id,
-              description: "INFLATABLE BOOKING", 
-              amount: Math.floor(props.balance*100),
-            })
-            if (response.data.success) {
-              setSuccess(true)
-              //  CREATING NEW RESERVATION - FIREBASE
-              let data = {
-                name: sessionStorage.getItem('name'),
-                lastName: sessionStorage.getItem('lastName'),
-                phone: sessionStorage.getItem('phone'),
-                email: sessionStorage.getItem('email'),
-                address: sessionStorage.getItem('address'),
-                postalCode: sessionStorage.getItem('postalCode'),
-                bookingDates: sessionStorage.getItem('bookingDates').split([',']),
-                inflatableID: sessionStorage.getItem('infatableID')
-              }
-              const docRef = await addDoc(collection(db, "bookings"), data);
-              setReservationID(docRef.id)
-    
-              //  SEND BOOKING CONFIMATION CLIENT & PROVIDER
-            } else {
-                console.log("ERROR ON PAYMENT", response);
-              // SHOW ALERT OF ERROR ON PAYMENT 
-              setShowBtn(true)
-              setFailed(true)
-            }
-        } catch (error) {
-          console.log("Error", error)
-        }
-    } else {
-        console.log(error.message)
-        // DISABLE LOADER
+    let data = {
+      name: sessionStorage.getItem('name'),
+      lastName: sessionStorage.getItem('lastName'),
+      phone: sessionStorage.getItem('phone'),
+      email: sessionStorage.getItem('email'),
+      address: sessionStorage.getItem('address'),
+      postalCode: sessionStorage.getItem('postalCode'),
+      bookingDates: sessionStorage.getItem('bookingDates').split([',']),
+      inflatableID: sessionStorage.getItem('infatableID')
     }
-  }
 
+    const handleSubmit = async (e) => {
+      setShowBtn(false)
+      // ADD TWO-STEP VERIFICATION ON BUSY DATES HERE 
+      // PROCESSING PAYMENT WITH STRPE
+      e.preventDefault()
+      const {error, paymentMethod} = await stripe.createPaymentMethod({
+            type: "card",
+            card: elements.getElement(CardElement)
+      })
+      if(!error) {
+          try {
+              const {id} = paymentMethod
+              const response = await axios.post(stripeURL + "/paymentInflatables", {
+                id,
+                description: "INFLATABLE BOOKING", 
+                amount: Math.floor(props.balance*100),
+              })
+              if (response.data.success) {
+                setSuccess(true)
+                //  CREATING NEW RESERVATION - FIREBASE
+                const docRef = await addDoc(collection(db, "bookings"), data);
+                setReservationID(docRef.id)
+                // SENDING EMAIL RESERVATION - NODEMAILER 
+                sendEmailConfirmation(docRef.id) 
+              } else {
+                  console.log("ERROR ON PAYMENT", response);
+                  setShowBtn(true)
+                  setFailed(true)
+              }
+          } catch (error) {
+            console.log("Error", error)
+          }
+      }
+    }
+
+    async function sendEmailConfirmation(id){
+      await fetch('https://better-stays-mailer.vercel.app/api/bebookingConfirmation', {
+        method: 'POST',
+        body: JSON.stringify({ 
+          name : data.name, 
+          lastName: data.lastName, 
+          phone : data.phone, 
+          email: data.email, 
+          address : data.address, 
+          postalCode: data.postalCode, 
+          dates: data.bookingDates,
+          reservationID: id,
+          image: sessionStorage.getItem('imageInflatable'), 
+          paid: props.balance, 
+      }), headers: {'Content-Type': 'application/json'}})
+      .then(response => response.json())
+      .then(response => console.log(response))
+    }
 
     return (
         <>

@@ -6,6 +6,7 @@ import About from './pages/About';
 import Services from './pages/Services';
 import Contact from './pages/contact';
 import Inflatable from './pages/Inflatable';
+import Inflatables from './pages/Inflatables';
 
 function App() {
   return (
@@ -15,6 +16,7 @@ function App() {
           <Route path="/services" element={<Services />} />
           <Route path="/contact" element={<Contact />} />
           <Route path="/inflatable" element={<Inflatable />} />
+          <Route path="/inflatables" element={<Inflatables />} />
         </Routes>
    </HashRouter>
   );
