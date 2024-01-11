@@ -28,7 +28,7 @@ function Inflatables() {
       case 'slides':
         setCurrentCategory('slides')
         break;
-      case 'games-and-obstables':
+      case 'games-and-obstacles':
         setCurrentCategory('games and obstacles')
         break;
       case 'extras':
