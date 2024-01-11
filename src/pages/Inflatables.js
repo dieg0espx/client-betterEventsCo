@@ -1,4 +1,5 @@
 import React, { useEffect, useState, useRef } from "react";
+import { useParams } from 'react-router-dom';
 import { getFirestore } from 'firebase/firestore';
 import { collection, getDocs } from "firebase/firestore";
 import app from '../Firbase';
@@ -11,37 +12,34 @@ function Inflatables() {
   const [currentCategory, setCurrentCategory] = useState('all rentals')
   const containerRef = useRef(null);
 
-  
+  const { category } = useParams();
 
   useEffect(()=>{
-    let url = window.location.href
-    let categoryURl = url.split('category=')[1]
-    console.log(categoryURl);
-    switch (categoryURl) {
+    switch (category) {
       case 'all-rentals':
         setCurrentCategory('all rentals')
         break;
       case 'bounce-houses':
-        console.log('bounce houses');
-        setCurrentCategory('bounce houses')
-        break;
+          setCurrentCategory('bounce houses')
+          break;
       case 'combo-jumpers':
         setCurrentCategory('combo jumpers')
         break;
       case 'slides':
         setCurrentCategory('slides')
         break;
-      case 'games-and-obstacles':
+      case 'games-and-obstables':
         setCurrentCategory('games and obstacles')
         break;
-      case 'extas':
+      case 'extras':
         setCurrentCategory('extras')
         break;
       default:
-        setCurrentCategory("all rentals")
+        setCurrentCategory('all rentals')
         break;
     }
-  },[])
+  },[category])
+
 
 
 
@@ -82,7 +80,7 @@ function Inflatables() {
       <Header />
       <div className="container1">
         <div className="top-nav">
-          <select defaultValue={currentCategory} onChange={(e)=>setCurrentCategory(e.target.value)}>
+          <select value={currentCategory} onChange={(e)=>setCurrentCategory(e.target.value)}>
             <option value={"all rentals"} selected> All Rentals </option>
             <option value={"bounce houses"}> Bounce Houses </option>
             <option value={"combo jumpers"}> Combo Jumpers </option>
