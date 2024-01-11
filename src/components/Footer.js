@@ -1,12 +1,12 @@
 import React from 'react'
 import { Link } from "react-router-dom";
+import logo from "../images/logo-white.png"
 
 function Footer() {
   return (
     <div className='footer'> 
       <div>
-        <h1> Better Events </h1>
-        <h2> Let the Better Events begin. </h2>
+        <img className="logo" src={logo} />
         <p> <i className="bi bi-telephone-fill iconPhone"></i>  +1 (630) 370-7422 </p>
         <p> <i className="bi bi-envelope-fill  iconMail"></i> bettereventsnow@gmail.com </p>
       </div>

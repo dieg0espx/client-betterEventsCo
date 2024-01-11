@@ -132,6 +132,10 @@ p {
   display: grid;
   grid-template-columns: 1fr 1fr;
 }
+.footer .logo {
+  width: 200px;
+  margin-left: -5px;
+}
 .footer h1 {
   font-weight: bold;
   font-size: 35px;
@@ -597,6 +601,7 @@ abbr[title] {
 }
 .header img {
   width: 100%;
+  margin-left: 10px;
 }
 .header .navBtns {
   display: flex;
