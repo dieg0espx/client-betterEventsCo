@@ -44,7 +44,7 @@ function PaymentForm(props) {
       email: sessionStorage.getItem('email'),
       address: sessionStorage.getItem('address'),
       postalCode: sessionStorage.getItem('postalCode'),
-      bookingDates: sessionStorage.getItem('bookingDates').split([',']),
+      bookingDates: sessionStorage.getItem('bookingDates'),
       inflatableID: sessionStorage.getItem('infatableID')
     }
 
@@ -93,7 +93,7 @@ function PaymentForm(props) {
           email: data.email, 
           address : data.address, 
           postalCode: data.postalCode, 
-          dates: data.bookingDates,
+          dates: data.bookingDates.split([',']),
           reservationID: id,
           image: sessionStorage.getItem('imageInflatable'), 
           paid: props.balance, 

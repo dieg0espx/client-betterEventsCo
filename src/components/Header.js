@@ -32,12 +32,12 @@ function Header() {
         <button className="nav-mobile-menu" onClick={()=>setMobileMenu(!mobileMenu)}><i className="bi bi-list"></i> </button>
       
         <div className="grid-inflatables">
-            <Link className="inflatables-btns" to="/inflatables"> All Rentals </Link>
-            <Link className="inflatables-btns" to="/inflatables"> Bounce Houses </Link>
-            <Link className="inflatables-btns" to="/inflatables"> Combo Jumpers </Link>
-            <Link className="inflatables-btns" to="/inflatables"> Slides </Link>
-            <Link className="inflatables-btns" to="/inflatables"> Games & Obstacles </Link>
-            <Link className="inflatables-btns" to="/inflatables"> Extras </Link>
+            <Link className="inflatables-btns" to="/inflatables?category=all-rentals"> All Rentals </Link>
+            <Link className="inflatables-btns" to="/inflatables?category=bounce-houses"> Bounce Houses </Link>
+            <Link className="inflatables-btns" to="/inflatables?category=combo-jumpers"> Combo Jumpers </Link>
+            <Link className="inflatables-btns" to="/inflatables?category=slides"> Slides </Link>
+            <Link className="inflatables-btns" to="/inflatables?category=games-and-obstacles"> Games & Obstacles </Link>
+            <Link className="inflatables-btns" to="/inflatables?category=extras"> Extras </Link>
         </div>
     </div>
     <div className="mobileMenu" style={{display: mobileMenu ? "flex":"none"}}>

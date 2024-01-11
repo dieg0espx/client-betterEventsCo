@@ -4,13 +4,47 @@ import { collection, getDocs } from "firebase/firestore";
 import app from '../Firbase';
 import Header from '../components/Header'
 import Footer from '../components/Footer'
-import { unstable_HistoryRouter } from "react-router-dom";
 
 function Inflatables() {
   const db = getFirestore(app);
   const [inflatables, setInflatables] = useState([]);
   const [currentCategory, setCurrentCategory] = useState('all rentals')
   const containerRef = useRef(null);
+
+  
+
+  useEffect(()=>{
+    let url = window.location.href
+    let categoryURl = url.split('category=')[1]
+    console.log(categoryURl);
+    switch (categoryURl) {
+      case 'all-rentals':
+        setCurrentCategory('all rentals')
+        break;
+      case 'bounce-houses':
+        console.log('bounce houses');
+        setCurrentCategory('bounce houses')
+        break;
+      case 'combo-jumpers':
+        setCurrentCategory('combo jumpers')
+        break;
+      case 'slides':
+        setCurrentCategory('slides')
+        break;
+      case 'games-and-obstacles':
+        setCurrentCategory('games and obstacles')
+        break;
+      case 'extas':
+        setCurrentCategory('extras')
+        break;
+      default:
+        setCurrentCategory("all rentals")
+        break;
+    }
+  },[])
+
+
+
 
   async function getInflatables() {
     let arrayInflatables = [];
@@ -42,16 +76,13 @@ function Inflatables() {
     }
   }
 
-  useEffect(()=>{
-    console.log(currentCategory);
-  },[currentCategory])
 
   return (
     <div className="inflatables-page">
       <Header />
       <div className="container1">
         <div className="top-nav">
-          <select onChange={(e)=>setCurrentCategory(e.target.value)}>
+          <select defaultValue={currentCategory} onChange={(e)=>setCurrentCategory(e.target.value)}>
             <option value={"all rentals"} selected> All Rentals </option>
             <option value={"bounce houses"}> Bounce Houses </option>
             <option value={"combo jumpers"}> Combo Jumpers </option>
