@@ -6,6 +6,7 @@ import ButtonContact from '../components/ButtonContact'
 import map1 from '../images/map1.png'
 import Faq from '../components/Faq'
 import NewsLetter from '../components/NewsLetter'
+import BtnCheckAllInflatables from '../components/BtnCheckAllInflatables'
 
 function Services() {
   return (
@@ -16,7 +17,7 @@ function Services() {
                 <div>
                     <p className='subTitle'> Our Services </p>
                     <p> At Better Events Co., we specialize in turning ordinary events into extraordinary celebrations by providing top-notch inflatable entertainment for kids. Whether you're planning a birthday party, school event, community fair, or any special occasion, our high-quality inflatables are here to add a touch of joy and excitement.</p>
-                    <button> Check All Inflatables </button>
+                    <BtnCheckAllInflatables />
                 </div>
             </div>
             <div className='container2'>

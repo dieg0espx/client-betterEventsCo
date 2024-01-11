@@ -583,6 +583,28 @@ abbr[title] {
     color: #0089BF;
   }
 
+  .btn-checkInflatables {
+    display: block;
+    width: 230px;
+    height: 40px;
+    border: none;
+    background-color: white;
+    color: #0089BF;
+    border-radius: 10px;
+    font-size: 18px;
+    font-weight: bold;
+    text-align: center;
+    line-height: 40px;
+    text-decoration: none;
+    transition: 0.5s;
+    box-shadow: rgba(99, 99, 99, 0.2) 0px 2px 8px 0px;
+    margin-top: 20px;
+  }
+  .btn-checkInflatables:hover {
+    background-color: #0089BF;
+    color: white;
+  }
+
 
 /* =========== HEADER  =========  */
 
