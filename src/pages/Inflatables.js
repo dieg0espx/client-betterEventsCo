@@ -1,5 +1,5 @@
 import React, { useEffect, useState, useRef } from "react";
-import { useParams } from 'react-router-dom';
+import { useParams, Link } from 'react-router-dom';
 import { getFirestore } from 'firebase/firestore';
 import { collection, getDocs } from "firebase/firestore";
 import app from '../Firbase';
@@ -67,12 +67,6 @@ function Inflatables() {
     getInflatables();
   }, []);
 
-  function changeInflatable(id){
-    window.location.href = '/#/inflatable?id=' + id
-    if(window.location.href.includes('inflatable')){
-      window.location.reload()
-    }
-  }
 
 
   return (
@@ -114,7 +108,7 @@ function Inflatables() {
                    <p className="type"> Kids</p>
                  </div>
                </div>
-               <button onClick={()=>changeInflatable(inflatable.id)}> Read More</button>
+               <Link className="btn-readMore" to={"/inflatable/" + inflatable.id}> Read More </Link>
               </div>
                ))}
              </div>
@@ -144,7 +138,7 @@ function Inflatables() {
                   <p className="type"> Kids</p>
                 </div>
               </div>
-              <button onClick={()=>changeInflatable(inflatable.id)}> Read More</button>
+              <Link className="btn-readMore" to={"/inflatable/" + inflatable.id}> Read More  </Link>
               </div>
             ))}
              </div>

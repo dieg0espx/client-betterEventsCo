@@ -1,4 +1,5 @@
-import { useEffect, useState } from 'react';
+import { useEffect, useState, useRef } from 'react';
+import { useParams } from 'react-router-dom';
 import { getFirestore, doc, getDoc, getDocs, updateDoc, collection, addDoc } from 'firebase/firestore';
 import app from '../Firbase'
 import Header from '../components/Header'
@@ -24,10 +25,18 @@ function Inflatable() {
   const [popup, setPopup] = useState(false)
   const db = getFirestore(app);
 
+  const { id } = useParams();
+  const scrollContainerRef = useRef(null);
+
   useEffect(() => {
-    getInflatable();
-    getBusyDates()
-  }, []);
+    getInflatable(id);
+    getBusyDates(id)
+    window.scrollTo(0, 0);
+    scrollContainerRef.current.scrollTop = 0;
+  }, [id]);
+
+
+
   useEffect(() => {
     let formattedDates = [];
     for (let i = 0; i < dates.length; i++) {
@@ -39,6 +48,7 @@ function Inflatable() {
       setBookingDates(getDatesBetween(startDate, endDate))
     }
   }, [dates])
+
   useEffect(()=> {
     // DOUBLE CHECKING THAT SELETED DATES ARE NOT BUSY
     if(bookingDates.length > 0 ){
@@ -70,14 +80,13 @@ function Inflatable() {
       day: '2-digit',
       year: 'numeric',
     });
-  }
-  const getInflatable = async () => {
-    const docRef = doc(db, "inflatables", window.location.href.split('=')[1].toString());
-    setInflatableID( window.location.href.split('=')[1].toString())
+  } 
+  const getInflatable = async (id) => {
+    const docRef = doc(db, "inflatables", id);
+    setInflatableID(id)
     try {
       const docSnap = await getDoc(docRef);
       if (docSnap.exists()) {
-        // console.log(docSnap.data());
         setInflatable(docSnap.data())
         setImageInflatable(docSnap.data().image)
       } else {
@@ -100,11 +109,11 @@ function Inflatable() {
     sessionStorage.setItem('imageInflatable', imageInflatable)
     setPopup(true)
   }
-  async function getBusyDates(){
+  async function getBusyDates(id){
     let arrayDates = []
     const querySnapshot = await getDocs(collection(db, "bookings"));
     querySnapshot.forEach((doc) => {
-      if(doc.data().inflatableID == window.location.href.split('=')[1].toString()){
+      if(doc.data().inflatableID == id){
         for (let i = 0; i < doc.data().bookingDates.length; i++) {
           arrayDates.push(new Date(doc.data().bookingDates[i]))
         }
@@ -135,7 +144,7 @@ function Inflatable() {
     <div className='booking-inflatable'>
         <Header />
         <div className='main-container'>
-          <div id="left">
+          <div id="left" ref={scrollContainerRef}>
             <img src={inflatable.image} />
             <div className='name-price'>
               <p id="name"> {inflatable.name} </p>

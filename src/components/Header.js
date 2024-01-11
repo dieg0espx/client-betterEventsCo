@@ -1,6 +1,4 @@
 import React, { useEffect, useState } from "react";
-import tempLogo from "../images/tempLogo.png";
-import logo from "../images/logo.png"
 import { Link } from "react-router-dom";
 
 function Header() {
@@ -23,7 +21,7 @@ function Header() {
   return (
     <div>
     <div className="header">
-        <img src={logo} onClick={()=>window.location.href="/"}/>
+        <img src={'https://res.cloudinary.com/dxfi1vj6q/image/upload/v1705007222/BetterEvents-01_jywxx8.png'} onClick={()=>window.location.href="/"}/>
         <div className="navBtns">
             <Link className={page == 1 ? "btn active":"btn"} onClick={()=>setPage(1)} to="/"> Home </Link>
             <Link className={page == 2 ? "btn active":"btn"} onClick={()=>setPage(2)} to="/services"> Services </Link>

@@ -2,6 +2,7 @@ import React, { useEffect, useState, useRef } from "react";
 import { getFirestore } from 'firebase/firestore';
 import { collection, getDocs } from "firebase/firestore";
 import app from '../Firbase';
+import { Link } from "react-router-dom";
 
 function Inflatables() {
   const db = getFirestore(app);
@@ -42,13 +43,6 @@ function Inflatables() {
     }
   };
   
-  function changeInflatable(id){
-    window.location.href = '/#/inflatable?id=' + id
-    if(window.location.href.includes('inflatable')){
-      window.location.reload()
-    }
-  }
-
   return (
     <div className="carousel-inflatables">
       <i className="bi bi-chevron-compact-left iconChev" onClick={handleScrollToLeft}></i>
@@ -75,57 +69,7 @@ function Inflatables() {
               <p className="type"> Kids</p>
             </div>
           </div>
-          <button onClick={()=>changeInflatable(inflatable.id)}> Read More</button>
-          </div>
-        ))}
-        {inflatables.map((inflatable) => (
-          <div className="inflatable" key={inflatable.id}>
-            <img src={inflatable.image} />
-          <div id="name-price">
-            <p id="name">{inflatable.name}</p>
-            <p id="price">${inflatable.price}</p>
-          </div>
-          <p id="description"> {inflatable.description}</p>
-          <div id="dimentions">
-            <div className="dimention">          
-              <p className="value">{inflatable.width} ft </p>
-              <p className="type"> Width</p>
-            </div>
-            <div className="dimention">          
-              <p className="value">{inflatable.height} ft </p>
-              <p className="type"> Height</p>
-            </div>
-            <div className="dimention">          
-              <p className="value"> {inflatable.capacity} </p>
-              <p className="type"> Kids</p>
-            </div>
-          </div>
-          <button onClick={() => window.location.href='/#/inflatable?id=' + inflatable.id}>Read More</button>
-          </div>
-        ))}
-        {inflatables.map((inflatable) => (
-          <div className="inflatable" key={inflatable.id}>
-            <img src={inflatable.image} />
-          <div id="name-price">
-            <p id="name">{inflatable.name}</p>
-            <p id="price">${inflatable.price}</p>
-          </div>
-          <p id="description"> {inflatable.description}</p>
-          <div id="dimentions">
-            <div className="dimention">          
-              <p className="value">{inflatable.width} ft </p>
-              <p className="type"> Width</p>
-            </div>
-            <div className="dimention">          
-              <p className="value">{inflatable.height} ft </p>
-              <p className="type"> Height</p>
-            </div>
-            <div className="dimention">          
-              <p className="value"> {inflatable.capacity} </p>
-              <p className="type"> Kids</p>
-            </div>
-          </div>
-          <button onClick={() => window.location.href='/#/inflatable?id=' + inflatable.id}>Read More</button>
+          <Link className="btn-readMore" to={"/inflatable/" + inflatable.id}> Read More </Link>
           </div>
         ))}
       </div>

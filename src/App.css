@@ -297,24 +297,6 @@ p {
   margin-top: -5px;
   margin-bottom: 0px;
 }
-.inflatable button {
-  display: block;
-  width: 100%;
-  height: 30px;
-  margin: auto;
-  border: none;
-  background-color: #0089BF;
-  color: white;
-  border-radius: 8px;
-  margin: 5px auto;
-  box-shadow: rgba(99, 99, 99, 0.2) 0px 2px 8px 0px;
-}
-.inflatable button:hover {
-  background-color: white;
-  color: #0089BF;
-}
-
-
 
 .react-calendar {
   min-width: 350px;
@@ -492,9 +474,9 @@ abbr[title] {
     z-index: 999;
   }
   .paymentGateway .payment-popup #logo{
-    max-width: 300px;
+    max-height: 70px;
     display: block;
-    margin: 10px auto;
+    margin: auto;
   }
   .paymentGateway .payment-popup h3 {
     border-bottom: 1px solid lightgray;
@@ -569,7 +551,7 @@ abbr[title] {
   }
   .form-creditCard #btnPay {
     display: block;
-    margin: 30px auto 0 auto;
+    margin: 45px auto 0 auto;
     width: 50%;
     height: 40px;
     background-color: #0089BF;
@@ -603,6 +585,26 @@ abbr[title] {
   .btn-checkInflatables:hover {
     background-color: #0089BF;
     color: white;
+  }
+
+  .btn-readMore {
+    display: block;
+    width: 100%;
+    height: 30px;
+    margin: auto;
+    border: none;
+    background-color: #0089BF;
+    color: white;
+    border-radius: 8px;
+    margin: 5px auto;
+    box-shadow: rgba(99, 99, 99, 0.2) 0px 2px 8px 0px;
+    text-align: center;
+    text-decoration: none;
+    line-height: 30px;
+  }
+  .btn-readMore:hover {
+    background-color: white;
+    color: #0089BF;
   }
 
 
@@ -1252,7 +1254,7 @@ abbr[title] {
 }
 .booking-inflatable .main-container #left{
   padding: 0 10px;
-  overflow-y: scroll;
+  overflow-y: auto;
   width: 90%;
   margin: 0 auto;
 }

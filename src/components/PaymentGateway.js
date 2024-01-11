@@ -1,6 +1,5 @@
 import React, { useEffect, useState } from 'react'
 import StripeContainer from './StripeContainer'
-import tempLogo from '../images/tempLogo.png'
 import { useSearchParams } from 'react-router-dom'
 
 function PaymentGateway(props) {
@@ -8,7 +7,7 @@ function PaymentGateway(props) {
   return (
     <div className='paymentGateway'>
         <div className='payment-popup'>
-            <img src={tempLogo} id="logo"/>
+            <img src={'https://res.cloudinary.com/dxfi1vj6q/image/upload/v1705007222/BetterEvents-01_jywxx8.png'} id="logo"/>
             <h3> Booking Details</h3>
             <div className='bookingDetails'>
               <img src={sessionStorage.getItem('imageInflatable')} id="inflatable" />

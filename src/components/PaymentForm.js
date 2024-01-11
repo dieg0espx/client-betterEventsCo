@@ -44,8 +44,18 @@ function PaymentForm(props) {
       email: sessionStorage.getItem('email'),
       address: sessionStorage.getItem('address'),
       postalCode: sessionStorage.getItem('postalCode'),
-      bookingDates: sessionStorage.getItem('bookingDates'),
+      bookingDates: parseBookingDates(sessionStorage.getItem('bookingDates')),
       inflatableID: sessionStorage.getItem('infatableID')
+    }
+
+    function parseBookingDates(bookingDatesString) {
+      try {
+        // Attempt to split the string into an array
+        return bookingDatesString ? bookingDatesString.split(',') : [];
+      } catch (error) {
+        console.error("Error parsing booking dates:", error);
+        return [];
+      }
     }
 
     const handleSubmit = async (e) => {
@@ -93,13 +103,11 @@ function PaymentForm(props) {
           email: data.email, 
           address : data.address, 
           postalCode: data.postalCode, 
-          dates: data.bookingDates.split([',']),
+          dates: data.bookingDates,
           reservationID: id,
           image: sessionStorage.getItem('imageInflatable'), 
           paid: props.balance, 
       }), headers: {'Content-Type': 'application/json'}})
-      .then(response => response.json())
-      .then(response => console.log(response))
     }
 
     return (
