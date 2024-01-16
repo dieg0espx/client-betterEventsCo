@@ -46,7 +46,9 @@
   }
 }
 body {
-  padding-top: 110px;
+  padding: 110px 20px 0 20px;
+  max-width: 1800px;
+  margin: auto;
 }
 
 /* ======  GENERAL COMPONENTS ========= */
@@ -131,6 +133,10 @@ p {
   color: white;
   display: grid;
   grid-template-columns: 1fr 1fr;
+  position: relative;
+  width: 100vw;
+  left: 50%;
+  transform: translateX(-50%);
 }
 .footer .logo {
   width: 200px;
@@ -892,6 +898,7 @@ abbr[title] {
   text-align: center;
   padding: 20px;
   margin-top: 40px;
+  display: none;
 }
 .home .container7 h3 {
   color:  white;
