@@ -1424,3 +1424,10 @@ abbr[title] {
   font-weight: 600;
   outline: none;
 }
+.inflatables-page .inflatables {
+  white-space:wrap;
+  width: 109%;
+  position: relative;
+  left: 50%;
+  transform: translate(-50%);
+}

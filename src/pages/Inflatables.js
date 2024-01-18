@@ -60,6 +60,7 @@ function Inflatables() {
         category: doc.data().category
       });
     });
+    arrayInflatables.sort((a, b) => a.name.localeCompare(b.name));
     setInflatables(arrayInflatables);
   }
 
