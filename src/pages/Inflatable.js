@@ -31,10 +31,9 @@ function Inflatable() {
   useEffect(() => {
     getInflatable(id);
     getBusyDates(id)
-    window.scrollTo(0, 0);
-    scrollContainerRef.current.scrollTop = 0;
+    // window.scrollTo(0, 0);
+    // scrollContainerRef.current.scrollTop = 0;
   }, [id]);
-
 
 
   useEffect(() => {
@@ -140,6 +139,18 @@ function Inflatable() {
     }
   },[popup])
 
+
+  function setupArea(dimension) {
+    if (typeof dimension === 'string' && dimension.includes('x')) {
+        let dimensions = dimension.split(' x ');
+        for (let i = 0; i < dimensions.length; i++) {
+            dimensions[i] = parseInt(dimensions[i]) + 3;
+        }
+        return dimensions[0] + ' x ' + dimensions[1];
+    }
+    return parseInt(dimension) + 2;
+  }
+
   return (
     <div className='booking-inflatable'>
         <Header />
@@ -153,26 +164,42 @@ function Inflatable() {
             <p id="description"> {inflatable.description}{inflatable.description}{inflatable.description}{inflatable.description} </p>
             <div id='rentalInformation'>
               <p> Rental Information </p>
+              <li> Adult supervision at all the time is required. </li>
               <li> Our inflatable deliveries are between 8am - 1pm daily.</li>
               <li> Our inflatable pick-ups start after 7pm daily. (Units may be left over night for an additional fee) </li>
               <li> Apon delivery, we set up and secure the unit with necessary tools. </li>
               <li> All water hoses, blowers, stakes, and extension cords will be provided to set up inflatable. </li>
               <li> We require all customers to have a dedicated power outlet for inflatable. </li>
+              <li> We require 1 electrical outlet, on it's own 20 amp circuit, within 100' to the unit.</li>
               <li> If the inflatable requires a water source, then, one must be provided. </li>
               <li> We are prepared for all grass set ups. If your set up will be on concrete, we must know in advance to prepare accordingly to make sure the unit is safe and secure for all children.</li>
             </div>
             <div id="dimentions">
-              <div className="dimention">          
-                <p className="value">{inflatable.width} ft </p>
-                <p className="type"> Width</p>
+              <div>
+                <p className='title'> Actual Size </p>
+                <div className='grid'>
+                  <div className="dimention">          
+                    <p className="value">{inflatable.width} ft </p>
+                    <p className="type"> Width</p>
+                  </div>
+                  <div className="dimention">          
+                    <p className="value">{inflatable.height} ft </p>
+                    <p className="type"> Height</p>
+                  </div>
+                </div>
               </div>
-              <div className="dimention">          
-                <p className="value">{inflatable.height} ft </p>
-                <p className="type"> Height</p>
-              </div>
-              <div className="dimention">          
-                <p className="value"> {inflatable.capacity} </p>
-                <p className="type"> Kids</p>
+              <div>
+                <p className='title'> Setup Area </p>
+                <div className='grid'>
+                  <div className="dimention">          
+                    <p className="value">{setupArea(inflatable.width)} ft </p>
+                    <p className="type"> Width</p>
+                  </div>
+                  <div className="dimention">          
+                    <p className="value">{setupArea(inflatable.height)} ft </p>
+                    <p className="type"> Height</p>
+                  </div>
+                </div>
               </div>
             </div>
           </div>

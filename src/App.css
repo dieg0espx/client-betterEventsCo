@@ -1294,10 +1294,19 @@ abbr[title] {
 
 .booking-inflatable .main-container #dimentions {
   display: grid;
-  grid-template-columns: 1fr 1fr 1fr;
-  gap: 8px;
-  max-width: 300px;
+  grid-template-columns: 1fr 1fr;
+  gap: 10%;
   margin-bottom: 8px;
+}
+.booking-inflatable .main-container #dimentions .title{
+  font-size: 17px;
+  color: black;
+  font-weight: 600;
+}
+.booking-inflatable .main-container #dimentions .grid {
+  display: grid;
+  grid-template-columns: 1fr 1fr 1fr;
+  gap: 5px;
 }
 .booking-inflatable .main-container .dimention {
   border: 1px solid lightgray;
