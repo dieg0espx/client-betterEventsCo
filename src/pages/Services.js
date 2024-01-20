@@ -43,7 +43,7 @@ function Services() {
             <div className='container3'>
                 <div>
                     <p className='subTitle'> Delivery Area </p>
-                    <p> We proudly serve surrounding communities such as Belvidere, Pingree Grove, Huntley, Madison, Janesville, Schaumburg, Arlington Heights and Elgin. If your specific community is not listed, please reach out to us at 630-370-7422, and we'll gladly provide delivery information for your location. Delivery rates vary based on dates, location, and types of equipment. Let Better Evens make your event extraordinary.  </p>
+                    <p> We proudly serve surrounding communities such as Belvidere, Pingree Grove, Huntley, Madison, Janesville, Schaumburg, Arlington Heights and Elgin. If your specific community is not listed, please reach out to us at 630-370-7422, and we'll gladly provide delivery information for your location. Delivery rates vary based on dates, location, and types of equipment. Let Better Events make your event extraordinary.  </p>
                     <ButtonContact />
                 </div>
                 <img src={map1} />
@@ -68,7 +68,7 @@ function Services() {
                 />
                  <Faq 
                     question={"Do you provide attendants for the inflatables?"} 
-                    answer={"While our inflatables are designed for safe use, we recommend having adult supervision during the event. If you need attendants, we can provide them for an additional fee."}
+                    answer={"We require having adult supervision."}
                 />
             </div>
             <NewsLetter />

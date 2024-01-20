@@ -33,7 +33,7 @@ function Home() {
           <img src={inflatable1} />
           <div>
             <p className='subTitle'> About Us </p> 
-            <p> Better Events is the premier party rental company in Northern Illinois, offering superior bounce houses,combos, water slides, games, tent, tables, and chairs for your birthday or special event. Our range of inflatables are conveniently delivered to the greater Rockford area and nearby suburbs. When in need of an inflatable rental in Rockford, trust Better Events to be your reliable partner for your next special occasion. </p>
+            <p> Better Events is the premier party rental company in Northern Illinois, offering superior bounce houses,combos, water slides, games, tents, tables, and chairs for your birthday or special event. Our range of inflatables are conveniently delivered to the greater Rockford area and nearby suburbs. When in need of an inflatable rental in Rockford, trust Better Events to be your reliable partner for your next special occasion. </p>
             <BtnLearnMore />
           </div>
       </div>
@@ -47,7 +47,7 @@ function Home() {
         <div className='eventTypes'>
           <img src={stock3} />
           <h3> Corporate Events </h3>
-          <p> Understands the importance of planning a special event such as a picnic, wellness event or holiday party. The planning of a corporate party can be long and overwhelming. Better events will work with you to make this process as seamless as possible </p>
+          <p> Better Events understands the importance of planning a special event such as a picnic, wellness event, or holiday party. The planning of a corporate party can be long and overwhelming. Better events will work with you to make this process as seamless as possible. </p>
           <BtnLearnMore />
         </div>
         <div className='eventTypes'>
@@ -60,8 +60,8 @@ function Home() {
       <div className='container5'>
           <div className='txt-container5'> 
             <p className='subTitle'> Home Rental </p> 
-            <p> Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed tincidunt, erat in malesuada aliquam, est erat faucibus purus, eget viverra nulla sem vitae neque. Quisque id sodales libero. In nec enim nisi. Quisque aliquet a augue nec venenatis. Curabitur ullamcorper volutpat velit, et cursus tortor tempus at. Integer bibendum ullamcorper sagittis. Nulla facilisi. Integer sapien est, iaculis in quam in, aliquam bibendum libero. </p>
-            <BtnLearnMore />
+            <p> Ready to tie the knot? Look no further than Better Stays - our vacation rental partners not only offer beautiful rental spaces, but also transforms into the perfect wedding venue. Our tables, chairs, and tents make planning a breeze. Say "I do" to a Better Stay for your special day  </p>
+            <BtnLearnMore url="https://betterstaynow.com"/>
           </div>
           <img src={stock5} />
       </div>
