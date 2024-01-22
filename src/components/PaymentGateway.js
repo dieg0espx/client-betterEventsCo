@@ -25,9 +25,7 @@ function PaymentGateway(props) {
               </p>
             </div>
             </div>
-            
-
-            <StripeContainer balance={props.balance} />
+              <StripeContainer balance={props.balance} />
         </div>        
     </div>
   )
