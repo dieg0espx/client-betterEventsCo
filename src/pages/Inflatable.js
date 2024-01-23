@@ -11,18 +11,19 @@ import PaymentGateway from '../components/PaymentGateway';
 
 function Inflatable() {
   const [inflatable, setInflatable] = useState([])
-  const [name, setName] = useState('')
-  const [lastName, setLastName] = useState('')
-  const [phone, setPhone] = useState('')
-  const [email, setEmail] = useState('')
+  const [name, setName] = useState('Diego')
+  const [lastName, setLastName] = useState('Espinosa')
+  const [phone, setPhone] = useState('9999088639')
+  const [email, setEmail] = useState('espinosa9mx@gmail.com')
   const [inflatableID, setInflatableID] = useState('')
-  const [address, setAddress] = useState('')
-  const [postCode, setPostalCode] = useState('')
+  const [address, setAddress] = useState('610 Granville St.')
+  const [postCode, setPostalCode] = useState('V6C 3T3')
   const [imageInflatable, setImageInflatable] = useState('')
   const [dates, setDates] = useState([])
   const [bookingDates, setBookingDates] = useState([])
   const [busyDates, setBusyDates] = useState([])
   const [popup, setPopup] = useState(false)
+  const [balance, setBalance] = useState(0)
   const db = getFirestore(app);
 
   const { id } = useParams();
@@ -31,8 +32,8 @@ function Inflatable() {
   useEffect(() => {
     getInflatable(id);
     getBusyDates(id)
-    // window.scrollTo(0, 0);
-    // scrollContainerRef.current.scrollTop = 0;
+    window.scrollTo(0, 0);
+    scrollContainerRef.current.scrollTop = 0;
   }, [id]);
 
 
@@ -132,6 +133,7 @@ function Inflatable() {
   };
 
   useEffect(()=>{
+    setBalance(inflatable.price*bookingDates.length)
     if(popup){
       document.body.style.overflow = 'hidden';
     } else {
@@ -217,7 +219,7 @@ function Inflatable() {
             </div>
             <div style={{display:popup? "block":"none"}}>
               <div className="overlay" onClick={()=>setPopup(!popup)}/>
-              <PaymentGateway balance={inflatable.price * bookingDates.length} popup={popup}/>
+              <PaymentGateway balance={balance} popup={popup}/>
             </div>
           </div>
         </div>

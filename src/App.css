@@ -477,10 +477,11 @@ abbr[title] {
     top: 50%;
     transform: translate(-50%, -50%);
     background-color: white;
-    width: 600px;
+    width: 700px;
     height: 520px;
     border-radius: 20px;
     padding: 20px 30px;
+    overflow-y: scroll;
     z-index: 999;
   }
   .paymentGateway .payment-popup #logo{
@@ -502,11 +503,61 @@ abbr[title] {
     display: grid;
     grid-template-columns: auto 60%;
     gap: 30px;
+    align-items: center;
   }
   .paymentGateway .bookingDetails #inflatable{
     display: block;
     width: 100%;
   }
+  .paymentGateway .amount-options {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 5px;
+    text-align: center;
+    margin: 15px 0;
+  }
+  .paymentGateway .amount-options p {
+    border-radius: 5px;
+    border: 1px solid transparent;
+    color: gray;
+    padding: 5px;
+    transition: 0.3s;
+    cursor: pointer;
+  }
+  .paymentGateway .amount-options p:hover {
+    border: 1px solid #0089BF;
+    color: #0089BF;
+  }
+  
+  .paymentGateway .amount-options .selected {
+    color: white;
+    background-color: #0089BF;
+    border: 1px solid #0089BF;
+  }
+  .paymentGateway .amount-options .selected:hover {
+    color: white;
+  }
+  .paymentGateway h4 {
+    font-size: 10px;
+    margin-bottom: 0;
+    color: #0089BF;
+  }
+  .paymentGateway #disclaimer {
+    font-size: 10px;
+  }
+  .paymentGateway .three-col  {
+    display: grid;
+    grid-template-columns: 20px auto 20px;
+    gap: 5px;
+    align-items: center;
+  }
+  .paymentGateway .iconChev {
+    color: gray;
+  }
+  .paymentGateway .iconChev:hover {
+    color: #0089BF;
+  }
+
   .paymentConfirmation {
     display: flex;
     gap: 20px;
