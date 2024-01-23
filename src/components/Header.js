@@ -21,7 +21,7 @@ function Header() {
   return (
     <div>
     <div className="header">
-        <img src={'https://res.cloudinary.com/dxfi1vj6q/image/upload/v1705369022/BetterEvents-10_eabusi.png'} onClick={()=>window.location.href="/"}/>
+        <img src={'https://res.cloudinary.com/dxfi1vj6q/image/upload/v1706048357/BetterEvents-10_eabusi_ys0lwn.png'} onClick={()=>window.location.href="/"}/>
         <div className="navBtns">
             <Link className={page == 1 ? "btn active":"btn"} onClick={()=>setPage(1)} to="/"> Home </Link>
             <Link className={page == 2 ? "btn active":"btn"} onClick={()=>setPage(2)} to="/services"> Services </Link>

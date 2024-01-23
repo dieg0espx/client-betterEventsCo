@@ -16,8 +16,6 @@ import NewsLetter from '../components/NewsLetter'
 import Inflatables from '../components/Inflatables'
 
 function Home() {
-
-
   return (
     <div className='home'>
       <Header />

@@ -50,6 +50,11 @@ body {
   max-width: 1800px;
   margin: auto;
 }
+@media screen and (max-width:800px) {
+  body {
+    padding: 110px 5px 0 5px;
+  }
+}
 
 /* ======  GENERAL COMPONENTS ========= */
 .btn-contact {
@@ -467,6 +472,13 @@ abbr[title] {
   background-color: #e6e6e6;
 }
 
+@media screen and (max-width:800px) {
+  .react-calendar__tile {
+    height: 40px;
+    font-size: 15px;
+  }
+}
+
  .prices {
     font-size: 10px;
   }
@@ -523,6 +535,7 @@ abbr[title] {
     padding: 5px;
     transition: 0.3s;
     cursor: pointer;
+    border: 1px solid lightgray;
   }
   .paymentGateway .amount-options p:hover {
     border: 1px solid #0089BF;
@@ -578,6 +591,39 @@ abbr[title] {
     color: red;
     font-weight: bold;
   }
+
+  @media screen and (max-width:800px) {
+    .payment-popup {
+      width: 100vw !important;
+      height: 100vh !important;
+      bottom: 0 !important;
+      left: 0 !important;
+      top: 100px !important;
+      transform: none !important;
+      border-top: 20px solid white;
+      padding-bottom: 250px !important;
+    }
+    .payment-popup .bookingDetails {
+      display: flex;
+      flex-direction: column;
+      margin-top: 10px;
+      align-items: self-start;
+    }
+    .payment-popup .amount-options {
+      display: block;
+    }
+    .payment-popup .paymentConfirmation {
+      display: block;
+      text-align: center;
+      margin-bottom: 20px;
+    }
+    .payment-popup #btnPay {
+      width: 80% !important;
+    }
+    
+  }
+
+
   #closePaymentGateway {
     display: block;
     width: 300px;
@@ -783,7 +829,7 @@ abbr[title] {
     grid-template-columns: 50% auto;
   }
   .header img {
-    margin-top: -5px;
+    /* border: 1px solid red; */
   }
   .nav-mobile-menu {
     display: block;
@@ -834,6 +880,14 @@ abbr[title] {
 .carousel-inflatables .iconChev{
   color: #0089BF;
   font-size: 30px;
+}
+@media screen and (max-width:800px) {
+  .carousel-inflatables {
+    padding-left: 0;
+  }
+  .carousel-inflatables .inflatable {
+    width: 350px;
+  }
 }
 
 /* ======== HOME ========= */
@@ -972,14 +1026,10 @@ abbr[title] {
 }
 
 @media screen and (max-width:800px) {
-  .home {
-    max-width: 100vw;
-  }
   .home .container1 {
-    width: 95%;
-    padding: 20px;
+    width: 100%;
     margin: -40px auto 40px auto;
-    height: 300px;
+    height: 400px;
     align-items: center;
   }
   .home .container1 h1 {
@@ -1002,18 +1052,23 @@ abbr[title] {
   .home .container3 {
     display: block;
     text-align: center;
+    width: 100%;
   }
   .home .container3 .btn-contact {
     margin: 40px auto 0 auto;
   }
   .home .container4 {
     display: block;
+    width: 100%;
   }
   .home .container4 .eventTypes {
     margin-bottom: 30px;
   }
   .home .container5 {
-    display: block;
+    display: flex;
+    flex-direction: column-reverse;
+    width: 100%;
+    margin-top: -10px;
   }
   .home .container5 .txt-container5 {
     align-items: center;
@@ -1024,6 +1079,7 @@ abbr[title] {
   }
   .home .container6 {
     display: block;
+    width: 100%;
   }
   .home .container6 .check p {
     margin: auto;
@@ -1041,6 +1097,10 @@ abbr[title] {
   }
   .home .newsLetter {
     text-align: center;
+    width: 100vw;
+    position: relative;
+    left: 50%;
+    transform: translateX(-50%);
   }
   .home .newsLetter h2{
     margin-top: -40px;
@@ -1167,11 +1227,16 @@ abbr[title] {
     display: block;
     margin-top: -50px;
     text-align: center;
+    width: 100vw;
+    position: relative;
+    left: 50%;
+    transform: translateX(-50%);
   }
   .services .container1 img {
     margin-bottom: 30px;
   }
-  .services .container1 button {
+  .services .container1 .btn-checkInflatables {
+    display: block;
     margin: 20px auto;
   }
   .services .container2 {
@@ -1192,6 +1257,11 @@ abbr[title] {
   }
   .services .container4 {
     width: 100%;
+    padding: 10px;
+  }
+  .services .container4 .subTitle{
+    max-width: 90%;
+    margin: 0 auto 20px auto;
   }
   .services .newsLetter {
     text-align: center;
@@ -1201,6 +1271,13 @@ abbr[title] {
   }
   .services .newsLetter input {
     width: 90%;
+  }
+  .services .newsLetter {
+    text-align: center;
+    width: 100vw;
+    position: relative;
+    left: 50%;
+    transform: translateX(-50%);
   }
 }
 
@@ -1442,18 +1519,29 @@ abbr[title] {
     display: block;
     height: fit-content;
     padding: 0;
-    
   }
   .booking-inflatable .main-container #left {
-    
     margin-top: -40px;
+    width: 100%;
+    padding: 15px;
   }
   .booking-inflatable .main-container #left img {
     max-width: 100%;
+    margin-top: 20px;
+  }
+  .booking-inflatable .name-price {
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start !important;
   }
   .booking-inflatable .main-container #left #dimentions{
     margin: auto;
+    display: block;
   }
+  .booking-inflatable .main-container #left #dimentions .dimention{
+    margin-bottom: 20px;
+  }
+
   .booking-inflatable .recommendations  {
     text-align: center;
     max-width: 100vw;
@@ -1469,6 +1557,9 @@ abbr[title] {
   }  
   .booking-inflatable .recommendations .iconChev {
     display: none;
+  }
+  .booking-inflatable #right {
+    border: 0px !important;
   }
 }
 
@@ -1500,4 +1591,29 @@ abbr[title] {
   position: relative;
   left: 50%;
   transform: translate(-50%);
+}
+
+@media screen and (max-width:800px) {
+  .inflatables-page {
+    margin-top: -50px;
+  }
+  .inflatables-page .container1 {
+    width: 100%;
+    max-width: 400px;
+  }
+  .inflatables-page .inflatables {
+    width: 100%;
+    display: flex;
+    flex-direction: column;
+  }
+  .inflatables-page .inflatables .inflatable{
+    display: block;
+    margin: 0;
+    margin-bottom: 15px;
+    width: 100%;
+  }
+  .inflatables-page .inflatables .inflatable #description{
+    white-space: normal;
+    min-width: 100%;
+  }
 }

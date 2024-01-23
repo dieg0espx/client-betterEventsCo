@@ -90,6 +90,7 @@ function PaymentForm(props) {
               }
           } catch (error) {
             console.log("Error", error)
+            setShowBtn(true)
           }
       }
     }
