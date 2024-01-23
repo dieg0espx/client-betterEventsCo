@@ -2,14 +2,30 @@ import React, { useEffect, useState } from 'react'
 import StripeContainer from './StripeContainer'
 import { useSearchParams } from 'react-router-dom'
 
+
 function PaymentGateway(props) {
   const [showDisclaimer, setShowDisclaimer] = useState(false)
   const [includeInsurance, setIncludeInsurance] = useState(false)
-  const [isFullAmount, setIsFullAmount] = useState(true)
+  const [onlyDeposit, setOnlyDeposit] = useState(false)
   const [balance, setBalance] = useState(0)
+  const [disableCheck, setDisableCheck] = useState(false)
 
+  // useEffect(()=>{
+  //   setBalance(props.balance)
+  // })
   useEffect(()=>{
-    setBalance(props.balance)
+    if (onlyDeposit){
+      setBalance(100)
+      setDisableCheck(true)
+      setIncludeInsurance(false)
+    } else {
+      setDisableCheck(false)
+      if(includeInsurance){
+        setBalance(props.balance * 1.09)
+      } else {
+        setBalance(props.balance)
+      }
+    }
   })
    
   return (
@@ -35,13 +51,13 @@ function PaymentGateway(props) {
             </div>
             </div>
             <div className='amount-options'>
-              <p className={isFullAmount ? "selected":""} onClick={()=>setIsFullAmount(true)}> Pay Full Amount </p>
-              <p className={isFullAmount ? "":"selected"} onClick={()=>setIsFullAmount(false)}> Pay Deposit Due ($100.00) </p>
+              <p className={onlyDeposit ? "":"selected"} onClick={()=>setOnlyDeposit(false)}> Pay Full Amount </p>
+              <p className={onlyDeposit ? "selected":""} onClick={()=>setOnlyDeposit(true)}> Pay Deposit Due ($100.00) </p>
             </div>
             <div className='damageWaiver'>
               <h4> Recommended </h4>
               <div className='three-col'>
-                <input type='checkbox' onChange={()=>setIncludeInsurance(!includeInsurance)}/>              
+                <input type='checkbox' disabled={disableCheck} checked={includeInsurance} onChange={()=>setIncludeInsurance(!includeInsurance)}/>              
                 <p> Add 9% Accidental Damage Waiver </p>
                 <i className={showDisclaimer ? "bi bi-chevron-up iconChev":"bi bi-chevron-down iconChev"} onClick={()=>setShowDisclaimer(!showDisclaimer)}></i>
               </div>

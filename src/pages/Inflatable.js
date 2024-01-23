@@ -122,15 +122,25 @@ function Inflatable() {
     setBusyDates(arrayDates)
   };
   const tileDisabled = ({ date, view }) => {
+    // Disable dates before today
+    const isBeforeToday = date < new Date();
+  
+    if (isBeforeToday) {
+      return true;
+    }
+  
     if (view === 'month') {
+      // Check if the date is in the array of busyDates
       return busyDates.some(busyDate => (
         busyDate.getDate() === date.getDate() &&
         busyDate.getMonth() === date.getMonth() &&
         busyDate.getFullYear() === date.getFullYear()
       ));
     }
+  
     return false;
   };
+  
 
   useEffect(()=>{
     setBalance(inflatable.price*bookingDates.length)
