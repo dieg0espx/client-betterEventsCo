@@ -25,8 +25,6 @@ function Inflatables(props) {
         width: doc.data().width
       });
     });
-
-
     setInflatables(arrayInflatables);
   }
 
@@ -46,7 +44,7 @@ function Inflatables(props) {
     }
   };
 
-  //IF THERE'S A PROP WITH A CATEGORY WILL DISPLAY THE ONES THAT MATCHES, OTHERWISE WILL SHOW ALL 
+  //IF THERE'S A PROPS.CATEGORY WILL DISPLAY THE ONES THAT MATCHES, OTHERWISE WILL SHOW ALL 
   const filteredInflatables = props.category? inflatables.filter((inflatable) => inflatable.category === props.category): inflatables;
 
   
