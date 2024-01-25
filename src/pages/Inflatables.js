@@ -86,65 +86,63 @@ function Inflatables() {
           </select>
         </div>
         <div className="inflatables" ref={containerRef}>
-            {currentCategory === 'all rentals' ? (
-             <div>
-               {inflatables.map((inflatable) => (
-              <div className="inflatable" key={inflatable.id}>
-               <img src={inflatable.image} />
-               <div id="name-price">
-                 <p id="name">{inflatable.name}</p>
-                 <p id="price">${inflatable.price}</p>
-               </div>
-               <p id="description"> {inflatable.description}</p>
-               <div id="dimentions">
-                 <div className="dimention">          
-                   <p className="value">{inflatable.width} ft </p>
-                   <p className="type"> Width</p>
+          {
+            currentCategory === 'all rentals' ? (
+              inflatables.map((inflatable) => (
+                <div className="inflatable" key={inflatable.id}>
+                 <img src={inflatable.image} />
+                 <div id="name-price">
+                   <p id="name">{inflatable.name}</p>
+                   <p id="price">${inflatable.price}</p>
                  </div>
-                 <div className="dimention">          
-                   <p className="value">{inflatable.height} ft </p>
-                   <p className="type"> Height</p>
+                 <p id="description"> {inflatable.description}</p>
+                 <div id="dimentions">
+                   <div className="dimention">          
+                     <p className="value">{inflatable.width} ft </p>
+                     <p className="type"> Width</p>
+                   </div>
+                   <div className="dimention">          
+                     <p className="value">{inflatable.height} ft </p>
+                     <p className="type"> Height</p>
+                   </div>
+                   <div className="dimention">          
+                     <p className="value"> {inflatable.capacity} </p>
+                     <p className="type"> Kids</p>
+                   </div>
                  </div>
-                 <div className="dimention">          
-                   <p className="value"> {inflatable.capacity} </p>
-                   <p className="type"> Kids</p>
-                 </div>
-               </div>
-               <Link className="btn-readMore" to={"/inflatable/" + inflatable.id}> Read More </Link>
-              </div>
-               ))}
-             </div>
-            ): (
-             <div>
-            {inflatables
-              .filter(inflatable => inflatable.category.includes(currentCategory))
+                 <Link className="btn-readMore" to={"/inflatable/" + inflatable.id}> Read More </Link>
+                </div>
+               ))
+            ):(
+            inflatables.filter(inflatable => inflatable.category.includes(currentCategory))
               .map((inflatable) => (
-              <div className="inflatable" key={inflatable.id}>
-                <img src={inflatable.image} />
-              <div id="name-price">
-                <p id="name">{inflatable.name}</p>
-                <p id="price">${inflatable.price}</p>
-              </div>
-              <p id="description"> {inflatable.description}</p>
-              <div id="dimentions">
-                <div className="dimention">          
-                  <p className="value">{inflatable.width} ft </p>
-                  <p className="type"> Width</p>
+                <div className="inflatable" key={inflatable.id}>
+                  <img src={inflatable.image} />
+                  <div id="name-price">
+                    <p id="name">{inflatable.name}</p>
+                    <p id="price">${inflatable.price}</p>
+                  </div>
+                  <p id="description"> {inflatable.description}</p>
+                  <div id="dimentions">
+                    <div className="dimention">          
+                      <p className="value">{inflatable.width} ft </p>
+                      <p className="type"> Width</p>
+                    </div>
+                    <div className="dimention">          
+                      <p className="value">{inflatable.height} ft </p>
+                      <p className="type"> Height</p>
+                    </div>
+                    <div className="dimention">          
+                      <p className="value"> {inflatable.capacity} </p>
+                      <p className="type"> Kids</p>
+                    </div>
+                  </div>
+                  <Link className="btn-readMore" to={"/inflatable/" + inflatable.id}> Read More  </Link>
                 </div>
-                <div className="dimention">          
-                  <p className="value">{inflatable.height} ft </p>
-                  <p className="type"> Height</p>
-                </div>
-                <div className="dimention">          
-                  <p className="value"> {inflatable.capacity} </p>
-                  <p className="type"> Kids</p>
-                </div>
-              </div>
-              <Link className="btn-readMore" to={"/inflatable/" + inflatable.id}> Read More  </Link>
-              </div>
-            ))}
-             </div>
-            )}
+             )
+            )
+            )
+          }
         </div>
       </div>
       <Footer />

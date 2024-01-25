@@ -245,11 +245,7 @@ p {
   background-color: white;
   color: #0089BF;
 }
-.inflatables {
-  width: 100%;
-  white-space: nowrap;
-  overflow-x: scroll;
-}
+
 
 .inflatable {
   display: inline-block;
@@ -916,6 +912,11 @@ abbr[title] {
   justify-content: center;
   padding: 20px;
 }
+.home .inflatables {
+  width: 100%;
+  white-space: nowrap;
+  overflow-x: scroll;
+}
 
 .home .container1 h1 {
   font-size: 3em;
@@ -1523,6 +1524,12 @@ abbr[title] {
   font-weight: 600;
 }
 
+.booking-inflatable .inflatables {
+  width: 100%;
+  white-space: nowrap;
+  overflow-x: scroll;
+}
+
 @media screen and (max-width:800px) {
   .booking-inflatable .main-container {
     display: block;
@@ -1595,12 +1602,12 @@ abbr[title] {
   outline: none;
 }
 .inflatables-page .inflatables {
-  white-space:wrap;
-  width: 109%;
-  position: relative;
-  left: 50%;
-  transform: translate(-50%);
+   width: 112%;
+   position: relative;
+   left: 51%;
+   transform: translate(-50%);
 }
+
 
 @media screen and (max-width:800px) {
   .inflatables-page {
