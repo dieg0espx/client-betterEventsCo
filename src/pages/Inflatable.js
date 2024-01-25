@@ -235,7 +235,7 @@ function Inflatable() {
         </div>
         <div className='recommendations'>
           <p className='subTitle'> You may also like ... </p>
-          <Inflatables />
+          <Inflatables category={inflatable.category}/>
         </div>
         <Footer />
     </div>

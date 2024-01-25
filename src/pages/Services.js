@@ -1,4 +1,4 @@
-import React from 'react'
+import React, {useEffect, useRef} from 'react'
 import Header from '../components/Header'
 import Footer from '../components/Footer'
 import stock7 from '../images/stock7.png'
@@ -9,8 +9,13 @@ import NewsLetter from '../components/NewsLetter'
 import BtnCheckAllInflatables from '../components/BtnCheckAllInflatables'
 
 function Services() {
+    const scrollContainerRef = useRef(null);
+    useEffect(()=>{
+      window.scrollTo(0, 0);
+      scrollContainerRef.current.scrollTop = 0;
+    },[])
   return (
-    <div className='services'>
+    <div className='services' ref={scrollContainerRef}>
         <Header />
             <div className='container1'>
                 <img src={stock7} />

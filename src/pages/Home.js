@@ -1,4 +1,4 @@
-import React , { useRef } from "react";
+import React , { useEffect, useRef } from "react";
 import Header from '../components/Header'
 import stock1 from '../images/stock1.png'
 import stock2 from '../images/stock2.png'
@@ -16,8 +16,13 @@ import NewsLetter from '../components/NewsLetter'
 import Inflatables from '../components/Inflatables'
 
 function Home() {
+  const scrollContainerRef = useRef(null);
+  useEffect(()=>{
+    window.scrollTo(0, 0);
+    scrollContainerRef.current.scrollTop = 0;
+  },[])
   return (
-    <div className='home'>
+    <div className='home' ref={scrollContainerRef}>
       <Header />
       <div className='container1'>
         <h1> Better Events</h1>

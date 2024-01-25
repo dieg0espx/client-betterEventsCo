@@ -4,7 +4,7 @@ import { collection, getDocs } from "firebase/firestore";
 import app from '../Firbase';
 import { Link } from "react-router-dom";
 
-function Inflatables() {
+function Inflatables(props) {
   const db = getFirestore(app);
   const [inflatables, setInflatables] = useState([]);
   const containerRef = useRef(null);
@@ -16,6 +16,7 @@ function Inflatables() {
       arrayInflatables.push({
         id: doc.id,
         capacity: doc.data().capacity,
+        category:doc.data().category,
         description: doc.data().description,
         height: doc.data().height,
         image: doc.data().image,
@@ -24,6 +25,8 @@ function Inflatables() {
         width: doc.data().width
       });
     });
+
+
     setInflatables(arrayInflatables);
   }
 
@@ -42,12 +45,17 @@ function Inflatables() {
       containerRef.current.scrollLeft += 50;
     }
   };
+
+  //IF THERE'S A PROP WITH A CATEGORY WILL DISPLAY THE ONES THAT MATCHES, OTHERWISE WILL SHOW ALL 
+  const filteredInflatables = props.category? inflatables.filter((inflatable) => inflatable.category === props.category): inflatables;
+
+  
   
   return (
     <div className="carousel-inflatables">
       <i className="bi bi-chevron-compact-left iconChev" onClick={handleScrollToLeft}></i>
       <div className="inflatables" ref={containerRef}>
-        {inflatables.map((inflatable) => (
+        {filteredInflatables.map((inflatable) => (
           <div className="inflatable" key={inflatable.id}>
             <img src={inflatable.image} />
           <div id="name-price">

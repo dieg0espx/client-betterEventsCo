@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect, useRef } from 'react';
 import Header from '../components/Header';
 import Footer from '../components/Footer';
 import map3 from '../images/map3.png';
@@ -6,6 +6,13 @@ import map3 from '../images/map3.png';
 function Contact() {
   const [message, setMessage] = useState({ name: '', lastName: '', phone: '', email: '', message: ''});
 
+
+  const scrollContainerRef = useRef(null);
+  useEffect(()=>{
+    window.scrollTo(0, 0);
+    scrollContainerRef.current.scrollTop = 0;
+  },[])
+  
   const handleInputChange = (e) => {
     const { name, value } = e.target;
     setMessage((prevMessage) => ({
@@ -13,7 +20,7 @@ function Contact() {
       [name]: value
     }));
   };
-
+  
   const sendMessage = async (e) => {
     e.preventDefault();
     await fetch('https://better-stays-mailer.vercel.app/api/contactForm', {
@@ -32,7 +39,7 @@ function Contact() {
   };
 
   return (
-    <div className='contact'>
+    <div className='contact' ref={scrollContainerRef}>
       <Header />
       <div className='container1'>
         <div className='form'>

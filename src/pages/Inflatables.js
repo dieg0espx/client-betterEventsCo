@@ -14,6 +14,7 @@ function Inflatables() {
 
   const { category } = useParams();
 
+
   useEffect(()=>{
     switch (category) {
       case 'all-rentals':
