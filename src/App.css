@@ -1003,9 +1003,9 @@ abbr[title] {
 .home .container6 {
   width: 90%;
   margin:auto;
-  display: flex;
+  display: grid;
+  grid-template-columns: 1fr 1fr 1fr;
   gap: 50px;
-  justify-content: space-evenly;
   margin-bottom: 80px;
 }
 

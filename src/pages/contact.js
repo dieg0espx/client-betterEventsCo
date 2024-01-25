@@ -49,8 +49,8 @@ function Contact() {
         <div className='details'>
           <p className='subTitle'> Contact Us</p>
           <p> We are committed to providing exceptional customer service and reliable solutions. We look forward to assisting you and ensuring your scaffolding needs are met to the highest standards. Your inquiries and feedback are valuable to us, so please don’t hesitate to reach out. </p>
-          <p className='phone-mail'> <i className="bi bi-telephone-fill"></i> +1 (234) 567-890</p>
-          <p className='phone-mail'> <i className="bi bi-envelope-fill"></i> example@mail.com </p>
+          <p className='phone-mail'> <i className="bi bi-telephone-fill"></i> +1 (630) 370-7422</p>
+          <p className='phone-mail'> <i className="bi bi-envelope-fill"></i> bettereventsnow@gmail.com </p>
         </div>
       </div>
       <img className='map' src={map3} alt='Map' />

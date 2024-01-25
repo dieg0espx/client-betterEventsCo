@@ -64,9 +64,9 @@ function Home() {
           <img src={stock5} />
       </div>
       <div className='container6'>
-        <Checks title="Title 1" description="Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed tincidunt, erat in malesuada aliquam, est erat faucibus purus, eget viverra nulla sem vitae neque." />
-        <Checks title="Title 2" description="Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed tincidunt, erat in malesuada aliquam, est erat faucibus purus, eget viverra nulla sem vitae neque." />
-        <Checks title="Title 3" description="Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed tincidunt, erat in malesuada aliquam, est erat faucibus purus, eget viverra nulla sem vitae neque." />
+        <Checks title="Punctuality" description=" We take pride in being a reliable partner for our customers. Our dedicated team ensures that the inflatables you choose for your event are delivered, set up, and picked up with the utmost punctuality."/>
+        <Checks title="Safety" description="safety is our utmost priority in delivering a memorable and worry-free experience for your events. We understand the significance of creating joyous moments while ensuring the well-being of all participants. " />
+        <Checks title="Quality" description="we take immense pride in our unwavering commitment to quality. Our extensive range of inflatables is crafted with meticulous attention to detail, using top-tier materials that guarantee durability and safety."/>
       </div>
       <div className='container7'>
           <h3> Customer Testimonials: Voices of Satisfaction </h3>
