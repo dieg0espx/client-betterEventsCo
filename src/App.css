@@ -205,6 +205,10 @@ p {
   flex-direction: column;
   align-items: center;
   justify-content: center;
+  width: 100vw;
+  position: relative;
+  left: 50%;
+  transform: translate(-50%);
 }
 .newsLetter h2 {
   font-size: 3em;
@@ -1139,6 +1143,10 @@ abbr[title] {
   gap: 40px;
   align-items: center;
   background-color: #0089BF;
+  width: 100vw;
+  position: relative;
+  left: 50%;
+  transform: translate(-50%);
 }
 
 .services .container1 img {

@@ -1,34 +1,62 @@
-import React from 'react'
-import Header from '../components/Header'
-import Footer from '../components/Footer'
-import map3 from '../images/map3.png'
+import React, { useState } from 'react';
+import Header from '../components/Header';
+import Footer from '../components/Footer';
+import map3 from '../images/map3.png';
 
-function contact() {
+function Contact() {
+  const [message, setMessage] = useState({ name: '', lastName: '', phone: '', email: '', message: ''});
+
+  const handleInputChange = (e) => {
+    const { name, value } = e.target;
+    setMessage((prevMessage) => ({
+      ...prevMessage,
+      [name]: value
+    }));
+  };
+
+  const sendMessage = async (e) => {
+    e.preventDefault();
+    await fetch('https://better-stays-mailer.vercel.app/api/contactForm', {
+      method: 'POST',
+      body: JSON.stringify({
+        name: message.name,
+        lastName: message.lastName,
+        email: message.email,
+        phone: message.phone,
+        message: message.message
+      }),
+      headers: { 'Content-Type': 'application/json' }
+    });
+    alert('Message sent succesfully')
+    setMessage({ name: '', lastName: '', phone: '', email: '', message: ''})
+  };
 
   return (
     <div className='contact'>
-        <Header />
-        <div className='container1'>
-            <div className='form'>
-                <p className='subTitle'> Send us a Message</p>
-                <input type='text' placeholder='First Name' />
-                <input type='text' placeholder='Last Name' />
-                <input type='tel' placeholder='Phone Number' />
-                <input type='email' placeholder='Email Address' />
-                <textarea rows={10}  type='text' placeholder='Message' />
-                <button> Send Message </button>
-            </div>
-            <div className='details'>
-                <p className='subTitle'> Contact Us</p>
-                <p> We are committed to providing exceptional customer service and reliable solutions. We look forward to assisting you and ensuring your scaffolding needs are met to the highest standards. Your inquiries and feedback are valuable to us, so please don’t hesitate to reach out. </p>
-                <p className='phone-mail'> <i className="bi bi-telephone-fill"></i> +1 (234) 567-890</p>
-                <p className='phone-mail'> <i className="bi bi-envelope-fill"></i> example@mail.com </p>
-            </div>
+      <Header />
+      <div className='container1'>
+        <div className='form'>
+          <p className='subTitle'> Send us a Message</p>
+          <form onSubmit={sendMessage}>
+            <input type='text' name='name' value={message.name} onChange={handleInputChange} placeholder='First Name' />
+            <input  type='text'  name='lastName'  value={message.lastName}  onChange={handleInputChange}  placeholder='Last Name'/>
+            <input type='tel' name='phone' value={message.phone} onChange={handleInputChange} placeholder='Phone Number'/>
+            <input type='email' name='email' value={message.email} onChange={handleInputChange} placeholder='Email Address'/>
+            <textarea rows={10} name='message' value={message.message} onChange={handleInputChange} placeholder='Message'></textarea>
+            <button type='submit'> Send Message </button>
+          </form>
         </div>
-        <img className="map" src={map3} />
-        <Footer />
+        <div className='details'>
+          <p className='subTitle'> Contact Us</p>
+          <p> We are committed to providing exceptional customer service and reliable solutions. We look forward to assisting you and ensuring your scaffolding needs are met to the highest standards. Your inquiries and feedback are valuable to us, so please don’t hesitate to reach out. </p>
+          <p className='phone-mail'> <i className="bi bi-telephone-fill"></i> +1 (234) 567-890</p>
+          <p className='phone-mail'> <i className="bi bi-envelope-fill"></i> example@mail.com </p>
+        </div>
+      </div>
+      <img className='map' src={map3} alt='Map' />
+      <Footer />
     </div>
-  )
+  );
 }
 
-export default contact
+export default Contact;

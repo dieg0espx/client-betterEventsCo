@@ -27,7 +27,7 @@ function PaymentGateway(props) {
       }
     }
   })
-   
+  
   return (
     <div className='paymentGateway'>
         <div className='payment-popup'>
