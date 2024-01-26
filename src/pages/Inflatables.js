@@ -14,7 +14,6 @@ function Inflatables() {
 
   const { category } = useParams();
 
-
   useEffect(()=>{
     switch (category) {
       case 'all-rentals':
@@ -42,9 +41,6 @@ function Inflatables() {
   },[category])
 
 
-
-
-
   async function getInflatables() {
     let arrayInflatables = [];
     const querySnapshot = await getDocs(collection(db, "inflatables"));
@@ -68,7 +64,6 @@ function Inflatables() {
   useEffect(() => {
     getInflatables();
   }, []);
-
 
 
   return (

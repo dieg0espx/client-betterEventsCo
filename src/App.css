@@ -289,6 +289,7 @@ p {
   text-align: left;
   max-width: 300px;
   height: 100px;
+  overflow: scroll;
 }
 .inflatable #dimentions {
   display: grid;
@@ -1582,9 +1583,12 @@ abbr[title] {
 /* ========= INFLATABLES PAGE ========= */
 
 .inflatables-page .container1{
-  width: 90%;
-  margin: auto;
+  width: 100%;
   padding: 20px;
+  justify-content: center;
+  display: flex;
+  justify-content: center;
+  flex-direction: column;
 }
 .inflatables-page .container1 .top-nav {
   /* border: 1px solid red; */
@@ -1602,10 +1606,16 @@ abbr[title] {
   outline: none;
 }
 .inflatables-page .inflatables {
-   width: 112%;
-   position: relative;
-   left: 51%;
-   transform: translate(-50%);
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(290px, 1fr));
+  gap: 5px;
+  width: 100%; /* Adjust the width percentage as needed */
+  margin: 0 auto; /* Center the grid horizontally */
+  position: relative;
+}
+
+.inflatables-page .inflatables .inflatable{
+  margin-bottom: 5px;
 }
 
 
@@ -1617,11 +1627,11 @@ abbr[title] {
     width: 100%;
     max-width: 400px;
   }
-  .inflatables-page .inflatables {
+  /* .inflatables-page .inflatables {
     width: 100%;
     display: flex;
     flex-direction: column;
-  }
+  } */
   .inflatables-page .inflatables .inflatable{
     display: block;
     margin: 0;
