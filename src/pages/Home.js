@@ -57,7 +57,7 @@ function Home() {
           <img src={stock4} />
           <h3> Birthday Parties </h3>
           <p>Looking for a way to make your next birthday party even more special? Look no further than Better Events! We partner with Better Stays to offer full vacation home rentals that include inflatables for a fun and memorable celebration.</p>
-          <BtnLearnMore />
+          <BtnLearnMore url="https://betterstaynow.com"/>
         </div>
       </div>
       <div className='container5'>
