@@ -173,7 +173,7 @@ function Inflatable() {
               <p id="name"> {inflatable.name} </p>
               <p id="price"> ${inflatable.price} USD </p>
             </div>
-            <p id="description"> {inflatable.description}{inflatable.description}{inflatable.description}{inflatable.description} </p>
+            <p id="description"> {inflatable.description}</p>
             <div id='rentalInformation'>
               <p> Rental Information </p>
               <li> Adult supervision at all the time is required. </li>

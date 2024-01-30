@@ -6,6 +6,7 @@ import About from './pages/About';
 import Services from './pages/Services';
 import Contact from './pages/contact';
 import Inflatable from './pages/Inflatable';
+import Extra from './pages/Extra';
 import Inflatables from './pages/Inflatables';
 
 function App() {
@@ -16,6 +17,7 @@ function App() {
           <Route path="/services" element={<Services />} />
           <Route path="/contact" element={<Contact />} />
           <Route path="/inflatable/:id" element={<Inflatable />} />
+          <Route path="/extra/:id" element={<Extra />} />
           <Route path="/inflatables" element={<Inflatables />} />
           <Route path="/inflatables/:category" element={<Inflatables />} />
         </Routes>

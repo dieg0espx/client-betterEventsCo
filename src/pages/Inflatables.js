@@ -9,6 +9,7 @@ import Footer from '../components/Footer'
 function Inflatables() {
   const db = getFirestore(app);
   const [inflatables, setInflatables] = useState([]);
+  const [extras, setExtras] = useState([])
   const [currentCategory, setCurrentCategory] = useState('all rentals')
   const containerRef = useRef(null);
 
@@ -60,9 +61,26 @@ function Inflatables() {
     arrayInflatables.sort((a, b) => a.name.localeCompare(b.name));
     setInflatables(arrayInflatables);
   }
+  async function getExtras() {
+    let arrayExtras = [];
+    const querySnapshot = await getDocs(collection(db, "extras"));
+    querySnapshot.forEach((doc) => {
+      arrayExtras.push({
+        id: doc.id,
+        name: doc.data().name,
+        description: doc.data().description,
+        price: doc.data().price,
+        image: doc.data().image,
+        category: 'extras'
+      });
+    });
+    arrayExtras.sort((a, b) => a.name.localeCompare(b.name));
+    setExtras(arrayExtras);
+  }
 
   useEffect(() => {
     getInflatables();
+    getExtras()
   }, []);
 
 
@@ -71,8 +89,8 @@ function Inflatables() {
       <Header />
       <div className="container1">
         <div className="top-nav">
-          <select value={currentCategory} onChange={(e)=>setCurrentCategory(e.target.value)}>
-            <option value={"all rentals"} selected> All Rentals </option>
+          <select value={currentCategory} onChange={(e) => setCurrentCategory(e.target.value)}>
+            <option value={"all rentals"} selected>All Rentals</option>
             <option value={"bounce houses"}> Bounce Houses </option>
             <option value={"combo jumpers"}> Combo Jumpers </option>
             <option value={"slides"}> Slides </option>
@@ -81,36 +99,8 @@ function Inflatables() {
           </select>
         </div>
         <div className="inflatables" ref={containerRef}>
-          {
-            currentCategory === 'all rentals' ? (
-              inflatables.map((inflatable) => (
-                <div className="inflatable" key={inflatable.id}>
-                 <img src={inflatable.image} />
-                 <div id="name-price">
-                   <p id="name">{inflatable.name}</p>
-                   <p id="price">${inflatable.price}</p>
-                 </div>
-                 <p id="description"> {inflatable.description}</p>
-                 <div id="dimentions">
-                   <div className="dimention">          
-                     <p className="value">{inflatable.width} ft </p>
-                     <p className="type"> Width</p>
-                   </div>
-                   <div className="dimention">          
-                     <p className="value">{inflatable.height} ft </p>
-                     <p className="type"> Height</p>
-                   </div>
-                   <div className="dimention">          
-                     <p className="value"> {inflatable.capacity} </p>
-                     <p className="type"> Kids</p>
-                   </div>
-                 </div>
-                 <Link className="btn-readMore" to={"/inflatable/" + inflatable.id}> Read More </Link>
-                </div>
-               ))
-            ):(
-            inflatables.filter(inflatable => inflatable.category.includes(currentCategory))
-              .map((inflatable) => (
+          {currentCategory === "all rentals"
+            ? inflatables.map((inflatable) => (
                 <div className="inflatable" key={inflatable.id}>
                   <img src={inflatable.image} />
                   <div id="name-price">
@@ -119,30 +109,80 @@ function Inflatables() {
                   </div>
                   <p id="description"> {inflatable.description}</p>
                   <div id="dimentions">
-                    <div className="dimention">          
+                    <div className="dimention">
                       <p className="value">{inflatable.width} ft </p>
                       <p className="type"> Width</p>
                     </div>
-                    <div className="dimention">          
+                    <div className="dimention">
                       <p className="value">{inflatable.height} ft </p>
                       <p className="type"> Height</p>
                     </div>
-                    <div className="dimention">          
+                    <div className="dimention">
                       <p className="value"> {inflatable.capacity} </p>
                       <p className="type"> Kids</p>
                     </div>
                   </div>
-                  <Link className="btn-readMore" to={"/inflatable/" + inflatable.id}> Read More  </Link>
+                  <Link className="btn-readMore" to={"/inflatable/" + inflatable.id}>Read More</Link>
                 </div>
-             )
-            )
-            )
+              ))
+              .concat (
+                extras.map((extra) => (
+                  <div className="inflatable" key={extra.id}>
+                    <img src={extra.image} />
+                    <div id="name-price">
+                      <p id="name">{extra.name}</p>
+                      <p id="price">${extra.price}</p>
+                    </div>
+                    <p id="description"> {extra.description}</p>
+                    <Link className="btn-readMore" to={"/extra/" + extra.id}>Read More</Link>
+                  </div>
+                ))
+              )
+            :  inflatables.filter(inflatable => inflatable.category.includes(currentCategory))
+            .map((inflatable) => (
+                  <div className="inflatable" key={inflatable.id}>
+                    <img src={inflatable.image} />
+                    <div id="name-price">
+                      <p id="name">{inflatable.name}</p>
+                      <p id="price">${inflatable.price}</p>
+                    </div>
+                    <p id="description"> {inflatable.description}</p>
+                    <div id="dimentions">
+                      <div className="dimention">
+                        <p className="value">{inflatable.width} ft </p>
+                        <p className="type"> Width</p>
+                      </div>
+                      <div className="dimention">
+                        <p className="value">{inflatable.height} ft </p>
+                        <p className="type"> Height</p>
+                      </div>
+                      <div className="dimention">
+                        <p className="value"> {inflatable.capacity} </p>
+                        <p className="type"> Kids</p>
+                      </div>
+                    </div>
+                    <Link className="btn-readMore" to={"/inflatable/" + inflatable.id}>Read More</Link>
+                  </div>
+                )) .concat (
+                  extras.filter(extra => extra.category.includes(currentCategory))
+            .map((extra) => (
+                    <div className="inflatable" key={extra.id}>
+                      <img src={extra.image} />
+                      <div id="name-price">
+                        <p id="name">{extra.name}</p>
+                        <p id="price">${extra.price}</p>
+                      </div>
+                      <p id="description"> {extra.description}</p>
+                      <Link className="btn-readMore" to={"/extra/" + extra.id}>Read More</Link>
+                    </div>
+                  ))
+                )
           }
         </div>
       </div>
       <Footer />
     </div>
-  )
+  );
 }
 
 export default Inflatables
