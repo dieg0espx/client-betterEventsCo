@@ -227,7 +227,7 @@ function Extra() {
             </div>
             <div className='recommendations'>
               <p className='subTitle'> You may also like ... </p>
-              <Inflatables category={''}/>
+              <Inflatables category={'extras'}/>
             </div>
             <Footer />
         </div>

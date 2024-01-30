@@ -25,7 +25,26 @@ function Inflatables(props) {
         width: doc.data().width
       });
     });
-    setInflatables(arrayInflatables);
+    let arrayExtras = []
+    const querySnapshot2 = await getDocs(collection(db, "extras"));
+    querySnapshot2.forEach((doc) => {
+      arrayExtras.push({
+        id: doc.id,
+        capacity: '',
+        category:doc.data().category,
+        description: doc.data().description,
+        height: 0,
+        image: doc.data().image,
+        name: doc.data().name,
+        price: doc.data().price,
+        width: 0
+      })
+    });
+
+    // let bothArrays = arrayInflatables.join(arrayExtras)
+   let bothArrays = arrayInflatables.concat(arrayExtras)
+
+    setInflatables(bothArrays)
   }
 
   useEffect(() => {
@@ -46,6 +65,7 @@ function Inflatables(props) {
 
   //IF THERE'S A PROPS.CATEGORY WILL DISPLAY THE ONES THAT MATCHES, OTHERWISE WILL SHOW ALL 
   const filteredInflatables = props.category? inflatables.filter((inflatable) => inflatable.category === props.category): inflatables;
+  
 
   
   
@@ -60,8 +80,8 @@ function Inflatables(props) {
             <p id="name">{inflatable.name}</p>
             <p id="price">${inflatable.price}</p>
           </div>
-          <p id="description"> {inflatable.description}</p>
-          <div id="dimentions">
+          <p id="description" style={{height: inflatable.category !== 'extras' ? "100px":"150px"}}> {inflatable.description}</p>
+          <div id="dimentions" style={{display: inflatable.category !== 'extras' ? "grid":"none"}}>
             <div className="dimention">          
               <p className="value">{inflatable.width} ft </p>
               <p className="type"> Width</p>
@@ -75,7 +95,9 @@ function Inflatables(props) {
               <p className="type"> Kids</p>
             </div>
           </div>
-          <Link className="btn-readMore" to={"/inflatable/" + inflatable.id}> Read More </Link>
+          {}
+          <Link className="btn-readMore" to={inflatable.category == 'extras' ? '/extra/' + inflatable.id : "/inflateble/" + inflatable.id}> Read More </Link>
+          
           </div>
         ))}
       </div>
