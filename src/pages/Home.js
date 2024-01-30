@@ -26,7 +26,7 @@ function Home() {
       <Header />
       <div className='container1'>
         <h1> Better Events</h1>
-        <h2> Let the Better Events begin </h2>
+        <h2> Making Every Event Better ! </h2>
         <ButtonContact />
       </div>
       <div className='container2'>
@@ -63,7 +63,7 @@ function Home() {
       <div className='container5'>
           <div className='txt-container5'> 
             <p className='subTitle'> Home Rental </p> 
-            <p> Ready to tie the knot? Look no further than Better Stays - our vacation rental partners not only offer beautiful rental spaces, but also transforms into the perfect wedding venue. Our tables, chairs, and tents make planning a breeze. Say "I do" to a Better Stay for your special day  </p>
+            <p> Ready to tie the knot? Look no further than Better Stays - our vacation rental partners not only offer beautiful rental spaces, but also transforms into the perfect Wedding Venues. Our tables, chairs, and tents make planning a breeze. Say "I do" to a Better Stay for your special day  </p>
             <BtnLearnMore url="https://betterstaynow.com"/>
           </div>
           <img src={stock5} />
