@@ -96,7 +96,7 @@ function Inflatables(props) {
             </div>
           </div>
           {}
-          <Link className="btn-readMore" to={inflatable.category == 'extras' ? '/extra/' + inflatable.id : "/inflateble/" + inflatable.id}> Read More </Link>
+          <Link className="btn-readMore" to={inflatable.category == 'extras' ? '/extra/' + inflatable.id : "/inflatable/" + inflatable.id}> Read More </Link>
           
           </div>
         ))}

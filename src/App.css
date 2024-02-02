@@ -1442,7 +1442,7 @@ abbr[title] {
 
 .booking-inflatable .main-container #dimentions {
   display: grid;
-  grid-template-columns: 1fr 1fr;
+  grid-template-columns: 2fr 2fr 1fr;
   gap: 10%;
   margin-bottom: 8px;
 }
@@ -1453,7 +1453,7 @@ abbr[title] {
 }
 .booking-inflatable .main-container #dimentions .grid {
   display: grid;
-  grid-template-columns: 1fr 1fr 1fr;
+  grid-template-columns: 1fr 1fr;
   gap: 5px;
 }
 .booking-inflatable .main-container .dimention {
@@ -1471,6 +1471,18 @@ abbr[title] {
   font-weight: bold;
   margin-top: 0px;
   margin-bottom: 0px;
+}
+.booking-inflatable .main-container #dimentions .wetDry{
+  text-align: center;
+  font-size: 20px;
+}
+.booking-inflatable .main-container #dimentions .iconWet{
+  font-size: 40px;    
+  color: rgb(0, 217, 255);
+}
+.booking-inflatable .main-container #dimentions .iconDry{
+  font-size: 40px;
+  color: rgb(255, 213, 0);
 }
 
 .booking-inflatable .main-container #right{
