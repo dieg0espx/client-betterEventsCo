@@ -46,7 +46,9 @@ function PaymentForm(props) {
       postalCode: sessionStorage.getItem('postalCode'),
       bookingDates: parseBookingDates(sessionStorage.getItem('bookingDates')),
       inflatableID: sessionStorage.getItem('infatableID'),
-      inflatableImage : sessionStorage.getItem('imageInflatable')
+      inflatableName: sessionStorage.getItem('inflatableName'),
+      inflatableImage : sessionStorage.getItem('imageInflatable'),
+      total:props.total
     }
 
     function parseBookingDates(bookingDatesString) {

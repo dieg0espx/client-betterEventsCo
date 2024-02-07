@@ -9,10 +9,9 @@ function PaymentGateway(props) {
   const [onlyDeposit, setOnlyDeposit] = useState(false)
   const [balance, setBalance] = useState(0)
   const [disableCheck, setDisableCheck] = useState(false)
+  const [total, setTotal] = useState(props.balance)
 
-  // useEffect(()=>{
-  //   setBalance(props.balance)
-  // })
+
   useEffect(()=>{
     if (onlyDeposit){
       setBalance(100)
@@ -62,9 +61,8 @@ function PaymentGateway(props) {
                 <i className={showDisclaimer ? "bi bi-chevron-up iconChev":"bi bi-chevron-down iconChev"} onClick={()=>setShowDisclaimer(!showDisclaimer)}></i>
               </div>
               <p id="disclaimer" style={{display: showDisclaimer? "block":"none"}}> We offer an optional 10% non-refundable damage waiver on all rental equipment. Lessee must select coverage, pay in full, and sign rental contract before the start of event for damage waiver to be bound. Acceptance of any and all claims that arise are based on sole discretion of Better Events Co. This Damage Waiver is NOT liability insurance. This Damage Waiver does NOT cover theft, vandalism, silly string, misuse, and/or abuse. This Damage Waiver does NOT cover missing equipment.</p>
-              
             </div>
-            <StripeContainer balance={balance.toFixed(2)} />
+            <StripeContainer balance={balance.toFixed(2)} total={total}/>
         </div>        
     </div>
   )
