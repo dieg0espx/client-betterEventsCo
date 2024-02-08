@@ -34,7 +34,7 @@ function PaymentGateway(props) {
       deposit: onlyDeposit ? 100 : 0, 
       paid: props.balance
     })
-  },[])
+  })
 
   
 
