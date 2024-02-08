@@ -62,6 +62,8 @@ function PaymentForm(props) {
     }
 
     const handleSubmit = async (e) => {
+      console.log(data);
+      console.log("Balances: " + props.balances);
       setShowBtn(false)
       // ADD TWO-STEP VERIFICATION ON BUSY DATES HERE 
       // PROCESSING PAYMENT WITH STRPE

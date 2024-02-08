@@ -26,6 +26,7 @@ function Inflatable() {
   const [balance, setBalance] = useState(0)
   const [total, setTotal] = useState(0)
   const [inflatableName, setInflatableName] = useState('')
+  
   const db = getFirestore(app);
 
   const { id } = useParams();
@@ -99,7 +100,7 @@ function Inflatable() {
     }
   };
   function createRerservation(){
-    let data = {name, lastName, phone, email, address, postCode, bookingDates, inflatableID}
+    let data = {name, lastName, phone, email, address, postCode, bookingDates, inflatableID, inflatableName}
     sessionStorage.setItem('name', data.name)
     sessionStorage.setItem('lastName', data.lastName)
     sessionStorage.setItem('phone', data.phone)
@@ -108,8 +109,8 @@ function Inflatable() {
     sessionStorage.setItem('postalCode', data.postCode)
     sessionStorage.setItem('bookingDates', data.bookingDates.join(", "))
     sessionStorage.setItem('infatableID', data.inflatableID)
-    sessionStorage.setItem('infatableName', inflatableName)
     sessionStorage.setItem('imageInflatable', imageInflatable)
+    sessionStorage.setItem('inflatableName', data.inflatableName)
     setPopup(true)
   }
   async function getBusyDates(id){
@@ -131,6 +132,7 @@ function Inflatable() {
     if (isBeforeToday) {
       return true;
     }
+  
     if (view === 'month') {
       // Check if the date is in the array of busyDates
       return busyDates.some(busyDate => (
@@ -139,8 +141,10 @@ function Inflatable() {
         busyDate.getFullYear() === date.getFullYear()
       ));
     }
+  
     return false;
   };
+  
   useEffect(()=>{
     setBalance(inflatable.price*bookingDates.length)
     setTotal(inflatable.price*bookingDates.length)
@@ -150,7 +154,6 @@ function Inflatable() {
       document.body.style.overflow = 'visible';
     }
   },[popup])
-
 
   function setupArea(dimension) {
     if (typeof dimension === 'string' && dimension.includes('x')) {

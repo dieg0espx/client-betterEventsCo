@@ -10,7 +10,11 @@ function PaymentGateway(props) {
   const [onlyDeposit, setOnlyDeposit] = useState(false)
   const [balance, setBalance] = useState(0)
   const [disableCheck, setDisableCheck] = useState(false)
-  const [balances, setBalances] = useState({rent: 0, insurance:0, deposit:0, paid:0})
+  const [rent, setRent] = useState(0)
+  const [insurance, setInsurance] = useState(0)
+  const [deposit, setDeposit] = useState(0)
+
+
 
   useEffect(()=>{
     if (onlyDeposit){
@@ -25,16 +29,20 @@ function PaymentGateway(props) {
         setBalance(props.balance)
       }
     }
+    
   })
 
-  useEffect(()=>{
-    setBalances({
-      rent: props.total, 
-      insurance: props.total * 0.09, 
-      deposit: onlyDeposit ? 100 : 0, 
+  useEffect(() => {
+    setBalances(prevBalances => ({
+      rent: props.total,
+      insurance: props.total * 0.09,
+      deposit: onlyDeposit ? 100 : 0,
       paid: props.balance
-    })
-  })
+    }));
+    console.log(balances);
+    console.log();
+  }, [props.total, props.balance, onlyDeposit]);
+  
 
   
 
