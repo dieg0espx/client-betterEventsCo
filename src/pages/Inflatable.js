@@ -24,7 +24,7 @@ function Inflatable() {
   const [busyDates, setBusyDates] = useState([])
   const [popup, setPopup] = useState(false)
   const [balance, setBalance] = useState(0)
-  const [price, setPrice] = useState(0)
+  const [total, setTotal] = useState(0)
   const db = getFirestore(app);
 
   const { id } = useParams();
@@ -140,7 +140,7 @@ function Inflatable() {
   };
   useEffect(()=>{
     setBalance(inflatable.price*bookingDates.length)
-    setPrice(inflatable.price*bookingDates.length)
+    setTotal(inflatable.price*bookingDates.length)
     if(popup){
       document.body.style.overflow = 'hidden';
     } else {
