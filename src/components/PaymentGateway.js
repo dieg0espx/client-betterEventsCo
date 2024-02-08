@@ -10,9 +10,7 @@ function PaymentGateway(props) {
   const [onlyDeposit, setOnlyDeposit] = useState(false)
   const [balance, setBalance] = useState(0)
   const [disableCheck, setDisableCheck] = useState(false)
-  const [rent, setRent] = useState(0)
-  const [insurance, setInsurance] = useState(0)
-  const [deposit, setDeposit] = useState(0)
+  const [balances, setBalances] = useState([])
 
 
 
@@ -32,16 +30,15 @@ function PaymentGateway(props) {
     
   })
 
-  useEffect(() => {
-    setBalances(prevBalances => ({
+  useEffect(() => { 
+    const newBalances = {
       rent: props.total,
-      insurance: props.total * 0.09,
+      insurance: includeInsurance ? props.total * 0.09 : 0,
       deposit: onlyDeposit ? 100 : 0,
-      paid: props.balance
-    }));
-    console.log(balances);
-    console.log();
-  }, [props.total, props.balance, onlyDeposit]);
+      paid: balance
+    };
+    setBalances(newBalances);
+  }, [props.total, props.balance, onlyDeposit, includeInsurance, balance]);
   
 
   
