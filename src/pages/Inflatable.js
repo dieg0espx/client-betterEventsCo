@@ -24,6 +24,7 @@ function Inflatable() {
   const [busyDates, setBusyDates] = useState([])
   const [popup, setPopup] = useState(false)
   const [balance, setBalance] = useState(0)
+  const [price, setPrice] = useState(0)
   const db = getFirestore(app);
 
   const { id } = useParams();
@@ -35,7 +36,6 @@ function Inflatable() {
     window.scrollTo(0, 0);
     scrollContainerRef.current.scrollTop = 0;
   }, [id]);
-
 
   useEffect(() => {
     let formattedDates = [];
@@ -128,7 +128,6 @@ function Inflatable() {
     if (isBeforeToday) {
       return true;
     }
-  
     if (view === 'month') {
       // Check if the date is in the array of busyDates
       return busyDates.some(busyDate => (
@@ -137,13 +136,11 @@ function Inflatable() {
         busyDate.getFullYear() === date.getFullYear()
       ));
     }
-  
     return false;
   };
-  
-
   useEffect(()=>{
     setBalance(inflatable.price*bookingDates.length)
+    setPrice(inflatable.price*bookingDates.length)
     if(popup){
       document.body.style.overflow = 'hidden';
     } else {
@@ -233,7 +230,7 @@ function Inflatable() {
             </div>
             <div style={{display:popup? "block":"none"}}>
               <div className="overlay" onClick={()=>setPopup(!popup)}/>
-              <PaymentGateway balance={balance} popup={popup}/>
+              <PaymentGateway balance={balance} popup={popup} total={total}/>
             </div>
           </div>
         </div>

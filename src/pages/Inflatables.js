@@ -40,8 +40,6 @@ function Inflatables() {
         break;
     }
   },[category])
-
-
   async function getInflatables() {
     let arrayInflatables = [];
     const querySnapshot = await getDocs(collection(db, "inflatables"));
@@ -77,12 +75,10 @@ function Inflatables() {
     arrayExtras.sort((a, b) => a.name.localeCompare(b.name));
     setExtras(arrayExtras);
   }
-
   useEffect(() => {
     getInflatables();
     getExtras()
   }, []);
-
 
   return (
     <div className="inflatables-page">
@@ -101,42 +97,41 @@ function Inflatables() {
         <div className="inflatables" ref={containerRef}>
           {
            currentCategory === "all rentals"? inflatables.map((inflatable) => (
-                  <div className="inflatable" key={inflatable.id}>
-                    <img src={inflatable.image} />
-                    <div id="name-price">
-                      <p id="name">{inflatable.name}</p>
-                      <p id="price">${inflatable.price}</p>
-                    </div>
-                    <p id="description"> {inflatable.description}</p>
-                    <div id="dimentions">
-                      <div className="dimention">
-                        <p className="value">{inflatable.width} ft </p>
-                        <p className="type"> Width</p>
-                      </div>
-                      <div className="dimention">
-                        <p className="value">{inflatable.height} ft </p>
-                        <p className="type"> Height</p>
-                      </div>
-                      <div className="dimention">
-                        <p className="value"> {inflatable.capacity} </p>
-                        <p className="type"> Kids</p>
-                      </div>
-                    </div>
-                    <Link className="btn-readMore" to={"/inflatable/" + inflatable.id}>Read More</Link>
-                  </div>
+            <div className="inflatable" key={inflatable.id}>
+              <img src={inflatable.image} />
+              <div id="name-price">
+                <p id="name">{inflatable.name}</p>
+                <p id="price">${inflatable.price}</p>
+              </div>
+              <p id="description"> {inflatable.description}</p>
+              <div id="dimentions">
+                <div className="dimention">
+                  <p className="value">{inflatable.width} ft </p>
+                  <p className="type"> Width</p>
+                </div>
+                <div className="dimention">
+                  <p className="value">{inflatable.height} ft </p>
+                  <p className="type"> Height</p>
+                </div>
+                <div className="dimention">
+                  <p className="value"> {inflatable.capacity} </p>
+                  <p className="type"> Kids</p>
+                </div>
+              </div>
+              <Link className="btn-readMore" to={"/inflatable/" + inflatable.id}>Read More</Link>
+            </div>
             ))
-            .concat(
-                  extras.map((extra) => (
-                    <div className="inflatable" key={extra.id}>
-                      <img src={extra.image} />
-                      <div id="name-price">
-                        <p id="name">{extra.name}</p>
-                        <p id="price">${extra.price}</p>
-                      </div>
-                      <p id="description" style={{height:'150px'}}> {extra.description}</p>
-                      <Link className="btn-readMore" to={"/extra/" + extra.id}>Read More</Link>
-                    </div>
-                  ))
+            .concat(extras.map((extra) => (
+              <div className="inflatable" key={extra.id}>
+                <img src={extra.image} />
+                <div id="name-price">
+                  <p id="name">{extra.name}</p>
+                  <p id="price">${extra.price}</p>
+                </div>
+                <p id="description" style={{height:'150px'}}> {extra.description}</p>
+                <Link className="btn-readMore" to={"/extra/" + extra.id}>Read More</Link>
+              </div>
+            ))
             )
           : 
             inflatables.filter((inflatable) => inflatable.category.includes(currentCategory)).map((inflatable) => (
@@ -164,17 +159,17 @@ function Inflatables() {
                     <Link className="btn-readMore" to={"/inflatable/" + inflatable.id}>Read More</Link>
                   </div>
             ))
-            .concat( extras.filter((extra) => extra.category.includes(currentCategory)).map((extra) => (
-                      <div className="inflatable" key={extra.id}>
-                        <img src={extra.image} />
-                        <div id="name-price">
-                          <p id="name">{extra.name}</p>
-                          <p id="price">${extra.price}</p>
-                        </div>
-                        <p id="description" style={{height:'150px'}}> {extra.description}</p>
-                        <Link className="btn-readMore" to={"/extra/" + extra.id}>Read More</Link>
-                      </div>
-                    ))
+            .concat(extras.filter((extra) => extra.category.includes(currentCategory)).map((extra) => (
+              <div className="inflatable" key={extra.id}>
+                <img src={extra.image} />
+                <div id="name-price">
+                  <p id="name">{extra.name}</p>
+                  <p id="price">${extra.price}</p>
+                </div>
+                <p id="description" style={{height:'150px'}}> {extra.description}</p>
+                <Link className="btn-readMore" to={"/extra/" + extra.id}>Read More</Link>
+              </div>
+            ))
             )
           }
         </div>
