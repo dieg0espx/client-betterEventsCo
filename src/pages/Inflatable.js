@@ -25,6 +25,7 @@ function Inflatable() {
   const [popup, setPopup] = useState(false)
   const [balance, setBalance] = useState(0)
   const [total, setTotal] = useState(0)
+  const [inflatableName, setInflatableName] = useState('')
   const db = getFirestore(app);
 
   const { id } = useParams();
@@ -89,6 +90,7 @@ function Inflatable() {
       if (docSnap.exists()) {
         setInflatable(docSnap.data())
         setImageInflatable(docSnap.data().image)
+        setInflatableName(docSnap.data().name)
       } else {
         alert("Inflatable Not Found")
       }
@@ -106,6 +108,7 @@ function Inflatable() {
     sessionStorage.setItem('postalCode', data.postCode)
     sessionStorage.setItem('bookingDates', data.bookingDates.join(", "))
     sessionStorage.setItem('infatableID', data.inflatableID)
+    sessionStorage.setItem('infatableName', inflatableName)
     sessionStorage.setItem('imageInflatable', imageInflatable)
     setPopup(true)
   }
