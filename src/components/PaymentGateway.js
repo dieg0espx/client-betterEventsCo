@@ -1,6 +1,7 @@
 import React, { useEffect, useState } from 'react'
 import StripeContainer from './StripeContainer'
 import { useSearchParams } from 'react-router-dom'
+import Inflatable from '../pages/Inflatable'
 
 
 function PaymentGateway(props) {
@@ -9,6 +10,7 @@ function PaymentGateway(props) {
   const [onlyDeposit, setOnlyDeposit] = useState(false)
   const [balance, setBalance] = useState(0)
   const [disableCheck, setDisableCheck] = useState(false)
+  const [balances, setBalances] = useState({rent: 0, insurance:0, deposit:0, paid:0})
 
   useEffect(()=>{
     if (onlyDeposit){
@@ -24,6 +26,17 @@ function PaymentGateway(props) {
       }
     }
   })
+
+  useEffect(()=>{
+    setBalances({
+      rent: props.total, 
+      insurance: props.total * 0.09, 
+      deposit: onlyDeposit ? 100 : 0, 
+      paid: props.balance
+    })
+  },[])
+
+  
 
   
   return (
@@ -61,7 +74,7 @@ function PaymentGateway(props) {
               </div>
               <p id="disclaimer" style={{display: showDisclaimer? "block":"none"}}> We offer an optional 10% non-refundable damage waiver on all rental equipment. Lessee must select coverage, pay in full, and sign rental contract before the start of event for damage waiver to be bound. Acceptance of any and all claims that arise are based on sole discretion of Better Events Co. This Damage Waiver is NOT liability insurance. This Damage Waiver does NOT cover theft, vandalism, silly string, misuse, and/or abuse. This Damage Waiver does NOT cover missing equipment.</p>
             </div>
-            <StripeContainer balance={balance.toFixed(2)} total={props.total}/>
+            <StripeContainer balance={balance.toFixed(2)} balances={balances}/>
         </div>        
     </div>
   )

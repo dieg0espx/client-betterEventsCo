@@ -48,7 +48,7 @@ function PaymentForm(props) {
       inflatableID: sessionStorage.getItem('infatableID'),
       inflatableName: sessionStorage.getItem('inflatableName'),
       inflatableImage : sessionStorage.getItem('imageInflatable'),
-      total:props.total
+      balances:props.balances
     }
 
     function parseBookingDates(bookingDatesString) {
