@@ -225,9 +225,12 @@ function Inflatable() {
                   </div>
                 </div>
               </div>  
-              <div className='wetDry'>
-                <i className={inflatable.wetDry == 'Dry'? "bi bi-brightness-high-fill iconDry":"bi bi-droplet-fill iconWet"}></i>
-                <p> {inflatable.wetDry}</p>
+              <div>
+              <p className='title'> Type </p>
+              <div className="dimention">          
+                <p className="value"> <i className={inflatable.wetDry == 'Dry'? "bi bi-brightness-high-fill iconDry":"bi bi-droplet-fill iconWet"}></i> </p>
+                <p className="type"> {inflatable.wetDry == 'Dry'? "Dry":"Wet"}</p>
+              </div>
               </div>
             </div>
           </div>

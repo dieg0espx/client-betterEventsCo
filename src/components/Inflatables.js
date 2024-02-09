@@ -22,7 +22,8 @@ function Inflatables(props) {
         image: doc.data().image,
         name: doc.data().name,
         price: doc.data().price,
-        width: doc.data().width
+        width: doc.data().width, 
+        wetDry:doc.data().wetDry
       });
     });
     let arrayExtras = []
@@ -91,8 +92,8 @@ function Inflatables(props) {
               <p className="type"> Height</p>
             </div>
             <div className="dimention">          
-              <p className="value"> {inflatable.capacity} </p>
-              <p className="type"> Kids</p>
+              <p className="value"> <i className={inflatable.wetDry == 'Dry'? "bi bi-brightness-high-fill iconDry":"bi bi-droplet-fill iconWet"}></i> </p>
+              <p className="type"> {inflatable.wetDry == 'Dry'? "Dry":"Wet"}</p>
             </div>
           </div>
           {}
