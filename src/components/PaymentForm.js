@@ -110,7 +110,6 @@ function PaymentForm(props) {
           phone : data.phone, 
           email: data.email, 
           address : data.address, 
-          postalCode: data.postalCode, 
           dates: data.bookingDates,
           reservationID: id,
           image: sessionStorage.getItem('imageInflatable'), 
@@ -133,6 +132,27 @@ function PaymentForm(props) {
         bookingId:id, 
       }
       const docRef = await addDoc(collection(db, "invoices"), invoiceData);
+      sendInvoiceEmail(docRef.id, id)
+    }
+
+    async function sendInvoiceEmail(id, bookingId){
+      await fetch('https://better-stays-mailer.vercel.app/api/beinvoice', {
+      // await fetch('https://localhost:4000/api/beInvoice', {
+        method: 'POST',
+        body: JSON.stringify({ 
+          name: data.name, 
+          lastName:data.lastName, 
+          phone: data.phone, 
+          email:data.email, 
+          address:data.address, 
+          dates:data.bookingDates, 
+          total: data.balances.rent, 
+          inflatableName:data.inflatableName, 
+          inflatableImage: data.inflatableImage, 
+          paid: false, 
+          invoiceId:id, 
+          bookingId:bookingId
+      }), headers: {'Content-Type': 'application/json'}})
     }
 
     return (
