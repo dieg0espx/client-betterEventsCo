@@ -79,7 +79,7 @@ function PaymentGateway(props) {
               </div>
               <p id="disclaimer" style={{display: showDisclaimer? "block":"none"}}> We offer an optional 10% non-refundable damage waiver on all rental equipment. Lessee must select coverage, pay in full, and sign rental contract before the start of event for damage waiver to be bound. Acceptance of any and all claims that arise are based on sole discretion of Better Events Co. This Damage Waiver is NOT liability insurance. This Damage Waiver does NOT cover theft, vandalism, silly string, misuse, and/or abuse. This Damage Waiver does NOT cover missing equipment.</p>
             </div>
-            <StripeContainer balance={balance.toFixed(2)} balances={balances}/>
+            <StripeContainer balance={balance.toFixed(2)} balances={balances} isInvoice={false}/>
         </div>        
     </div>
   )

@@ -5,6 +5,7 @@ import cardGif from '../images/creditCard.gif'
 import { getFirestore, doc, getDoc, getDocs, updateDoc, collection, addDoc } from 'firebase/firestore';
 import app from '../Firbase'
 
+
 const CARD_OPTIONS = {
 	style: {
         base: {
@@ -136,17 +137,30 @@ function PaymentForm(props) {
             <button id="btnPay" style={{display: showBtn? "block":"none"}}>Pay ${props.balance} USD</button>
         </form>
         :
-       <div>
-           <div className="paymentConfirmation">
-                <i className="bi bi-check-circle-fill iconConfirmation"></i>
-                <div id="confirmation">
-                  <p> <b> Payment Approved </b></p>
-                  <p> You Booking has been confirmed </p>
-                  <p> <b> Confirmation: </b> {reservationID} </p>
-                </div>
-           </div>
-           <button id="closePaymentGateway" onClick={()=>window.location.href = '/'}> Done  </button>
-       </div> 
+        <div>
+          {props.isInvoice}
+        <div style={{ display: props.isInvoice ? "block" : "none" }}>
+          <div className="paymentConfirmation">
+            <i className="bi bi-check-circle-fill iconConfirmation"></i>
+            <div id="confirmation">
+              <p><b>Payment Approved</b></p>
+              <p>You Invoice has been paid</p>
+            </div>
+          </div>
+        </div>
+        <div style={{ display: props.isInvoice ? "none" : "block" }}>
+          <div className="paymentConfirmation">
+            <i className="bi bi-check-circle-fill iconConfirmation"></i>
+            <div id="confirmation">
+              <p><b>Payment Approved</b></p>
+              <p>Your Booking has been confirmed</p>
+              <p><b>Confirmation:</b> {reservationID}</p>
+            </div>
+          </div>
+          <button id="closePaymentGateway" onClick={() => window.location.href = '/'}>Done</button>
+        </div>
+      </div>
+      
         }     
       </>
     )
