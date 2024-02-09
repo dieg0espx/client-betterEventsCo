@@ -43,7 +43,7 @@ function PaymentForm(props) {
       phone: sessionStorage.getItem('phone'),
       email: sessionStorage.getItem('email'),
       address: sessionStorage.getItem('address'),
-      postalCode: sessionStorage.getItem('postalCode'),
+      coordinates: sessionStorage.getItem('coordinates'),
       bookingDates: parseBookingDates(sessionStorage.getItem('bookingDates')),
       inflatableID: sessionStorage.getItem('infatableID'),
       inflatableName: sessionStorage.getItem('inflatableName'),

@@ -8,6 +8,7 @@ import Calendar from 'react-calendar';
 import Inflatables from '../components/Inflatables'
 import StripeContainer from '../components/StripeContainer';
 import PaymentGateway from '../components/PaymentGateway';
+import PlacesAutocomplete, { geocodeByAddress, getLatLng } from 'react-places-autocomplete';
 
 function Inflatable() {
   const [inflatable, setInflatable] = useState([])
@@ -16,8 +17,6 @@ function Inflatable() {
   const [phone, setPhone] = useState('9999088639')
   const [email, setEmail] = useState('espinosa9mx@gmail.com')
   const [inflatableID, setInflatableID] = useState('')
-  const [address, setAddress] = useState('610 Granville St.')
-  const [postCode, setPostalCode] = useState('V6C 3T3')
   const [imageInflatable, setImageInflatable] = useState('')
   const [dates, setDates] = useState([])
   const [bookingDates, setBookingDates] = useState([])
@@ -26,7 +25,17 @@ function Inflatable() {
   const [balance, setBalance] = useState(0)
   const [total, setTotal] = useState(0)
   const [inflatableName, setInflatableName] = useState('')
-  
+  const [address, setAddress] = useState('');
+  const [coordinates, setCoordinates] = useState([])
+
+  const handleSelect = async (selectedAddress) => {
+    const results = await geocodeByAddress(selectedAddress);
+    const latLng = await getLatLng(results[0]);
+    let coordinatesStr = latLng.lat + "," + latLng.lng
+    setAddress(selectedAddress);
+    setCoordinates(coordinatesStr)
+  };
+
   const db = getFirestore(app);
 
   const { id } = useParams();
@@ -100,13 +109,13 @@ function Inflatable() {
     }
   };
   function createRerservation(){
-    let data = {name, lastName, phone, email, address, postCode, bookingDates, inflatableID, inflatableName}
+    let data = {name, lastName, phone, email, address, coordinates, bookingDates, inflatableID, inflatableName}
     sessionStorage.setItem('name', data.name)
     sessionStorage.setItem('lastName', data.lastName)
     sessionStorage.setItem('phone', data.phone)
     sessionStorage.setItem('email', data.email)
     sessionStorage.setItem('address', data.address)
-    sessionStorage.setItem('postalCode', data.postCode)
+    sessionStorage.setItem('coordinates', data.coordinates)
     sessionStorage.setItem('bookingDates', data.bookingDates.join(", "))
     sessionStorage.setItem('infatableID', data.inflatableID)
     sessionStorage.setItem('imageInflatable', imageInflatable)
@@ -229,8 +238,31 @@ function Inflatable() {
                 <input value={lastName} onChange={(e)=>setLastName(e.target.value)} type='text' placeholder='Last Name' />
                 <input value={phone} onChange={(e)=>setPhone(e.target.value)} type='tel' placeholder='Phone Number' />
                 <input value={email} onChange={(e)=>setEmail(e.target.value)} type='email' placeholder='Email Address' />
-                <input value={address} onChange={(e)=>setAddress(e.target.value)} type='text' placeholder='Address' />
-                <input value={postCode} onChange={(e)=>setPostalCode(e.target.value)} type='text' placeholder='Postal Code' />
+                <PlacesAutocomplete value={address} onChange={setAddress} onSelect={handleSelect}>
+                  {({ getInputProps, suggestions, getSuggestionItemProps, loading }) => (
+                    <div>
+                      <input {...getInputProps({ placeholder: 'Delivery Address' })} />
+                      <div>
+                        {loading && <div>Loading...</div>}
+                        {suggestions.map((suggestion) => {
+                          const style = { 
+                            backgroundColor: suggestion.active ? '#0089BF' : '#fff' ,
+                            color: suggestion.active ? 'white' : 'gray', 
+                            border:'1px solid gray',
+                            borderRadius:'5px',
+                            padding:'3px 5px', 
+                            marginBottom:'1px' 
+                          };
+                          return (
+                            <div {...getSuggestionItemProps(suggestion, { style })}>
+                              {suggestion.description}
+                            </div>
+                          );
+                        })}
+                      </div>
+                    </div>
+                    )}
+                </PlacesAutocomplete>
                 <button className='btn-book' onClick={()=>createRerservation()} style={{display: bookingDates.length > 0?"block":"none"}}> Book Now </button>
                 <p style={{display: bookingDates.length == 0?"block":"none"}}> *Select an available date </p>
             </div>
