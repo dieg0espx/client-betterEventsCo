@@ -1700,3 +1700,6 @@ abbr[title] {
   font-size: 15px;
   color: #0089BF;
 }
+.invoice #confirmation p {
+  margin-bottom: 15px;
+}

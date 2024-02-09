@@ -5,7 +5,6 @@ import cardGif from '../images/creditCard.gif'
 import { getFirestore, doc, getDoc, getDocs, updateDoc, collection, addDoc } from 'firebase/firestore';
 import app from '../Firbase'
 
-
 const CARD_OPTIONS = {
 	style: {
         base: {
@@ -84,6 +83,10 @@ function PaymentForm(props) {
                 //  CREATING NEW RESERVATION - FIREBASE
                 const docRef = await addDoc(collection(db, "bookings"), data);
                 setReservationID(docRef.id)
+                // CREATING NEW INVOICE IF ITS NOT FULLY PAID
+                if(data.balances.deposit == 100){
+                  createInvoice(docRef.id)
+                }
                 // SENDING EMAIL RESERVATION - NODEMAILER 
                 sendEmailConfirmation(docRef.id) 
               } else {
@@ -113,6 +116,23 @@ function PaymentForm(props) {
           image: sessionStorage.getItem('imageInflatable'), 
           paid: props.balance, 
       }), headers: {'Content-Type': 'application/json'}})
+    }
+
+    async function createInvoice(id){
+      let invoiceData = {
+        name: data.name, 
+        lastName:data.lastName, 
+        phone: data.phone, 
+        email:data.email, 
+        address:data.address, 
+        dates:data.bookingDates, 
+        total: data.balances.rent, 
+        inflatableName:data.inflatableName, 
+        inflatableImage: data.inflatableImage, 
+        paid: false, 
+        bookingId:id, 
+      }
+      const docRef = await addDoc(collection(db, "invoices"), invoiceData);
     }
 
     return (
