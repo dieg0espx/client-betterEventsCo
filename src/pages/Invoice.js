@@ -1,21 +1,25 @@
-import React, {useEffect} from 'react'
+import React, {useEffect, useState} from 'react'
 import Header from '../components/Header'
 import StripeContainer from '../components/StripeContainer'
 
 function Invoice() {
+    const [showDisclaimer, setShowDisclaimer] = useState(false)
+    const [includeInsurance, setIncludeInsurance] = useState(false)
+
     useEffect(() => { 
         document.body.style.backgroundColor = 'aliceblue';
       }, []);
 
       let invoice = {
-        title: "Invoice 2", 
-        description: "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.",
-        issued:"September 2, 2023", 
-        amount:1234, 
         name:'Diego', 
         lastName:'Espinosa', 
         phone: '9999088639',
         email:'espinosa9mx@gmail.com', 
+        address:'610 Granville St. Vancouver, BC', 
+        dates: '02/02/2024 to 02/02/2024', 
+        total:365, 
+        inflatableName: 'Inflatable Name',
+        image:'https://res.cloudinary.com/dxfi1vj6q/image/upload/v1706645339/IMG_0310_lo2x9y.jpg'
       }
       function formatCurrency(amount, currencyCode = 'USD', locale = 'en-US') {
         // Use the Intl.NumberFormat to format the number as currency
@@ -29,28 +33,35 @@ function Invoice() {
       }
   return (
     <div className='container'>
-        {/* <Header /> */}
+        
         <div className='invoice'>
-            <img src={'https://res.cloudinary.com/dxfi1vj6q/image/upload/v1706048357/BetterEvents-10_eabusi_ys0lwn.png'} />
+            <img className="headerImg" src={'https://res.cloudinary.com/dxfi1vj6q/image/upload/v1706048357/BetterEvents-10_eabusi_ys0lwn.png'} />
             <hr></hr>
-            <div className='grid'>
-                <div>
-                    <h2>{invoice.title}</h2>
-                    <p id="description"> {invoice.description}</p>
-                    <p id="issued"><b>Issued: </b> {invoice.issued}</p>
+            <div className='grid'>                        
+                <div id="left">
+                    <img src={invoice.image} />
+                    <p> <b>Full Name:</b> {invoice.name} {invoice.lastName} </p>
+                    <p> <b>Phone:</b> {invoice.phone}</p>
+                    <p> <b>Eamil:</b> {invoice.email}</p>
+                    <p> <b>Address:</b> {invoice.address}</p>
+                    <p> <b>Dates:</b> {invoice.dates}</p>
                 </div>
                 <div>
-                    <h3 id="amount"> {formatCurrency(invoice.amount)} USD</h3>
+                    <h3 id="total"> {formatCurrency(includeInsurance?invoice.total *1.09 : invoice.total)} USD </h3>
                     <hr></hr>
-                    <p className='clientInformation'> <i className="bi bi-check-circle-fill iconCheck"></i>{invoice.name} {invoice.lastName}</p>
-                    <p className='clientInformation'> <i className="bi bi-check-circle-fill iconCheck"></i>{invoice.phone}</p>
-                    <p className='clientInformation'> <i className="bi bi-check-circle-fill iconCheck"></i>{invoice.email}</p>
-                    <StripeContainer balance={invoice.amount.toFixed(2)} isInvoice={true}/>
-                </div>
+                    <div className='damageWaiver'>
+                        <h4> Recommended </h4>
+                        <div style={{display:'flex', gap:'10px'}}>
+                          <input type='checkbox' checked={includeInsurance} onChange={()=>setIncludeInsurance(!includeInsurance)}/>              
+                          <p onClick={()=>setIncludeInsurance(!includeInsurance)}> Add 9% Accidental Damage Waiver </p>
+                        </div>
+                        <p id="disclaimer" style={{display: showDisclaimer? "block":"none"}}> We offer an optional 9% non-refundable damage waiver on all rental equipment. Lessee must select coverage, pay in full, and sign rental contract before the start of event for damage waiver to be bound. Acceptance of any and all claims that arise are based on sole discretion of Better Events Co. This Damage Waiver is NOT liability insurance. This Damage Waiver does NOT cover theft, vandalism, silly string, misuse, and/or abuse. This Damage Waiver does NOT cover missing equipment.</p>
+                    </div>
+                    <StripeContainer balance={(includeInsurance?invoice.total *1.09 : invoice.total).toFixed(2)} isInvoice={true}/>
+                </div>                
             </div>
         </div>
     </div>
   )
 }
-
 export default Invoice

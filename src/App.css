@@ -1666,48 +1666,37 @@ abbr[title] {
   border: 1px solid lightgray;
   padding:40px;
   margin-top: 20px;
+  width: fit-content;
+  margin: auto;
 }
-.invoice img {
-  width: 300px;
+.invoice .headerImg {
+  width: 200px;
+}
+.invoice #left img {
+  width:70%;
+  margin-bottom: 40px;
+}
+.invoice p {
+  margin: 0;
+  margin-bottom: 5px;
+  font-size: 20px;
 }
 .invoice .grid {
   display: grid;
-  grid-template-columns: 60% auto;
-  gap: 50px;
+  grid-template-columns: 500px 500px;
+  gap: 30px;
+  align-items: center;
 }
-.invoice h2 {
-  font-weight: bold;
-  font-size: 35px;
-  margin-bottom: 30px;
-}
-.invoice #description {
-  font-size: 23px;
-  color: black;
-}
-.invoice #issued {
-  font-size: 25px;
-  color: black;
-  margin-top: 30px;
-}
-.invoice #amount {
-  font-size: 50px;
-  font-weight: bold;
+.invoice #total {
+  font-size: 40px;
   color: gray;
+  font-weight: bold;
   text-align: center;
-  margin-top: 50px;
-  margin-bottom: 0;
 }
-.invoice .clientInformation {
-  font-size: 20px;
+.invoice #disclaimer {
+  font-size: 13px;
 }
-.invoice .iconCheck {
-  font-size: 20px;
-  margin-right: 10px;
-  color: green;
-}
-.invoice h3 {
-  font-size: 20px;
-  margin-top: 30px;
+.invoice h4, .invoice h3 {
+  font-size: 15px;
   color: #0089BF;
-  margin-bottom: 30px;
 }

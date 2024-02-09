@@ -143,7 +143,7 @@ function PaymentForm(props) {
           <div className="paymentConfirmation">
             <i className="bi bi-check-circle-fill iconConfirmation"></i>
             <div id="confirmation">
-              <p><b>Payment Approved</b></p>
+              <p><b>Payment Approved</b></p> 
               <p>You Invoice has been paid</p>
             </div>
           </div>
