@@ -9,7 +9,7 @@ function StripeContainer(props) {
   return (
     <div className='form-creditCard'>
       <Elements stripe={stripeTestPromise}>
-        <PaymentForm  balance={props.balance} total={props.total} balances={props.balances} isInvoice={props.isInvoice}/>
+          <PaymentForm  balance={props.balance} total={props.total} balances={props.balances}  includeInsurance={props.includeInsurance} bookingId={props.bookingId} isInvoice={props.isInvoice}/>  
       </Elements>
     </div>
   )

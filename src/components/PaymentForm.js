@@ -80,15 +80,24 @@ function PaymentForm(props) {
               })
               if (response.data.success) {
                 setSuccess(true)
-                //  CREATING NEW RESERVATION - FIREBASE
-                const docRef = await addDoc(collection(db, "bookings"), data);
-                setReservationID(docRef.id)
-                // CREATING NEW INVOICE IF ITS NOT FULLY PAID
-                if(data.balances.deposit == 100){
-                  createInvoice(docRef.id)
+                
+                console.log('INVOICE: ' + props.isInvoice);
+                if(props.isInvoice){
+                  // UPDATING BALANCES WHEN INVOICE HAS BEEN PAID
+                  console.log('IS INVOICE -> UPDATING BALANCES');
+                  updateBalances(props.bookingId)
+                } else {
+                  //  CREATING NEW RESERVATION - FIREBASE
+                  const docRef = await addDoc(collection(db, "bookings"), data);
+                  setReservationID(docRef.id) 
+                  // SENDING EMAIL RESERVATION - NODEMAILER 
+                  sendEmailConfirmation(docRef.id) 
+                  // CREATING NEW INVOICE IF ITS NOT FULLY PAID
+                  if(data.balances.deposit == 100){
+                    createInvoice(docRef.id)
+                  }
                 }
-                // SENDING EMAIL RESERVATION - NODEMAILER 
-                sendEmailConfirmation(docRef.id) 
+
               } else {
                   console.log("ERROR ON PAYMENT", response);
                   setShowBtn(true)
@@ -116,7 +125,6 @@ function PaymentForm(props) {
           paid: props.balance, 
       }), headers: {'Content-Type': 'application/json'}})
     }
-
     async function createInvoice(id){
       let invoiceData = {
         name: data.name, 
@@ -134,10 +142,8 @@ function PaymentForm(props) {
       const docRef = await addDoc(collection(db, "invoices"), invoiceData);
       sendInvoiceEmail(docRef.id, id)
     }
-
     async function sendInvoiceEmail(id, bookingId){
       await fetch('https://better-stays-mailer.vercel.app/api/beinvoice', {
-      // await fetch('https://localhost:4000/api/beInvoice', {
         method: 'POST',
         body: JSON.stringify({ 
           name: data.name, 
@@ -154,6 +160,17 @@ function PaymentForm(props) {
           bookingId:bookingId
       }), headers: {'Content-Type': 'application/json'}})
     }
+    async function updateBalances(id) {
+      const washingtonRef = doc(db, "bookings", 'GrrOKXNHkvAQZSQCfyiH');
+    
+      await updateDoc(washingtonRef, {
+        'balances.deposit': parseFloat(100),
+        'balances.insurance': props.includeInsurance ? parseFloat(props.balance * 0.09) : 0,
+        'balances.paid': props.includeInsurance ? parseFloat(props.balance * 1.09) + 100 : parseFloat(props.balance) + 100,
+        'balances.rent': parseFloat(props.balance),
+      });
+    }
+    
 
     return (
         <>

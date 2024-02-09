@@ -19,7 +19,6 @@ function Invoice() {
     },[])
 
     async function getInvoice(){
-        let arrayInvoice = []
         const docRef = doc(db, "invoices", id);
         const docSnap = await getDoc(docRef);
     
@@ -31,21 +30,6 @@ function Invoice() {
         }
     }
 
-
-
-
-    //   let invoice = {
-    //     name:'Diego', 
-    //     lastName:'Espinosa', 
-    //     phone: '9999088639',
-    //     email:'espinosa9mx@gmail.com', 
-    //     address:'610 Granville St. Vancouver, BC', 
-    //     dates: '02/02/2024 to 02/02/2024', 
-    //     total:365, 
-    //     inflatableName: 'Inflatable Name',
-    //     inflatableImage:'https://res.cloudinary.com/dxfi1vj6q/image/upload/v1706645339/IMG_0310_lo2x9y.jpg', 
-    //     paid:false
-    //   }
       function formatCurrency(amount, currencyCode = 'USD', locale = 'en-US') {
         // Use the Intl.NumberFormat to format the number as currency
         const formatter = new Intl.NumberFormat(locale, {
@@ -91,7 +75,7 @@ function Invoice() {
                                 </div>
                             </div>
                             <div style={{ display: !invoice.paid ? "flex" : "none" }}>
-                                <StripeContainer balance={(includeInsurance ? invoice.total * 1.09 : invoice.total).toFixed(2)} isInvoice={true} />
+                                <StripeContainer balance={(includeInsurance ? invoice.total * 1.09 : invoice.total).toFixed(2)} isInvoice={true} includeInsurance={includeInsurance} bookingId={id}/>
                             </div>
                         </div>
                     </div>
