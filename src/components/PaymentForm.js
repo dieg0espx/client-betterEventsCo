@@ -25,11 +25,9 @@ const CARD_OPTIONS = {
 function PaymentForm(props) {
     const db = getFirestore(app);
     const stripeURL = process.env.REACT_APP_STRIPEURL;
-
     const [success, setSuccess ] = useState(false)
     const stripe = useStripe()
     const elements = useElements()
-
     const [showBtn, setShowBtn] = useState(true);
     const [failed, setFailed] = useState(false);
     const [bookingDates, setBookingDates] = useState([]);
@@ -50,7 +48,6 @@ function PaymentForm(props) {
       inflatableImage : sessionStorage.getItem('imageInflatable'),
       balances:props.balances
     }
-
     function parseBookingDates(bookingDatesString) {
       try {
         // Attempt to split the string into an array
@@ -60,7 +57,6 @@ function PaymentForm(props) {
         return [];
       }
     }
-
     const handleSubmit = async (e) => {
       setShowBtn(false)
       // ADD TWO-STEP VERIFICATION ON BUSY DATES HERE 
@@ -97,7 +93,6 @@ function PaymentForm(props) {
                     createInvoice(docRef.id)
                   }
                 }
-
               } else {
                   console.log("ERROR ON PAYMENT", response);
                   setShowBtn(true)
@@ -109,7 +104,6 @@ function PaymentForm(props) {
           }
       }
     }
-
     async function sendEmailConfirmation(id){
       await fetch('https://better-stays-mailer.vercel.app/api/bebookingConfirmation', {
         method: 'POST',
@@ -169,9 +163,7 @@ function PaymentForm(props) {
         'balances.paid': props.includeInsurance ? parseFloat(props.balance * 1.09) + 100 : parseFloat(props.balance) + 100,
         'balances.rent': parseFloat(props.balance),
       });
-    }
-    
-
+    }    
     return (
         <>
         <div className="paymentLoader" style={{display: showLoader? "block":"none"}}>

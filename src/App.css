@@ -571,6 +571,24 @@ abbr[title] {
   .paymentGateway .iconChev:hover {
     color: #0089BF;
   }
+  .paymentGateway .damageWaiver {
+    margin-bottom: 20px;
+  }
+  .paymentGateway #btnPay {
+    display: block;
+    margin: 45px auto 0 auto;
+    width: 50%;
+    height: 40px;
+    background-color: #0089BF;
+    color: white;
+    border: none;
+    border-radius: 10px;
+    box-shadow: rgba(99, 99, 99, 0.2) 0px 2px 8px 0px;
+  }
+  .paymentGateway #btnPay:hover {
+    background-color: white;
+    color: #0089BF;
+  }
 
   .paymentConfirmation {
     display: flex;
@@ -591,6 +609,43 @@ abbr[title] {
   .paymentGateway #failed {
     color: red;
     font-weight: bold;
+  }
+
+  .paymentGateway .paymentMethod{
+    display: grid;
+    grid-template-columns:20px 20px auto;
+    align-items: center;
+    gap: 25px;
+    border: 1px solid lightgray;
+    border-radius: 5px;
+    padding-left: 5px;
+    margin-bottom: 5px;
+  }
+  .paymentGateway .cashBookingConfirmation {
+    display: grid;
+    grid-template-columns: 100px auto;
+    gap: 20px;
+    align-items: center;
+    padding: 0 20px;
+    margin-top: 20px;
+  }
+  .paymentGateway .cashBookingConfirmation .iconConfirmation{
+    font-size: 80px;
+    color: #3bd304;
+  }
+  .paymentGateway .iconCash {
+    color: gray;
+    font-size: 30px;
+  }
+
+  .paymentMethod .iconCheck {
+    font-size: 17px;
+    text-align: center;
+    border-radius: 50%;
+    height: 20px;
+    width: 20px;
+    line-height: 19px;
+    color: white;
   }
 
   @media screen and (max-width:800px) {
@@ -1220,7 +1275,9 @@ abbr[title] {
   text-align: right;
 }
 .services .container3 img {
-  width: 100%;
+  width: 90%;
+  border-radius: 20px;
+  box-shadow: rgba(0, 0, 0, 0.1) 0px 4px 12px;
 }
 .services .container3 .btn-contact {
   margin-left: auto;
