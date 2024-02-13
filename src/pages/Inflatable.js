@@ -189,7 +189,7 @@ function Inflatable() {
             <div id='rentalInformation'>
               <p> Rental Information </p>
               <li> Adult supervision at all the time is required. </li>
-              <li> Our inflatable deliveries are between 8am - 1pm daily.</li>
+              <li> Our inflatable deliveries are between 5am - 4pm daily.</li>
               <li> Our inflatable pick-ups start after 7pm daily. (Units may be left over night for an additional fee) </li>
               <li> Upon delivery, we set up and secure the unit with necessary tools. </li>
               <li> All blowers, stakes, and extension cords will be provided to set up inflatable. </li>

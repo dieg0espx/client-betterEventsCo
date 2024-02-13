@@ -29,7 +29,7 @@ function PaymentGateway(props) {
     inflatableName: sessionStorage.getItem('inflatableName'),
     inflatableImage : sessionStorage.getItem('imageInflatable'),
     balances:balances, 
-    method:'Cash'
+    method:'Cash in Office'
   }
 
   useEffect(()=>{
@@ -53,7 +53,7 @@ function PaymentGateway(props) {
       rent: props.total,
       insurance: includeInsurance ? props.total * 0.09 : 0,
       deposit: onlyDeposit ? 100 : 0,
-      paid: balance
+      paid: paymentMethod == 1? 0:balance
     };
     setBalances(newBalances);
   }, [props.total, props.balance, onlyDeposit, includeInsurance, balance]);

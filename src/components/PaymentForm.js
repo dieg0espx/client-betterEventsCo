@@ -46,7 +46,8 @@ function PaymentForm(props) {
       inflatableID: sessionStorage.getItem('infatableID'),
       inflatableName: sessionStorage.getItem('inflatableName'),
       inflatableImage : sessionStorage.getItem('imageInflatable'),
-      balances:props.balances
+      balances:props.balances, 
+      method:"Credit Card"
     }
     function parseBookingDates(bookingDatesString) {
       try {
@@ -131,7 +132,7 @@ function PaymentForm(props) {
         inflatableName:data.inflatableName, 
         inflatableImage: data.inflatableImage, 
         paid: false, 
-        bookingId:id, 
+        bookingId:id
       }
       const docRef = await addDoc(collection(db, "invoices"), invoiceData);
       sendInvoiceEmail(docRef.id, id)
