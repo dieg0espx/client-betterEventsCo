@@ -23,7 +23,7 @@ function Inflatables(props) {
         name: doc.data().name,
         price: doc.data().price,
         width: doc.data().width, 
-        wetDry:doc.data().wetDry
+        wetDry:doc.data().wetDry, 
       });
     });
     let arrayExtras = []

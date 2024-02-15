@@ -43,7 +43,7 @@ function Inflatable() {
 
   useEffect(() => {
     getInflatable(id);
-    getBusyDates(id)
+    
     window.scrollTo(0, 0);
     scrollContainerRef.current.scrollTop = 0;
   }, [id]);
@@ -101,6 +101,7 @@ function Inflatable() {
         setInflatable(docSnap.data())
         setImageInflatable(docSnap.data().image)
         setInflatableName(docSnap.data().name)
+        getBusyDates(id, docSnap.data().count)
       } else {
         alert("Inflatable Not Found")
       }
@@ -122,8 +123,10 @@ function Inflatable() {
     sessionStorage.setItem('inflatableName', data.inflatableName)
     setPopup(true)
   }
-  async function getBusyDates(id){
+  async function getBusyDates(id, count){
+    console.log('GETTING BUSY DATES');
     let arrayDates = []
+    let bookedDates = []
     const querySnapshot = await getDocs(collection(db, "bookings"));
     querySnapshot.forEach((doc) => {
       if(doc.data().inflatableID == id){
@@ -132,25 +135,38 @@ function Inflatable() {
         }
       }
     });
-    setBusyDates(arrayDates)
+    var counts = {};
+    for (var i = 0; i < arrayDates.length; i++) {
+      var element = arrayDates[i];
+      if (counts[element] === undefined) {
+        counts[element] = 1;
+      } else {
+        counts[element]++;
+      }
+    }
+    for (var key in counts) {
+      if (counts.hasOwnProperty(key)) {
+        console.log('DATE: ' + key);
+        console.log(counts[key]);
+        if(counts[key] >= count){
+          bookedDates.push(new Date(key))
+        }
+      }
+    }
+    setBusyDates(bookedDates)
   };
   const tileDisabled = ({ date, view }) => {
-    // Disable dates before today
     const isBeforeToday = date < new Date();
-  
     if (isBeforeToday) {
       return true;
     }
-  
     if (view === 'month') {
-      // Check if the date is in the array of busyDates
       return busyDates.some(busyDate => (
         busyDate.getDate() === date.getDate() &&
         busyDate.getMonth() === date.getMonth() &&
         busyDate.getFullYear() === date.getFullYear()
       ));
     }
-  
     return false;
   };
   
