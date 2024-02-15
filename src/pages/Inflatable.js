@@ -124,7 +124,6 @@ function Inflatable() {
     setPopup(true)
   }
   async function getBusyDates(id, count){
-    console.log('GETTING BUSY DATES');
     let arrayDates = []
     let bookedDates = []
     const querySnapshot = await getDocs(collection(db, "bookings"));
@@ -146,8 +145,6 @@ function Inflatable() {
     }
     for (var key in counts) {
       if (counts.hasOwnProperty(key)) {
-        console.log('DATE: ' + key);
-        console.log(counts[key]);
         if(counts[key] >= count){
           bookedDates.push(new Date(key))
         }
