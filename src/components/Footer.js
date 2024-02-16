@@ -9,6 +9,7 @@ function Footer() {
         <img className="logo" src={'https://res.cloudinary.com/dxfi1vj6q/image/upload/v1705007222/BetterEvents-02_gqzykd.png'} />
         <p> <i className="bi bi-telephone-fill iconPhone"></i>  +1 (630) 370-7422 </p>
         <p> <i className="bi bi-envelope-fill  iconMail"></i> bettereventsnow@gmail.com </p>
+        <p> <i className="bi bi-geo-alt  iconMail"></i> 4911 Hydraulic Rd, Rockford, Il, United States.</p>
       </div>
       <div id="right">
             <p> <i className="bi bi-facebook iconFacebook"></i> <i className="bi bi-instagram iconInstagram"></i> </p>

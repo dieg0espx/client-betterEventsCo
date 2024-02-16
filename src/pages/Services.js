@@ -69,11 +69,11 @@ function Services() {
                 />
                  <Faq 
                     question={"How long is the rental period?"} 
-                    answer={"Our standard rental period is typically 4-6 hours, but longer rental periods can be arranged. Contact us for specific details."}
+                    answer={"Our standard rental period is typically 8 hours, but longer rental periods can be arranged. Contact us for specific details."}
                 />
                  <Faq 
                     question={"Do you provide attendants for the inflatables?"} 
-                    answer={"We require having adult supervision."}
+                    answer={"We require adult supervision for all rentals."}
                 />
             </div>
             <NewsLetter />
