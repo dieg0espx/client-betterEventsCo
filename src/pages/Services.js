@@ -21,17 +21,17 @@ function Services() {
                 <img src={stock7} />
                 <div>
                     <p className='subTitle'> Our Services </p>
-                    <p> At Better Events Co., we specialize in turning ordinary events into extraordinary celebrations by providing top-notch inflatable entertainment for kids. Whether you're planning a birthday party, school event, community fair, or any special occasion, our high-quality inflatables are here to add a touch of joy and excitement.</p>
+                    <p> At Better Events, we specialize in turning ordinary events into extraordinary celebrations by providing top-notch inflatable entertainment for kids. Whether you're planning a birthday party, school event, community fair, or any special occasion, our high-quality inflatables are here to add a touch of joy and excitement.</p>
                     <BtnCheckAllInflatables />
                 </div>
             </div>
             <div className='container2'>
-                <p className='subTitle'> Why Choose Better Events Co.</p>
+                <p className='subTitle'> Why Choose Better Events</p>
                 <div className='reasons'>
                     <div className='reason'>
                         <i className="bi bi-stack iconReason"></i>
                         <h3> Wide Variety </h3>
-                        <p> From Magical bouncing castles to exciting inflatable slides, daredevil obstacle course, and entertaining interactive games, the otpions for fun are endless. </p>
+                        <p> From Magical bouncing castles to exciting inflatable slides, daredevil obstacle course, and entertaining interactive games, the options for fun are endless. </p>
                     </div>
                     <div className='reason'>
                         <i className="bi bi-person-fill-check iconReason"></i>
@@ -65,7 +65,7 @@ function Services() {
                 />
                  <Faq 
                     question={"What is included in the rental price?"} 
-                    answer={"The rental price typically includes delivery, setup, and takedown of the inflatable. Additional fees may apply for delivery outside our standard service area."}
+                    answer={"The rental price includes delivery, setup, and takedown of the inflatable. Additional fees may apply for delivery outside our standard service area."}
                 />
                  <Faq 
                     question={"How long is the rental period?"} 
