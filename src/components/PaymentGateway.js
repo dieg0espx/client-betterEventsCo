@@ -16,6 +16,7 @@ function PaymentGateway(props) {
   const [paymentMethod, setPaymentMethod] = useState(1)
   const [reservationID, setReservationID] = useState('') 
   const [bookCompleted, setBookCompleted] = useState(false)
+  const [deliveryFee, setDeliveryFee] = useState(0)
 
   let data = {
     name: sessionStorage.getItem('name'),
@@ -39,22 +40,27 @@ function PaymentGateway(props) {
     } else {
       setDisableCheck(false)
       if(includeInsurance){
-        setBalance(props.balance * 1.09)
+        setBalance((props.balance + deliveryFee) * 1.09)
       } else {
-        setBalance(props.balance)
+        setBalance(props.balance + deliveryFee)
       }
     }
     
   })
+  useEffect(()=>{
+    setBalance(parseFloat(balance + deliveryFee))
+    console.log(balance);
+  },[deliveryFee])
+
   useEffect(() => { 
     const newBalances = {
-      rent: props.total,
-      insurance: includeInsurance ? props.total * 0.09 : 0,
+      rent: props.total + deliveryFee,
+      insurance: includeInsurance ? ((props.total + deliveryFee) * 0.09) : 0,
       deposit: onlyDeposit ? 100 : 0,
-      paid: paymentMethod == 1? 0:balance
+      paid: paymentMethod == 1? 0: balance + deliveryFee
     };
     setBalances(newBalances);
-  }, [props.total, props.balance, onlyDeposit, includeInsurance, balance]);
+  }, [props.total, props.balance, onlyDeposit, includeInsurance, balance, deliveryFee]);
   function parseBookingDates(bookingDatesString) {
     try {
       // Attempt to split the string into an array
@@ -85,7 +91,7 @@ function PaymentGateway(props) {
         dates: data.bookingDates,
         reservationID: id,
         image: sessionStorage.getItem('imageInflatable'), 
-        paid: props.balance, 
+        paid: props.balance + deliveryFee, 
     }), headers: {'Content-Type': 'application/json'}})
   }
   async function createInvoice(id){
@@ -155,11 +161,11 @@ function PaymentGateway(props) {
             <div className='specific-time'>
               <h4> Specific Time Delivery </h4>
               <p> Restrictions means we can deliver as early as 7am and pickup as late as midnight. Please call out office if you have any questions.</p>
-              <select>
-                <option> No restriction, no charge </option>
-                <option> YES - Must deliver at an excat time ($100.00)</option>
-                <option> YES - Must deliver within a 1 hour window ($65.00)</option>
-                <option> YES - You must deliver within a 2 hours or greater window ($45.00)</option>
+              <select onChange={(e)=>setDeliveryFee(parseInt(e.target.value))}>
+                <option value={0}> No restriction, no charge </option>
+                <option value={100}> YES - Must deliver at an exact time ($100.00)</option>
+                <option value={65}> YES - Must deliver within a 1 hour window ($65.00)</option>
+                <option value={45}> YES - You must deliver within a 2 hours or greater window ($45.00)</option>
               </select>
             </div>
 
@@ -183,7 +189,7 @@ function PaymentGateway(props) {
               <p> Credit Card </p>
             </div>
             <div style={{display: paymentMethod == 1 ? "none":"block"}}>
-              <StripeContainer balance={balance.toFixed(2)} balances={balances} isInvoice={false}/>
+              <StripeContainer balance={balance} balances={balances} isInvoice={false}/>
             </div>
             <div className='cashBookingConfirmation' style={{display: bookCompleted? "flex":"none"}}>
               <i className="bi bi-check-circle-fill iconConfirmation"></i>
