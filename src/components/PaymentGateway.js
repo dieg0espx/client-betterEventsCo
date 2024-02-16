@@ -57,7 +57,8 @@ function PaymentGateway(props) {
       rent: props.total + deliveryFee,
       insurance: includeInsurance ? ((props.total + deliveryFee) * 0.09) : 0,
       deposit: onlyDeposit ? 100 : 0,
-      paid: paymentMethod == 1? 0: balance + deliveryFee
+      paid: paymentMethod == 1? 0: balance + deliveryFee, 
+      deliveryFee: deliveryFee
     };
     setBalances(newBalances);
   }, [props.total, props.balance, onlyDeposit, includeInsurance, balance, deliveryFee]);
@@ -91,7 +92,7 @@ function PaymentGateway(props) {
         dates: data.bookingDates,
         reservationID: id,
         image: sessionStorage.getItem('imageInflatable'), 
-        paid: props.balance + deliveryFee, 
+        paid: parseFloat(props.balance + deliveryFee).toFixed(2), 
     }), headers: {'Content-Type': 'application/json'}})
   }
   async function createInvoice(id){
