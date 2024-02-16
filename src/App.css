@@ -648,6 +648,24 @@ abbr[title] {
     color: white;
   }
 
+
+  .paymentGateway .specific-time {
+    /* border: 1px solid red; */
+    margin-bottom: 20px;
+  }
+  .paymentGateway .specific-time p{
+    font-size: 10px;
+  }
+  .paymentGateway .specific-time select{
+    width: 100%;
+    border: 1px solid lightgray;
+    padding-left: 10px;
+    height: 40px;
+    border-radius: 5px;
+    color: gray;
+    outline: none;
+  }
+
   @media screen and (max-width:800px) {
     .payment-popup {
       width: 100vw !important;
@@ -666,7 +684,7 @@ abbr[title] {
       align-items: self-start;
     }
     .payment-popup .amount-options {
-      display: block;
+      display: flex;
     }
     .payment-popup .paymentConfirmation {
       display: block;
@@ -678,7 +696,6 @@ abbr[title] {
     }
     
   }
-
 
   #closePaymentGateway {
     display: block;

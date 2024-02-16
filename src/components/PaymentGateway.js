@@ -31,7 +31,6 @@ function PaymentGateway(props) {
     balances:balances, 
     method:'Cash in Office'
   }
-
   useEffect(()=>{
     if (onlyDeposit){
       setBalance(100)
@@ -47,7 +46,6 @@ function PaymentGateway(props) {
     }
     
   })
-
   useEffect(() => { 
     const newBalances = {
       rent: props.total,
@@ -57,7 +55,6 @@ function PaymentGateway(props) {
     };
     setBalances(newBalances);
   }, [props.total, props.balance, onlyDeposit, includeInsurance, balance]);
-
   function parseBookingDates(bookingDatesString) {
     try {
       // Attempt to split the string into an array
@@ -67,7 +64,6 @@ function PaymentGateway(props) {
       return [];
     }
   }
-
   async function createCashReservation(){
     const docRef = await addDoc(collection(db, "bookings"), data);
     sendEmailConfirmation(docRef.id)
@@ -155,6 +151,18 @@ function PaymentGateway(props) {
               <p className={onlyDeposit ? "":"selected"} onClick={()=>setOnlyDeposit(false)}> Pay Full Amount </p>
               <p className={onlyDeposit ? "selected":""} onClick={()=>setOnlyDeposit(true)}> Pay Deposit Due ($100.00) </p>
             </div>
+
+            <div className='specific-time'>
+              <h4> Specific Time Delivery </h4>
+              <p> Restrictions means we can deliver as early as 7am and pickup as late as midnight. Please call out office if you have any questions.</p>
+              <select>
+                <option> No restriction, no charge </option>
+                <option> YES - Must deliver at an excat time ($100.00)</option>
+                <option> YES - Must deliver within a 1 hour window ($65.00)</option>
+                <option> YES - You must deliver within a 2 hours or greater window ($45.00)</option>
+              </select>
+            </div>
+
             <div className='damageWaiver' style={{display:bookCompleted? "none":"block"}}>
               <h4> Recommended </h4>
               <div className='three-col'>
@@ -163,7 +171,7 @@ function PaymentGateway(props) {
                 <i className={showDisclaimer ? "bi bi-chevron-up iconChev":"bi bi-chevron-down iconChev"} onClick={()=>setShowDisclaimer(!showDisclaimer)}></i>
               </div>
               <p id="disclaimer" style={{display: showDisclaimer? "block":"none"}}> We offer an optional 9% non-refundable damage waiver on all rental equipment. Lessee must select coverage, pay in full, and sign rental contract before the start of event for damage waiver to be bound. Acceptance of any and all claims that arise are based on sole discretion of Better Events Co. This Damage Waiver is NOT liability insurance. This Damage Waiver does NOT cover theft, vandalism, silly string, misuse, and/or abuse. This Damage Waiver does NOT cover missing equipment.</p>
-            </div>            
+            </div> 
             <div className='paymentMethod' onClick={()=>setPaymentMethod(1)} style={{display:bookCompleted? "none":"flex"}}>
               <i className="bi bi-check-lg iconCheck" style={{backgroundColor: paymentMethod == 1? "#0089BF":"white", border: paymentMethod == 1? "none":"1px solid gray"}}></i>
               <i className="bi bi-cash-stack iconCash"></i>
