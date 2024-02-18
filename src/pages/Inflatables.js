@@ -53,7 +53,8 @@ function Inflatables() {
         name: doc.data().name,
         price: doc.data().price,
         width: doc.data().width,
-        category: doc.data().category
+        category: doc.data().category, 
+        wetDry: doc.data().wetDry
       });
     });
     arrayInflatables.sort((a, b) => a.name.localeCompare(b.name));
@@ -114,8 +115,8 @@ function Inflatables() {
                   <p className="type"> Height</p>
                 </div>
                 <div className="dimention">
-                  <p className="value"> {inflatable.capacity} </p>
-                  <p className="type"> Kids</p>
+                  <p className="value">  <i className={inflatable.wetDry == 'Dry'? "bi bi-brightness-high-fill iconDry":"bi bi-droplet-fill iconWet"}></i>  </p>
+                  <p className="type"> {inflatable.wetDry}</p>
                 </div>
               </div>
               <Link className="btn-readMore" to={"/inflatable/" + inflatable.id}>Read More</Link>

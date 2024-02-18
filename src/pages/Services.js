@@ -41,7 +41,7 @@ function Services() {
                     <div className='reason'>
                         <i className="bi bi-clock iconReason"></i>
                         <h3> On-Time Delivery </h3>
-                        <p> We understand the importance of punctuality. Trust Better Events Co. to deliver and set up your inflatables on time, allowing the fun to start promptly. </p>
+                        <p> We understand the importance of punctuality. Trust Better Events to deliver and set up your inflatables on time, allowing the fun to start promptly. </p>
                     </div>
                 </div>
             </div>

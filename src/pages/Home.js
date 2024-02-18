@@ -36,7 +36,7 @@ function Home() {
           <img src={inflatable1} />
           <div>
             <p className='subTitle'> About Us </p> 
-            <p> Better Events is the premier party rental company in Northern Illinois, offering superior bounce houses,combos, water slides, games, tents, tables, and chairs for your birthday or special event. Our range of inflatables are conveniently delivered to the greater Rockford area and nearby suburbs. When in need of an inflatable rental in Rockford, trust Better Events to be your reliable partner for your next special occasion. </p>
+            <p> Better Events is the premier party rental company in Northern Illinois, offering superior bounce houses,combos, water slides, games, tents, tables, and chairs for your birthday or special event. Our range of inflatables are conveniently delivered to the greater Rockford area and nearby suburbs. When in need of an inflatable rental in northern Illinois, trust Better Events to be your reliable partner for your next special occasion. </p>
             <BtnLearnMore />
           </div>
       </div>

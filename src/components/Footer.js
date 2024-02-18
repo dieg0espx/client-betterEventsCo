@@ -1,14 +1,22 @@
+import { logEvent } from 'firebase/analytics';
 import React from 'react'
 import { Link } from "react-router-dom";
 
 
 function Footer() {
+  
+    function handleEmailClick(){
+      const emailAddress = 'bettereventsnow@gmail..com';
+      const mailtoLink = `mailto:${emailAddress}`
+      window.location.href = mailtoLink;
+    };
+
   return (
     <div className='footer'> 
       <div>
         <img className="logo" src={'https://res.cloudinary.com/dxfi1vj6q/image/upload/v1705007222/BetterEvents-02_gqzykd.png'} />
         <p> <i className="bi bi-telephone-fill iconPhone"></i>  +1 (630) 370-7422 </p>
-        <p> <i className="bi bi-envelope-fill  iconMail"></i> bettereventsnow@gmail.com </p>
+        <p onClick={()=>handleEmailClick()}> <i className="bi bi-envelope-fill  iconMail"></i> bettereventsnow@gmail.com </p>
         <p> <i className="bi bi-geo-alt  iconMail"></i> 4911 Hydraulic Rd, Rockford, Il, United States.</p>
       </div>
       <div id="right">
