@@ -17,6 +17,7 @@ function PaymentGateway(props) {
   const [reservationID, setReservationID] = useState('') 
   const [bookCompleted, setBookCompleted] = useState(false)
   const [deliveryFee, setDeliveryFee] = useState(0)
+  const [checkedRules, setCheckedRules] = useState(false)
 
   let data = {
     name: sessionStorage.getItem('name'),
@@ -158,7 +159,6 @@ function PaymentGateway(props) {
               <p className={onlyDeposit ? "":"selected"} onClick={()=>setOnlyDeposit(false)}> Pay Full Amount </p>
               <p className={onlyDeposit ? "selected":""} onClick={()=>setOnlyDeposit(true)}> Pay Deposit Due ($100.00) </p>
             </div>
-
             <div className='specific-time'>
               <h4> Specific Time Delivery </h4>
               <p> Restrictions means we can deliver as early as 7am and pickup as late as midnight. Please call out office if you have any questions.</p>
@@ -169,7 +169,6 @@ function PaymentGateway(props) {
                 <option value={50}> YES - You must deliver within a 2 hours or greater window ($50.00)</option>
               </select>
             </div>
-
             <div className='damageWaiver' style={{display:bookCompleted? "none":"block"}}>
               <h4> Recommended </h4>
               <div className='three-col'>
@@ -189,8 +188,13 @@ function PaymentGateway(props) {
               <i className="bi bi-credit-card-2-front iconCash"></i>
               <p> Credit Card </p>
             </div>
+            <div className='confirm-contract'>
+              <input type='checkbox' disabled={disableCheck} checked={checkedRules} onChange={()=>setCheckedRules(!checkedRules)}/>              
+              <p onClick={()=>setCheckedRules(!checkedRules)}> I have read and accept the <a href='/#/contract'>rules and restrictions.</a> </p>
+            </div>
             <div style={{display: paymentMethod == 1 ? "none":"block"}}>
               <StripeContainer balance={balance} balances={balances} isInvoice={false}/>
+              <div className='blocking-btn' style={{display: checkedRules? "none":"block"}}></div>
             </div>
             <div className='cashBookingConfirmation' style={{display: bookCompleted? "flex":"none"}}>
               <i className="bi bi-check-circle-fill iconConfirmation"></i>
@@ -199,8 +203,8 @@ function PaymentGateway(props) {
                 <p><b>Confirmation:</b> {reservationID}</p>
               </div>
             </div>
-            <div style={{display: paymentMethod == 1 && !bookCompleted ? "block":"none"}}>
-              <button id="btnPay" onClick={()=>createCashReservation()}> Book Now </button>
+            <div style={{display: paymentMethod == 1 && !bookCompleted && checkedRules ? "block":"none"}}>
+              <button id="btnPay" onClick={()=>createCashReservation()} > Book Now </button>
             </div>
 
         </div>        

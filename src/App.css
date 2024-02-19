@@ -594,6 +594,14 @@ abbr[title] {
     color: #0089BF;
   }
 
+  .paymentGateway .confirm-contract {
+    display: flex;
+    gap: 10px;
+    margin: 10px 0;
+  }
+
+
+
   .paymentConfirmation {
     display: flex;
     gap: 20px;
@@ -640,6 +648,12 @@ abbr[title] {
   .paymentGateway .iconCash {
     color: gray;
     font-size: 30px;
+  }
+
+  .paymentGateway .blocking-btn {
+    padding: 30px;
+    margin-top: -45px;
+    background-color: white;
   }
 
   .paymentMethod .iconCheck {
@@ -698,6 +712,11 @@ abbr[title] {
     }
     .payment-popup #btnPay {
       width: 80% !important;
+    }
+    .payment-popup .amount-options p {
+      display: flex;
+      align-items: center;
+      justify-content: center; 
     }
     
   }
@@ -1782,4 +1801,27 @@ abbr[title] {
 }
 .invoice #confirmation p {
   margin-bottom: 15px;
+}
+
+
+/* ====== CONTRACT PAGE ======  */
+.wrapper-contract {
+  padding: 20px;
+  color: gray;
+  margin-top: 0;
+}
+.wrapper-contract h2 {
+  color: #0089BF;
+  font-size: 25px;
+  font-weight: bold;
+}
+.wrapper-contract li {
+  margin-bottom: 5px;
+}
+@media screen and (max-width: 800px) {
+    .wrapper-contract {
+      padding: 0 15px;
+      margin-top: -20px;
+      margin-bottom: 20px;
+    }
 }

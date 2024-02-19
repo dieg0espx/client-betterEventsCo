@@ -9,6 +9,7 @@ import Inflatable from './pages/Inflatable';
 import Extra from './pages/Extra';
 import Inflatables from './pages/Inflatables';
 import Invoice from './pages/Invoice';
+import Contract from './pages/Contract';
 
 function App() {
   return (
@@ -22,6 +23,7 @@ function App() {
           <Route path="/inflatables" element={<Inflatables />} />
           <Route path="/inflatables/:category" element={<Inflatables />} />
           <Route path="/invoice/:id" element={<Invoice />} />
+          <Route path="/contract" element={<Contract />} />
         </Routes>
    </HashRouter>
   );
