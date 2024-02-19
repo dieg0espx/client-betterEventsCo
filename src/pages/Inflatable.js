@@ -281,7 +281,7 @@ function Inflatable() {
                     </div>
                     )}
                 </PlacesAutocomplete>
-                <button className='btn-book' onClick={()=>createRerservation()} style={{display: bookingDates.length > 0?"block":"none"}}> Book Now </button>
+                <button className='btn-book' onClick={()=>createRerservation()} style={{display: bookingDates.length > 0 && name.length > 0 && lastName.length > 0 && phone.length > 0 && email.length > 0 && address.length > 0?"block":"none"}}> Book Now </button>
                 <p style={{display: bookingDates.length == 0?"block":"none"}}> *Select an available date </p>
             </div>
             <div style={{display:popup? "block":"none"}}>
