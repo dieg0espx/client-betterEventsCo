@@ -67,8 +67,6 @@ function Inflatables(props) {
   //IF THERE'S A PROPS.CATEGORY WILL DISPLAY THE ONES THAT MATCHES, OTHERWISE WILL SHOW ALL 
   const filteredInflatables = props.category? inflatables.filter((inflatable) => inflatable.category === props.category): inflatables;
   
-
-  
   
   return (
     <div className="carousel-inflatables">

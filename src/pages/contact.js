@@ -38,6 +38,16 @@ function Contact() {
     setMessage({ name: '', lastName: '', phone: '', email: '', message: ''})
   };
 
+  function handleEmailClick(){
+    const emailAddress = 'bettereventsnow@gmail..com';
+    const mailtoLink = `mailto:${emailAddress}`
+    window.location.href = mailtoLink;
+  };
+
+  function openOfficeMaps(){
+    window.open('https://maps.app.goo.gl/jBSFwTMirQuWERaF7', '_blank');
+  }
+
   return (
     <div className='contact' ref={scrollContainerRef}>
       <Header />
@@ -57,8 +67,8 @@ function Contact() {
           <p className='subTitle'> Contact Us</p>
           <p> We are committed to providing exceptional customer service and reliable solutions. We look forward to assisting you and ensuring your needs are met to the highest standards. Your inquiries and feedback are valuable to us, so please don’t hesitate to reach out. </p>
           <p className='phone-mail'> <i className="bi bi-telephone-fill"></i> +1 (630) 370-7422</p>
-          <p className='phone-mail'> <i className="bi bi-envelope-fill"></i> bettereventsnow@gmail.com </p>
-          <p className='phone-mail'> <i className="bi bi-geo-alt"></i> 4911 Hydraulic Rd, Rockford, Il, United States. </p>
+          <p className='phone-mail' onClick={()=>handleEmailClick()}> <i className="bi bi-envelope-fill"></i> bettereventsnow@gmail.com </p>
+          <p className='phone-mail' onClick={()=>openOfficeMaps()}> <i className="bi bi-geo-alt"></i> 4911 Hydraulic Rd, Rockford, Il, United States. </p>
         </div>
       </div>
       <iframe 
