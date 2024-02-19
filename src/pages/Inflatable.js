@@ -12,10 +12,10 @@ import PlacesAutocomplete, { geocodeByAddress, getLatLng } from 'react-places-au
 
 function Inflatable() {
   const [inflatable, setInflatable] = useState([])
-  const [name, setName] = useState('Diego')
-  const [lastName, setLastName] = useState('Espinosa')
-  const [phone, setPhone] = useState('9999088639')
-  const [email, setEmail] = useState('espinosa9mx@gmail.com')
+  const [name, setName] = useState('')
+  const [lastName, setLastName] = useState('')
+  const [phone, setPhone] = useState('')
+  const [email, setEmail] = useState('')
   const [inflatableID, setInflatableID] = useState('')
   const [imageInflatable, setImageInflatable] = useState('')
   const [dates, setDates] = useState([])
@@ -201,6 +201,8 @@ function Inflatable() {
             <p id="description"> {inflatable.description}</p>
             <div id='rentalInformation'>
               <p> Rental Information </p>
+              <li> Maximum weight limit per person: 175 lbs </li>
+              <li> Maximum number of jumpers allowed : 6</li>
               <li> Adult supervision at all the time is required. </li>
               <li> Our inflatable deliveries are between 5am - 4pm daily.</li>
               <li> Our inflatable pick-ups start after 7pm daily. (Units may be left over night for an additional fee) </li>
