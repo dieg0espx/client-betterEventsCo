@@ -91,10 +91,23 @@ function Inflatables(props) {
               <p className="value">{inflatable.height} ft </p>
               <p className="type"> Height</p>
             </div>
-            <div className="dimention">          
-              <p className="value"> <i className={inflatable.wetDry == 'Dry'? "bi bi-brightness-high-fill iconDry":"bi bi-droplet-fill iconWet"}></i> </p>
-              <p className="type"> {inflatable.wetDry == 'Dry'? "Dry":"Wet"}</p>
-            </div>
+            <div className="dimention">
+                  {inflatable.wetDry === 'Wet / Dry' ? (
+                      <p className="value">
+                        <i className="bi bi-brightness-high-fill iconDry"></i> 
+                        <i className="bi bi-droplet-fill iconWet"></i>
+                      </p>
+                    ) : inflatable.wetDry === 'Dry' ? (
+                      <p className="value">
+                        <i className="bi bi-brightness-high-fill iconDry"></i>
+                      </p>
+                    ) : inflatable.wetDry === 'Wet' ? (
+                      <p className="value">
+                        <i className="bi bi-droplet-fill iconWet"></i>
+                      </p>
+                  ): null}
+                  <p className="type"> {inflatable.wetDry}</p>
+                </div>
           </div>
           {}
           <Link className="btn-readMore" to={inflatable.category == 'extras' ? '/extra/' + inflatable.id : "/inflatable/" + inflatable.id}> Read More </Link>
