@@ -115,7 +115,20 @@ function Inflatables() {
                   <p className="type"> Height</p>
                 </div>
                 <div className="dimention">
-                  <p className="value">  <i className={inflatable.wetDry == 'Dry'? "bi bi-brightness-high-fill iconDry":"bi bi-droplet-fill iconWet"}></i>  </p>
+                  {inflatable.wetDry === 'Wet / Dry' ? (
+                      <p className="value">
+                        <i className="bi bi-brightness-high-fill iconDry"></i> 
+                        <i className="bi bi-droplet-fill iconWet"></i>
+                      </p>
+                    ) : inflatable.wetDry === 'Dry' ? (
+                      <p className="value">
+                        <i className="bi bi-brightness-high-fill iconDry"></i>
+                      </p>
+                    ) : inflatable.wetDry === 'Wet' ? (
+                      <p className="value">
+                        <i className="bi bi-droplet-fill iconWet"></i>
+                      </p>
+                  ): null}
                   <p className="type"> {inflatable.wetDry}</p>
                 </div>
               </div>

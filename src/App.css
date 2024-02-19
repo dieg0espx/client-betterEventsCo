@@ -305,6 +305,10 @@ p {
 .inflatable .dimention .value {
   font-size: 15px;
   margin: 0;
+  display: flex;
+  flex-direction: row;
+  justify-content: center;
+  gap: 10px;
 }
 .inflatable .dimention .type {
   font-size: 15px;
