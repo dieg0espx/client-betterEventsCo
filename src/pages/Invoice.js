@@ -41,7 +41,7 @@ function Invoice() {
         return formatter.format(amount);
       }
       return (
-        <div className='container'>
+        <div className='container invoice-page'>
             {Object.keys(invoice).length > 0 && (
                 <div className='invoice'>
                     <img className="headerImg" src={'https://res.cloudinary.com/dxfi1vj6q/image/upload/v1706048357/BetterEvents-10_eabusi_ys0lwn.png'} />
@@ -60,7 +60,7 @@ function Invoice() {
                             <hr></hr>
                             <div className='damageWaiver'>
                                 <h4> Recommended </h4>
-                                <div style={{ display: 'flex', gap: '10px' }}>
+                                <div className='grid-check'>
                                     <input type='checkbox' checked={includeInsurance} onChange={() => setIncludeInsurance(!includeInsurance)} />
                                     <p onClick={() => setIncludeInsurance(!includeInsurance)}> Add 9% Accidental Damage Waiver </p>
                                 </div>

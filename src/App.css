@@ -1758,7 +1758,9 @@ abbr[title] {
 
 
 /* =====  INVOICE PAGE  ======= */
-
+.invoice-page {
+  margin-bottom: 50px;
+}
 .invoice {
   background-color: white;
   border-radius: 10px;
@@ -1792,6 +1794,14 @@ abbr[title] {
   font-weight: bold;
   text-align: center;
 }
+.invoice .grid-check {
+  display: flex;
+  gap: 10px;
+  align-items: center;
+}
+.invoice .grid-check input{
+  margin-top: -5px;
+}
 .invoice #disclaimer {
   font-size: 13px;
 }
@@ -1801,6 +1811,33 @@ abbr[title] {
 }
 .invoice #confirmation p {
   margin-bottom: 15px;
+}
+
+@media screen and (max-width:800px) {
+  .invoice-page {
+    margin-top:-60px ;
+  }
+  .invoice {
+    margin-top: 0;
+  }
+  .invoice .headerImg {
+    margin: auto;
+    display: block;
+  }
+  .invoice .grid {
+    display: block;
+  }
+  .invoice #left img {
+    width: 100%;
+  }
+  .invoice #total {
+    margin-top: 30px;
+  }
+  .invoice #btnPay {
+    width: 100%;
+    height: 45px;
+    font-size: 20px;
+  }
 }
 
 
