@@ -155,14 +155,18 @@ function PaymentForm(props) {
           bookingId:bookingId
       }), headers: {'Content-Type': 'application/json'}})
     }
-    async function updateBalances(id) {
-      const washingtonRef = doc(db, "bookings", 'GrrOKXNHkvAQZSQCfyiH');
-    
-      await updateDoc(washingtonRef, {
+    async function updateBalances() {
+      const bookingsRef = doc(db, "bookings", props.bookingId);
+      await updateDoc(bookingsRef, {
         'balances.deposit': parseFloat(100),
         'balances.insurance': props.includeInsurance ? parseFloat(props.balance * 0.09) : 0,
         'balances.paid': props.includeInsurance ? parseFloat(props.balance * 1.09) + 100 : parseFloat(props.balance) + 100,
         'balances.rent': parseFloat(props.balance),
+      });
+
+      const invoicesRef = doc(db, "invoices", props.invoiceId);
+      await updateDoc(invoicesRef, {
+        paid:true
       });
     }    
     return (

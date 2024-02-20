@@ -1838,6 +1838,15 @@ abbr[title] {
     height: 45px;
     font-size: 20px;
   }
+  .invoice .paymentConfirmation {
+    flex-direction: column;
+    text-align: center;
+  }
+
+  .invoice #confirmation p {
+   line-height: 20px;
+  }
+
 }
 
 

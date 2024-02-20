@@ -58,7 +58,7 @@ function Invoice() {
                         <div>
                             <h3 id="total"> {formatCurrency(includeInsurance ? invoice.total * 1.09 : invoice.total)} USD </h3>
                             <hr></hr>
-                            <div className='damageWaiver'>
+                            <div className='damageWaiver' style={{ display: !invoice.paid ? "block" : "none" }}>
                                 <h4> Recommended </h4>
                                 <div className='grid-check'>
                                     <input type='checkbox' checked={includeInsurance} onChange={() => setIncludeInsurance(!includeInsurance)} />
@@ -75,7 +75,13 @@ function Invoice() {
                                 </div>
                             </div>
                             <div style={{ display: !invoice.paid ? "flex" : "none" }}>
-                                <StripeContainer balance={(includeInsurance ? invoice.total * 1.09 : invoice.total).toFixed(2)} isInvoice={true} includeInsurance={includeInsurance} bookingId={id}/>
+                                <StripeContainer 
+                                    balance={(includeInsurance ? invoice.total * 1.09 : invoice.total).toFixed(2)} 
+                                    isInvoice={true} 
+                                    includeInsurance={includeInsurance} 
+                                    bookingId={invoice.bookingId}
+                                    invoiceId={id}
+                                />
                             </div>
                         </div>
                     </div>
