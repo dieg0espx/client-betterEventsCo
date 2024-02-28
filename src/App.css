@@ -1860,9 +1860,11 @@ abbr[title] {
   color: #0089BF;
   font-size: 25px;
   font-weight: bold;
+  margin-top: 30px;
+  margin-bottom: 30px;
 }
 .wrapper-contract li {
-  margin-bottom: 5px;
+  margin-bottom: 10px;
 }
 @media screen and (max-width: 800px) {
     .wrapper-contract {

@@ -17,7 +17,9 @@ function PaymentGateway(props) {
   const [reservationID, setReservationID] = useState('') 
   const [bookCompleted, setBookCompleted] = useState(false)
   const [deliveryFee, setDeliveryFee] = useState(0)
+  const [deliveryAmount, setDeliveryAmount] = useState(0)
   const [checkedRules, setCheckedRules] = useState(false)
+  const [miles, setMiles] = useState(0)
 
   let data = {
     name: sessionStorage.getItem('name'),
@@ -34,6 +36,9 @@ function PaymentGateway(props) {
     method:'Cash in Office'
   }
   useEffect(()=>{
+    calculateDeliveryDistance()
+  },[])
+  useEffect(()=>{
     if (onlyDeposit){
       setBalance(100)
       setDisableCheck(true)
@@ -41,16 +46,15 @@ function PaymentGateway(props) {
     } else {
       setDisableCheck(false)
       if(includeInsurance){
-        setBalance((props.balance + deliveryFee) * 1.09)
+        setBalance(((props.balance + deliveryFee) * 1.09) + deliveryAmount )
       } else {
-        setBalance(props.balance + deliveryFee)
+        setBalance(props.balance + deliveryFee + deliveryAmount)
       }
     }
     
   })
   useEffect(()=>{
-    setBalance(parseFloat(balance + deliveryFee))
-    console.log(balance);
+    setBalance(parseFloat(balance + deliveryFee + deliveryAmount))
   },[deliveryFee])
 
   useEffect(() => { 
@@ -58,8 +62,9 @@ function PaymentGateway(props) {
       rent: props.total + deliveryFee,
       insurance: includeInsurance ? ((props.total + deliveryFee) * 0.09) : 0,
       deposit: onlyDeposit ? 100 : 0,
-      paid: paymentMethod == 1? 0: balance + deliveryFee, 
-      deliveryFee: deliveryFee
+      paid: paymentMethod == 1? 0: balance + deliveryFee + deliveryAmount, 
+      deliveryFee: deliveryFee,
+      deliveryAmount: deliveryAmount
     };
     setBalances(newBalances);
   }, [props.total, props.balance, onlyDeposit, includeInsurance, balance, deliveryFee]);
@@ -131,8 +136,14 @@ function PaymentGateway(props) {
         bookingId:bookingId
     }), headers: {'Content-Type': 'application/json'}})
   }
-  
-
+  async function calculateDeliveryDistance(){
+    fetch(`https://server-better-events.vercel.app/api/calculateDistance?deliveryAddress=${data.address}`)
+    .then((response) => response.json())
+    .then((response) => {
+      setMiles(parseFloat(response.rows[0].elements[0].distance.text.split(' ')[0]))
+      setDeliveryAmount(parseFloat(response.rows[0].elements[0].distance.text.split(' ')[0])*1.5)
+    })
+  }
   
   return (
     <div className='paymentGateway'>
@@ -152,6 +163,7 @@ function PaymentGateway(props) {
                     sessionStorage.getItem('bookingDates').split(',')[sessionStorage.getItem('bookingDates').split(',').length - 1]
                   }`: 'Select dates'}
               </p>
+              <p><b> Delivery Fee: </b>${deliveryAmount.toFixed(2)} USD </p>
               <p> <b> Total : </b> ${balance.toFixed(2)} USD</p>
             </div>
             </div>
@@ -160,7 +172,7 @@ function PaymentGateway(props) {
               <p className={onlyDeposit ? "selected":""} onClick={()=>setOnlyDeposit(true)}> Pay Deposit Due ($100.00) </p>
             </div>
             <div className='specific-time'>
-              <h4> Specific Time Delivery </h4>
+              <h4> Specific Time Delivery </h4> 
               <p> Restrictions means we can deliver as early as 7am and pickup as late as midnight. Please call out office if you have any questions.</p>
               <select onChange={(e)=>setDeliveryFee(parseInt(e.target.value))}>
                 <option value={0}> No restriction, no charge </option>
@@ -189,7 +201,7 @@ function PaymentGateway(props) {
               <p> Credit Card </p>
             </div>
             <div className='confirm-contract'>
-              <input type='checkbox' disabled={disableCheck} checked={checkedRules} onChange={()=>setCheckedRules(!checkedRules)}/>              
+              <input type='checkbox' checked={checkedRules} onChange={()=>setCheckedRules(!checkedRules)}/>              
               <p onClick={()=>setCheckedRules(!checkedRules)}> I have read and accept the <a href='/#/contract'>rules and restrictions.</a> </p>
             </div>
             <div style={{display: paymentMethod == 1 ? "none":"block"}}>

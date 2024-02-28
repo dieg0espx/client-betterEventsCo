@@ -1,27 +1,22 @@
-import React, { useEffect } from 'react';
+import React, { useEffect, useState } from 'react';
 import axios from 'axios';
 
 function Test() {
-  const APIKEY = 'AIzaSyBJLc7G1TkrBTRq3cge-TsYgNpEvDz3pyM';
+  const [miles, setMiles] = useState(0)
 
-  async function calculateDistance() {
-    const deliveryAddress = '610 Granville Street, Vancouver';
-    const vendorAddress = '488 Helmcken Street, Vancouver';
-    const apiURL = `https://maps.googleapis.com/maps/api/distancematrix/json?units=imperial&origins=${vendorAddress}&destination=${deliveryAddress}&key=${APIKEY}`;
-
-    try {
-      const response = await axios.get(apiURL);
-      console.log(response.data);
-    } catch (error) {
-      console.error('Error fetching data:', error);
-    }
+  async function calculateDistance(){
+    fetch('https://server-better-events.vercel.app/api/calculateDistance?deliveryAddress=488 Helmcken St')
+    .then((response) => response.json())
+    .then((response) => setMiles(parseFloat(response.rows[0].elements[0].distance.text.split(' ')[0])))
   }
 
   useEffect(() => {
     calculateDistance();
   }, []);
 
-  return <div>Test</div>;
+  return <div>
+    {miles}
+  </div>;
 }
 
 export default Test;
