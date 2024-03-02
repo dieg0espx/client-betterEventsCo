@@ -28,6 +28,8 @@ function Inflatable() {
   const [address, setAddress] = useState('');
   const [coordinates, setCoordinates] = useState([])
   const [deliveryAmount, setDeliveryAmount] = useState(0)
+  const [tax, setTax] = useState(0)
+  const [state, setState] = useState('')
 
   const handleSelect = async (selectedAddress) => {
     const results = await geocodeByAddress(selectedAddress);
@@ -193,6 +195,20 @@ function Inflatable() {
   async function calculateDeliveryDistance(){
     const currentCity = address.split(',')[1]
     const currentState = address.split(',')[2]
+    
+    // SETTING UP TAX BASED ON THE STATE
+    if (currentState == ' Illinois' || currentState == ' IL'){
+      setState('Illinois')
+      setTax(8.75)
+    } else if (currentState == ' Wisconsin' || currentState == ' WI'){
+      setState('Wisconsin')
+      setTax(6.25)
+    } else {
+      alert ('Unfornately, We dont do delivery to that area :(')
+      window.location.reload()
+    }
+
+
 
     console.log('CALCULATUNG DELIVERY DISTANCE ....');
     console.log("City:" + currentCity);
@@ -210,7 +226,7 @@ function Inflatable() {
       setDeliveryAmount(50)
       return;
     }
-    // Get the distance from the warehouse to the delivery area 
+    // Get the distance from the warehouse to the delivery area -- 425 Fawell Boulevard, Glen Ellyn, Illinois, EE. UU.
     fetch(`https://server-better-events.vercel.app/api/calculateDistance?deliveryAddress=${address}`)
     .then((response) => response.json())
     .then((response) => {
@@ -321,7 +337,14 @@ function Inflatable() {
             </div>
             <div style={{display:popup? "block":"none"}}>
               <div className="overlay" onClick={()=>setPopup(!popup)}/>
-              <PaymentGateway balance={balance} popup={popup} total={total} deliveryAmount={deliveryAmount}/>
+              <PaymentGateway 
+                balance={balance} 
+                popup={popup} 
+                total={total} 
+                deliveryAmount={deliveryAmount} 
+                tax={tax} 
+                state={state}
+              />
             </div>
           </div>
         </div>
