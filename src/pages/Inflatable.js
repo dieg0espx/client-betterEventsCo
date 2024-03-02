@@ -1,5 +1,5 @@
 import { useEffect, useState, useRef } from 'react';
-import { useParams } from 'react-router-dom';
+import { useParams, useSearchParams } from 'react-router-dom';
 import { getFirestore, doc, getDoc, getDocs, updateDoc, collection, addDoc } from 'firebase/firestore';
 import app from '../Firbase'
 import Header from '../components/Header'
@@ -12,10 +12,10 @@ import PlacesAutocomplete, { geocodeByAddress, getLatLng } from 'react-places-au
 
 function Inflatable() {
   const [inflatable, setInflatable] = useState([])
-  const [name, setName] = useState('')
-  const [lastName, setLastName] = useState('')
-  const [phone, setPhone] = useState('')
-  const [email, setEmail] = useState('')
+  const [name, setName] = useState('Diego')
+  const [lastName, setLastName] = useState('Espinosa')
+  const [phone, setPhone] = useState('9999088639')
+  const [email, setEmail] = useState('espinosa9mx@gmail.com')
   const [inflatableID, setInflatableID] = useState('')
   const [imageInflatable, setImageInflatable] = useState('')
   const [dates, setDates] = useState([])
@@ -27,6 +27,7 @@ function Inflatable() {
   const [inflatableName, setInflatableName] = useState('')
   const [address, setAddress] = useState('');
   const [coordinates, setCoordinates] = useState([])
+  const [deliveryAmount, setDeliveryAmount] = useState(0)
 
   const handleSelect = async (selectedAddress) => {
     const results = await geocodeByAddress(selectedAddress);
@@ -122,6 +123,7 @@ function Inflatable() {
     sessionStorage.setItem('imageInflatable', imageInflatable)
     sessionStorage.setItem('inflatableName', data.inflatableName)
     setPopup(true)
+    calculateDeliveryDistance()
   }
   async function getBusyDates(id, count){
     let arrayDates = []
@@ -187,6 +189,39 @@ function Inflatable() {
     }
     return parseInt(dimension) + 2;
   }
+
+  async function calculateDeliveryDistance(){
+    const currentCity = address.split(',')[1]
+    const currentState = address.split(',')[2]
+
+    console.log('CALCULATUNG DELIVERY DISTANCE ....');
+    console.log("City:" + currentCity);
+    console.log("State:" + currentState);
+    //checking if the city belongs to Winnbago County -- 112 S Cherry St, Cherry Valley, Illinois, EE. UU.
+    let winnebagoCities = ['Cherry Valley', 'Durand', 'Loves Park', 'Machesney Park', 'Pecatonica', 'Rockford', 'Rockton', 'Roscoe', 'Seward', 'Shirland', 'South Beloit', 'Winnebago']
+    for(let i=0; i < winnebagoCities.length; i++){
+      if(' ' + winnebagoCities[i] == currentCity){
+        setDeliveryAmount(30)
+        return;
+      }
+    }
+    // Check if the address belongs to WISCONSIN STATE  -- 1810 Monroe Street, Madison, Wisconsin, EE. UU.
+    if (currentState == ' WI' || currentState == ' Wisconsin') {
+      setDeliveryAmount(50)
+      return;
+    }
+    // Get the distance from the warehouse to the delivery area 
+    fetch(`https://server-better-events.vercel.app/api/calculateDistance?deliveryAddress=${address}`)
+    .then((response) => response.json())
+    .then((response) => {
+      let miles = parseFloat(response.rows[0].elements[0].distance.text.split(' ')[0])
+      setDeliveryAmount(miles * 1.5)
+      console.log("DELIVERY COST : " + miles*1.5);
+      return
+    })
+  }
+
+
 
   return (
     <div className='booking-inflatable'>
@@ -286,7 +321,7 @@ function Inflatable() {
             </div>
             <div style={{display:popup? "block":"none"}}>
               <div className="overlay" onClick={()=>setPopup(!popup)}/>
-              <PaymentGateway balance={balance} popup={popup} total={total}/>
+              <PaymentGateway balance={balance} popup={popup} total={total} deliveryAmount={deliveryAmount}/>
             </div>
           </div>
         </div>

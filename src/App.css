@@ -576,7 +576,7 @@ abbr[title] {
     color: #0089BF;
   }
   .paymentGateway .damageWaiver {
-    margin-bottom: 20px;
+    margin-bottom: 10px;
   }
   .paymentGateway #btnPay {
     display: block;
@@ -622,7 +622,12 @@ abbr[title] {
     color: red;
     font-weight: bold;
   }
-
+  .paymentGateway .paymentMethods{
+    display: flex;
+    justify-content: space-between;
+    gap: 10px;
+    margin-bottom: 10px;
+  }
   .paymentGateway .paymentMethod{
     display: grid;
     grid-template-columns:20px 20px auto;
@@ -632,6 +637,7 @@ abbr[title] {
     border-radius: 5px;
     padding-left: 5px;
     margin-bottom: 5px;
+    width: 100%;
   }
   .paymentGateway .cashBookingConfirmation {
     display: grid;
@@ -717,6 +723,10 @@ abbr[title] {
       display: flex;
       align-items: center;
       justify-content: center; 
+    }
+
+    .paymentGateway .paymentMethods{
+      flex-direction: column;
     }
     
   }
