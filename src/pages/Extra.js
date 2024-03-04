@@ -9,6 +9,7 @@ import Inflatables from '../components/Inflatables'
 import StripeContainer from '../components/StripeContainer';
 import PaymentGateway from '../components/PaymentGateway';
 import PlacesAutocomplete, { geocodeByAddress, getLatLng } from 'react-places-autocomplete';
+import { calculateNewValue } from '@testing-library/user-event/dist/utils';
 
 function Extra() {
     const [extra, setExtra] = useState([])
@@ -27,6 +28,9 @@ function Extra() {
     const [inflatableName, setInflatableName] = useState('')
     const [address, setAddress] = useState('');
     const [coordinates, setCoordinates] = useState([])
+    const [deliveryAmount, setDeliveryAmount] = useState(0)
+    const [tax, setTax] = useState(0)
+    const [state, setState] = useState('')
   
     const handleSelect = async (selectedAddress) => {
       const results = await geocodeByAddress(selectedAddress);
@@ -43,7 +47,6 @@ function Extra() {
   
     useEffect(() => {
       getExtra(id);
-      getBusyDates(id)
       window.scrollTo(0, 0);
       scrollContainerRef.current.scrollTop = 0;
     }, [id]);
@@ -101,6 +104,7 @@ function Extra() {
           setExtra(docSnap.data())
           setImageInflatable(docSnap.data().image)
           setInflatableName(docSnap.data().name)
+          getBusyDates(id, docSnap.data().count)
         } else {
           alert("Element Not Found")
         }
@@ -121,9 +125,11 @@ function Extra() {
       sessionStorage.setItem('imageInflatable', imageInflatable)
       sessionStorage.setItem('inflatableName', data.inflatableName)
       setPopup(true)
+      calculateDeliveryDistance()
     }
-    async function getBusyDates(id){
+    async function getBusyDates(id, count){
       let arrayDates = []
+      let bookedDates = []
       const querySnapshot = await getDocs(collection(db, "bookings"));
       querySnapshot.forEach((doc) => {
         if(doc.data().inflatableID == id){
@@ -132,7 +138,23 @@ function Extra() {
           }
         }
       });
-      setBusyDates(arrayDates)
+      var counts = {};
+      for (var i = 0; i < arrayDates.length; i++) {
+        var element = arrayDates[i];
+        if (counts[element] === undefined) {
+          counts[element] = 1;
+        } else {
+          counts[element]++;
+        }
+      }
+      for (var key in counts) {
+        if (counts.hasOwnProperty(key)) {
+          if(counts[key] >= count){
+            bookedDates.push(new Date(key))
+          }
+        }
+      }
+      setBusyDates(bookedDates)
     };
     const tileDisabled = ({ date, view }) => {
       // Disable dates before today
@@ -163,6 +185,53 @@ function Extra() {
         document.body.style.overflow = 'visible';
       }
     },[popup])
+
+
+    async function calculateDeliveryDistance(){
+      const currentCity = address.split(',')[1]
+      const currentState = address.split(',')[2]
+      
+      // SETTING UP TAX BASED ON THE STATE
+      if (currentState == ' Illinois' || currentState == ' IL'){
+        setState('Illinois')
+        setTax(8.75)
+      } else if (currentState == ' Wisconsin' || currentState == ' WI'){
+        setState('Wisconsin')
+        setTax(6.25)
+      } else {
+        alert ('Unfornately, We dont do delivery to that area :(')
+        window.location.reload()
+      }
+  
+  
+  
+      console.log('CALCULATUNG DELIVERY DISTANCE ....');
+      console.log("City:" + currentCity);
+      console.log("State:" + currentState);
+      //checking if the city belongs to Winnbago County -- 112 S Cherry St, Cherry Valley, Illinois, EE. UU.
+      let winnebagoCities = ['Cherry Valley', 'Durand', 'Loves Park', 'Machesney Park', 'Pecatonica', 'Rockford', 'Rockton', 'Roscoe', 'Seward', 'Shirland', 'South Beloit', 'Winnebago']
+      for(let i=0; i < winnebagoCities.length; i++){
+        if(' ' + winnebagoCities[i] == currentCity){
+          setDeliveryAmount(30)
+          return;
+        }
+      }
+      // Check if the address belongs to WISCONSIN STATE  -- 1810 Monroe Street, Madison, Wisconsin, EE. UU.
+      if (currentState == ' WI' || currentState == ' Wisconsin') {
+        setDeliveryAmount(50)
+        return;
+      }
+      // Get the distance from the warehouse to the delivery area -- 425 Fawell Boulevard, Glen Ellyn, Illinois, EE. UU.
+      fetch(`https://server-better-events.vercel.app/api/calculateDistance?deliveryAddress=${address}`)
+      .then((response) => response.json())
+      .then((response) => {
+        let miles = parseFloat(response.rows[0].elements[0].distance.text.split(' ')[0])
+        setDeliveryAmount(miles * 1.5)
+        console.log("DELIVERY COST : " + miles*1.5);
+        return
+      })
+    }
+
 
     return (
         <div className='booking-inflatable'>
@@ -214,7 +283,14 @@ function Extra() {
                 </div>
                 <div style={{display:popup? "block":"none"}}>
                   <div className="overlay" onClick={()=>setPopup(!popup)}/>
-                  <PaymentGateway balance={balance} popup={popup} total={total}/>
+                  <PaymentGateway 
+                    balance={balance} 
+                    popup={popup} 
+                    total={total} 
+                    deliveryAmount={deliveryAmount} 
+                    tax={tax} 
+                    state={state}
+                  />
                 </div>
               </div>
             </div>

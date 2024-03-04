@@ -150,7 +150,7 @@ function PaymentGateway(props) {
                     sessionStorage.getItem('bookingDates').split(',')[sessionStorage.getItem('bookingDates').split(',').length - 1]
                   }`: 'Select dates'}
               </p>
-              <p><b> Delivery Fee: </b>${props.deliveryAmount.toFixed(2)} USD </p>
+              <p><b> Delivery Fee: </b>${props.deliveryAmount.toFixed(2)} USD </p> 
               <p> <b> TAX ({props.state}): </b>${(balance*(props.tax/100)).toFixed(2)} USD </p>
               <p> <b> Total : </b> ${(balance + (balance*(props.tax/100))).toFixed(2)} USD</p>
             </div>
