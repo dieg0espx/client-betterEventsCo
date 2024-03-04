@@ -1702,6 +1702,32 @@ abbr[title] {
   }
 }
 
+
+.houseContact {
+  text-align: center;
+  display: flex;
+  flex-direction: column;
+  gap: 20px;
+  align-items: center;
+  justify-content: center;
+}
+.houseContact h2{
+  font-size: 30px;
+  font-weight: bold;
+  color: #0089BF;
+}
+.houseContact .btn-contact {
+  margin: 20px auto;
+}
+.houseContact .btn-property {
+  color: #0089BF;
+  background-color: transparent;
+  border: none;
+}
+.houseContact .btn-property:hover {
+  background-color: white;
+  color: #0089BF;
+}
 /* ========= INFLATABLES PAGE ========= */
 
 .inflatables-page .container1{

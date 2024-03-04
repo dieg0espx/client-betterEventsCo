@@ -1,5 +1,5 @@
 import { useEffect, useState, useRef } from 'react';
-import { useParams, useSearchParams } from 'react-router-dom';
+import { Link, useParams, useSearchParams } from 'react-router-dom';
 import { getFirestore, doc, getDoc, getDocs, updateDoc, collection, addDoc } from 'firebase/firestore';
 import app from '../Firbase'
 import Header from '../components/Header'
@@ -31,6 +31,7 @@ function Extra() {
     const [deliveryAmount, setDeliveryAmount] = useState(0)
     const [tax, setTax] = useState(0)
     const [state, setState] = useState('')
+    const [isHouse, setIsHouse] = useState(false)
   
     const handleSelect = async (selectedAddress) => {
       const results = await geocodeByAddress(selectedAddress);
@@ -44,11 +45,21 @@ function Extra() {
     
     const { id } = useParams();
     const scrollContainerRef = useRef(null);
+
+
+    let housesList = [
+      'CdNgeq7zaEvVVgBNGiho',
+      'UE6QvNQZh6jWWz9gKG0m',
+      'vd1gfe4JmO2CzcuQXFwL',
+      'BgmTZ5OKmxlowlHDRIvs',
+      'Rdeob23dtmejFn3bqlgm'
+    ]
   
     useEffect(() => {
       getExtra(id);
       window.scrollTo(0, 0);
       scrollContainerRef.current.scrollTop = 0;
+      housesList.includes(id) ? setIsHouse(true) : setIsHouse(false)
     }, [id]);
 
     useEffect(() => {
@@ -77,6 +88,16 @@ function Extra() {
         }
       }
     },[bookingDates])
+
+    useEffect(()=>{
+      setBalance(extra.price*bookingDates.length)
+      setTotal(extra.price*bookingDates.length)
+      if(popup){
+        document.body.style.overflow = 'hidden';
+      } else {
+        document.body.style.overflow = 'visible';
+      }
+    },[popup])
   
     const getDatesBetween = (startDate, endDate) => {
       const datesBetween = [];
@@ -175,18 +196,6 @@ function Extra() {
     
       return false;
     };
-  
-    useEffect(()=>{
-      setBalance(extra.price*bookingDates.length)
-      setTotal(extra.price*bookingDates.length)
-      if(popup){
-        document.body.style.overflow = 'hidden';
-      } else {
-        document.body.style.overflow = 'visible';
-      }
-    },[popup])
-
-
     async function calculateDeliveryDistance(){
       const currentCity = address.split(',')[1]
       const currentState = address.split(',')[2]
@@ -233,6 +242,7 @@ function Extra() {
     }
 
 
+
     return (
         <div className='booking-inflatable'>
             <Header />
@@ -246,9 +256,10 @@ function Extra() {
                 <p id="description"> {extra.description}</p>
 
               </div>
-              <div id="right">  
-                <Calendar selectRange={true} onChange={setDates}  tileDisabled={tileDisabled} />
-                <div className='form'>
+              <div id="right" >  
+                <div style={{display: isHouse? "none":"block"}}>
+                  <Calendar selectRange={true} onChange={setDates}  tileDisabled={tileDisabled} />
+                  <div className='form'>
                     <input value={name} onChange={(e)=>setName(e.target.value)} type='text' placeholder='First Name' />
                     <input value={lastName} onChange={(e)=>setLastName(e.target.value)} type='text' placeholder='Last Name' />
                     <input value={phone} onChange={(e)=>setPhone(e.target.value)} type='tel' placeholder='Phone Number' />
@@ -280,7 +291,15 @@ function Extra() {
                     </PlacesAutocomplete>
                     <button className='btn-book' onClick={()=>createRerservation()} style={{display: bookingDates.length > 0?"block":"none"}}> Book Now </button>
                     <p style={{display: bookingDates.length == 0?"block":"none"}}> *Select an available date </p>
+                  </div>
                 </div>
+                <div className='houseContact' style={{display: isHouse? "block":"none"}}>
+                      <h2> To Continue </h2>
+                      <p> Please contact us to get more information and availability.</p>
+                      <button onClick={()=>window.location.href = extra.propertyLink} className='btn-property'> View Theme House </button>
+                      <Link to='/contact' className='btn-contact'> Contact Us </Link>
+                </div>
+
                 <div style={{display:popup? "block":"none"}}>
                   <div className="overlay" onClick={()=>setPopup(!popup)}/>
                   <PaymentGateway 
