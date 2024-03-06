@@ -251,7 +251,7 @@ function Extra() {
                 <img src={extra.image} />
                 <div className='name-price'>
                   <p id="name"> {extra.name} </p>
-                  <p id="price"> ${extra.price} USD </p>
+                  <p id="price" style={{display: extra.name.toLowerCase().includes('wedding') ? "none" : "block"}}>${extra.price} USD</p>
                 </div>
                 <p id="description"> {extra.description}</p>
 

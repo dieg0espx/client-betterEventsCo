@@ -201,7 +201,7 @@ function Inflatables() {
                     <img src={extra.image} alt={extra.name} />
                     <div id="name-price">
                       <p id="name">{extra.name}</p>
-                      <p id="price">${extra.price}</p>
+                      <p id="price" style={{display: extra.name.toLowerCase().includes('wedding') ? "none" : "block"}}>${extra.price}</p>
                     </div>
                     <p id="description" style={{ height: '150px' }}>{extra.description}</p>
                     <Link className="btn-readMore" to={"/extra/" + extra.id}>Read More</Link>

@@ -77,7 +77,7 @@ function Inflatables(props) {
             <img src={inflatable.image} />
           <div id="name-price">
             <p id="name">{inflatable.name}</p>
-            <p id="price">${inflatable.price}</p>
+            <p id="price" style={{display: inflatable.name.toLowerCase().includes('wedding') ? "none" : "block"}}>${inflatable.price}</p>
           </div>
           <p id="description" style={{height: inflatable.category !== 'extras' ? "100px":"150px"}}> {inflatable.description}</p>
           <div id="dimentions" style={{display: inflatable.category !== 'extras' ? "grid":"none"}}>

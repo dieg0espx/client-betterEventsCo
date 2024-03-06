@@ -246,7 +246,7 @@ function Inflatable() {
             <img src={inflatable.image} />
             <div className='name-price'>
               <p id="name"> {inflatable.name} </p>
-              <p id="price"> ${inflatable.price} USD </p>
+              <p id="price" style={{display: inflatable.name.toLowerCase().includes('wedding') ? "none" : "block"}}>${inflatable.price} USD</p>
             </div>
             <p id="description"> {inflatable.description}</p>
             <div id='rentalInformation'>
