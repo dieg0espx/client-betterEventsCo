@@ -36,6 +36,7 @@ function Header() {
             <Link className="inflatables-btns" to="/inflatables/combo-jumpers"> Combo Jumpers </Link>
             <Link className="inflatables-btns" to="/inflatables/slides"> Slides </Link>
             <Link className="inflatables-btns" to="/inflatables/games-and-obstacles"> Games & Obstacles </Link>
+            <Link className="inflatables-btns" to="/inflatables/packages"> Packages </Link>
             <Link className="inflatables-btns" to="/inflatables/extras"> Extras </Link>
         </div>
     </div>

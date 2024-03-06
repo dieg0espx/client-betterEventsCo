@@ -32,6 +32,9 @@ function Inflatables() {
       case 'games-and-obstacles':
         setCurrentCategory('games and obstacles')
         break;
+      case 'packages':
+        setCurrentCategory('packages')
+        break;
       case 'extras':
         setCurrentCategory('extras')
         break;
@@ -92,6 +95,7 @@ function Inflatables() {
             <option value={"combo jumpers"}> Combo Jumpers </option>
             <option value={"slides"}> Slides </option>
             <option value={"games and obstacles"}> Games & Obstacles </option>
+            <option value={"pac"}> Packages </option>
             <option value={"extras"}> Extras </option>
           </select>
         </div>
@@ -135,18 +139,21 @@ function Inflatables() {
               <Link className="btn-readMore" to={"/inflatable/" + inflatable.id}>Read More</Link>
             </div>
             ))
-            .concat(extras.map((extra) => (
-              <div className="inflatable" key={extra.id}>
-                <img src={extra.image} />
-                <div id="name-price">
-                  <p id="name">{extra.name}</p>
-                  <p id="price">${extra.price}</p>
-                </div>
-                <p id="description" style={{height:'150px'}}> {extra.description}</p>
-                <Link className="btn-readMore" to={"/extra/" + extra.id}>Read More</Link>
-              </div>
-            ))
+            .concat(
+              extras
+                .map(extra => (
+                  <div className="inflatable" key={extra.id}>
+                    <img src={extra.image} alt={extra.name} />
+                    <div id="name-price">
+                      <p id="name">{extra.name}</p>
+                      <p id="price">${extra.price}</p>
+                    </div>
+                    <p id="description" style={{ height: '150px' }}>{extra.description}</p>
+                    <Link className="btn-readMore" to={"/extra/" + extra.id}>Read More</Link>
+                  </div>
+                ))
             )
+            
           : 
             inflatables.filter((inflatable) => inflatable.category.includes(currentCategory)).map((inflatable) => (
                   <div className="inflatable" key={inflatable.id}>
@@ -186,18 +193,22 @@ function Inflatables() {
                     <Link className="btn-readMore" to={"/inflatable/" + inflatable.id}>Read More</Link>
                   </div>
             ))
-            .concat(extras.filter((extra) => extra.category.includes(currentCategory)).map((extra) => (
-              <div className="inflatable" key={extra.id}>
-                <img src={extra.image} />
-                <div id="name-price">
-                  <p id="name">{extra.name}</p>
-                  <p id="price">${extra.price}</p>
-                </div>
-                <p id="description" style={{height:'150px'}}> {extra.description}</p>
-                <Link className="btn-readMore" to={"/extra/" + extra.id}>Read More</Link>
-              </div>
-            ))
+            .concat(
+              extras
+                .filter((extra) => currentCategory == 'extras' || (currentCategory === 'packages' && extra.name.toLowerCase().includes('party')))
+                .map((extra) => (
+                  <div className="inflatable" key={extra.id} style={{display: currentCategory == 'extras' && extra.name.toLowerCase().includes('party') ? "none":"block"}}>
+                    <img src={extra.image} alt={extra.name} />
+                    <div id="name-price">
+                      <p id="name">{extra.name}</p>
+                      <p id="price">${extra.price}</p>
+                    </div>
+                    <p id="description" style={{ height: '150px' }}>{extra.description}</p>
+                    <Link className="btn-readMore" to={"/extra/" + extra.id}>Read More</Link>
+                  </div>
+                ))
             )
+            
           }
         </div>
       </div>
