@@ -64,7 +64,7 @@ function Home() {
           <div className='txt-container5'> 
             <p className='subTitle'> Wedding Venues </p> 
             <p> Ready to tie the knot? Look no further than Better Stays - our vacation rental partners not only offer beautiful rental spaces, but also transforms into the perfect wedding venues. Our tables, chairs, and tents make planning a breeze. Say "I do" to a Better Stay for your special day  </p>
-            <BtnLearnMore url="https://betterstaynow.com"/>
+            <BtnLearnMore link="/inflatables/packages"/>
           </div>
           <img src={'https://res.cloudinary.com/dxfi1vj6q/image/upload/v1706655268/original_51752222_1253204812_fjtcqa.jpg'} />
       </div>

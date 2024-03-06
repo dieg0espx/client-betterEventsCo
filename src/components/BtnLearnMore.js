@@ -15,7 +15,7 @@ function BtnLearnMore(props) {
       {props.url  ? (
         <button className='btn-contact' onClick={()=> window.open(direction, '_blank')}> Learn More </button>
       ) : (
-        <Link className='btn-contact' to={direction}> Learn More </Link>
+        <Link className='btn-contact' to={props.link || direction}> Learn More </Link>
       )}
     </div>
   );
