@@ -296,8 +296,8 @@ function Extra() {
                 </div>
                 <div className='houseContact' style={{display: isHouse? "block":"none"}}>
                       <h2> To Continue </h2>
-                      <p> Please contact us to get more information and availability.</p>
-                      <button onClick={()=>window.location.href = extra.propertyLink} className='btn-property'> View Theme House </button>
+                      <p> Please reach out to us for futher details and to inquire about availability.</p>
+                      <button onClick={()=>window.location.href = extra.propertyLink} className='btn-property'> View Property </button>
                       <Link to='/contact' className='btn-contact'> Contact Us </Link>
                 </div>
 
