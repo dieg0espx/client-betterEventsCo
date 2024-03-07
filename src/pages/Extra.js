@@ -52,7 +52,9 @@ function Extra() {
       'UE6QvNQZh6jWWz9gKG0m',
       'vd1gfe4JmO2CzcuQXFwL',
       'BgmTZ5OKmxlowlHDRIvs',
-      'Rdeob23dtmejFn3bqlgm'
+      'Rdeob23dtmejFn3bqlgm', 
+      '7feIr1Wk85vKS268Ju3E',
+      'I98cVelMeBRJ0VriXnPh'
     ]
   
     useEffect(() => {
@@ -252,9 +254,8 @@ function Extra() {
                 <div className='name-price'>
                   <p id="name"> {extra.name} </p>
                   <p id="price" style={{display: extra.name && extra.name.toLowerCase().includes('wedding') ? "none" : "block"}}>${extra.price} USD</p>
-      </div>
+                </div>
                 <p id="description"> {extra.description}</p>
-
               </div>
               <div id="right" >  
                 <div style={{display: isHouse? "none":"block"}}>
