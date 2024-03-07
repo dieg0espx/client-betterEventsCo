@@ -95,7 +95,7 @@ function Inflatables() {
             <option value={"combo jumpers"}> Combo Jumpers </option>
             <option value={"slides"}> Slides </option>
             <option value={"games and obstacles"}> Games & Obstacles </option>
-            <option value={"pac"}> Packages </option>
+            <option value={"packages"}> Packages </option>
             <option value={"extras"}> Extras </option>
           </select>
         </div>
@@ -153,9 +153,10 @@ function Inflatables() {
                   </div>
                 ))
             )
-            
           : 
-            inflatables.filter((inflatable) => inflatable.category.includes(currentCategory)).map((inflatable) => (
+            inflatables
+            .filter((inflatable) => inflatable.category.includes(currentCategory))
+            .map((inflatable) => (
                   <div className="inflatable" key={inflatable.id}>
                     <img src={inflatable.image} />
                     <div id="name-price">
