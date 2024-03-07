@@ -84,15 +84,8 @@ function PaymentForm(props) {
                   console.log('IS INVOICE -> UPDATING BALANCES');
                   updateBalances(props.bookingId)
                 } else {
-                  //  CREATING NEW RESERVATION - FIREBASE
-                  const docRef = await addDoc(collection(db, "bookings"), data);
-                  setReservationID(docRef.id) 
-                  // SENDING EMAIL RESERVATION - NODEMAILER 
-                  sendEmailConfirmation(docRef.id) 
-                  // CREATING NEW INVOICE IF ITS NOT FULLY PAID
-                  if(data.balances.deposit == 100){
-                    createInvoice(docRef.id)
-                  }
+                  createReservation()
+                  
                 }
               } else {
                   console.log("ERROR ON PAYMENT", response);
@@ -169,6 +162,16 @@ function PaymentForm(props) {
         paid:true
       });
     }    
+    async function createReservation(){
+      const docRef = await addDoc(collection(db, "bookings"), data);
+      setReservationID(docRef.id) 
+      // SENDING EMAIL RESERVATION - NODEMAILER 
+      sendEmailConfirmation(docRef.id) 
+      // CREATING NEW INVOICE IF ITS NOT FULLY PAID
+      if(data.balances.deposit == 100){
+        createInvoice(docRef.id)
+      }
+    }
     return (
         <>
         <div className="paymentLoader" style={{display: showLoader? "block":"none"}}>

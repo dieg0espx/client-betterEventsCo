@@ -129,6 +129,23 @@ function Inflatable() {
   async function getBusyDates(id, count){
     let arrayDates = []
     let bookedDates = []
+    let bounceHousesList= [
+      '6tfyHwIxoJfyRy4VZKng',
+      'MM3qCVRBCHv1wvHOjAyb',
+      'Rj21T5lVxKY98nLbCqx9',
+      'RoBEKlWaPcKQ5fcpxMOq',
+      'XAjwOTYABYPzQAmQe9bQ',
+      'XzIyTCveYRJJLSIAHl5c',
+      'Zqi5ABlT71ebyuFMhxQb',
+      'a9sPhiuEwZOJiaZRoLuq',
+      'adqV3mizg54BTiw91An8',
+      'lqvwa9UMbgDJ2eLgDgHD',
+      'slI3uwxtrfmQzLqojdlW',
+      'ud3aydhzdIaf13Znftpp',
+      'xRvIHgECoPp1lJEMXTM5',
+      'yuXTdGRwXy2Wg2ml37Ef'
+    ]
+    
     const querySnapshot = await getDocs(collection(db, "bookings"));
     querySnapshot.forEach((doc) => {
       if(doc.data().inflatableID == id){
@@ -206,9 +223,6 @@ function Inflatable() {
       alert ('Unfornately, We dont do delivery to that area :(')
       window.location.reload()
     }
-
-
-
     console.log('CALCULATUNG DELIVERY DISTANCE ....');
     console.log("City:" + currentCity);
     console.log("State:" + currentState);
