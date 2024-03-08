@@ -77,6 +77,31 @@ function Inflatables() {
       });
     });
     arrayExtras.sort((a, b) => a.name.localeCompare(b.name));
+    arrayExtras.sort((a, b) => {
+      // Custom sorting function to prioritize items without a number in the name
+      const aHasNumber = /\d/.test(a.name); // Check if a.name contains a number
+      const bHasNumber = /\d/.test(b.name); // Check if b.name contains a number
+    
+      if (!aHasNumber && bHasNumber) {
+        return -1;
+      } else if (aHasNumber && !bHasNumber) {
+        return 1;
+      } else {
+        // If neither or both include a number, use the previous sorting logic
+        const aIncludesPackages = a.name.toLowerCase().includes('packages');
+        const bIncludesPackages = b.name.toLowerCase().includes('packages');
+    
+        if (aIncludesPackages && !bIncludesPackages) {
+          return -1;
+        } else if (!aIncludesPackages && bIncludesPackages) {
+          return 1;
+        } else {
+          // If neither or both include 'Packages', use default sorting
+          return a.name.localeCompare(b.name);
+        }
+      }
+    });
+    
     setExtras(arrayExtras);
   }
   useEffect(() => {
@@ -196,7 +221,7 @@ function Inflatables() {
             ))
             .concat(
               extras
-                .filter((extra) => currentCategory == 'extras' || (currentCategory === 'packages' && extra.name.toLowerCase().includes('package')))
+                .filter((extra) => currentCategory === 'extras' || (currentCategory === 'packages' && extra.name.toLowerCase().includes('package')))
                 .map((extra) => (
                   <div className="inflatable" key={extra.id} style={{display: currentCategory == 'extras' && extra.name.toLowerCase().includes('package') ? "none":"block"}}>
                     <img src={extra.image} alt={extra.name} />
