@@ -221,7 +221,7 @@ function Inflatables() {
             ))
             .concat(
               extras
-                .filter((extra) => currentCategory === 'extras' || (currentCategory === 'packages' && extra.name.toLowerCase().includes('package')))
+                .filter((extra) => currentCategory === 'extras' || (currentCategory === 'packages' && extra.name.toLowerCase().includes('package')) || (currentCategory === 'packages' && extra.name.toLowerCase().includes('pkg')))
                 .map((extra) => (
                   <div className="inflatable" key={extra.id} style={{display: currentCategory == 'extras' && extra.name.toLowerCase().includes('package') ? "none":"block"}}>
                     <img src={extra.image} alt={extra.name} />
