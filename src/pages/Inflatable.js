@@ -12,10 +12,10 @@ import PlacesAutocomplete, { geocodeByAddress, getLatLng } from 'react-places-au
 
 function Inflatable() {
   const [inflatable, setInflatable] = useState([])
-  const [name, setName] = useState('Diego')
-  const [lastName, setLastName] = useState('Espinosa')
-  const [phone, setPhone] = useState('9999088639')
-  const [email, setEmail] = useState('espinosa9mx@gmail.com')
+  const [name, setName] = useState('')
+  const [lastName, setLastName] = useState('')
+  const [phone, setPhone] = useState('')
+  const [email, setEmail] = useState('')
   const [inflatableID, setInflatableID] = useState('')
   const [imageInflatable, setImageInflatable] = useState('')
   const [dates, setDates] = useState([])
