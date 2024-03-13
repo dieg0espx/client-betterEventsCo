@@ -161,7 +161,7 @@ function PaymentGateway(props) {
             </div>
             <div className='specific-time'>
               <h4> Specific Time Delivery </h4> 
-              <p> Restrictions means we can deliver as early as 7am and pickup as late as midnight. Please call out office if you have any questions.</p>
+              <p> Restrictions means we can deliver as early as 7am and pickup as late as midnight. Please call our office if you have any questions.</p>
               <select onChange={(e)=>setDeliveryFee(parseInt(e.target.value))}>
                 <option value={0}> No restriction, no charge </option>
                 <option value={125}> YES - Must deliver at an exact time ($125.00)</option>
