@@ -244,7 +244,6 @@ function Inflatables() {
                   </div>
                 ))
             )
-            
           }
         </div>
       </div>
