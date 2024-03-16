@@ -233,7 +233,7 @@ function Inflatables() {
               extras
                 .filter((extra) => currentCategory === 'extras' || (currentCategory === 'packages' && extra.name.toLowerCase().includes('package')) || (currentCategory === 'packages' && extra.name.toLowerCase().includes('pkg')))
                 .map((extra) => (
-                  <div className="inflatable" key={extra.id} style={{display: currentCategory == 'extras' && extra.name.toLowerCase().includes('package') ? "none":"block"}}>
+                  <div className="inflatable" key={extra.id} style={{display: currentCategory == 'extras' && extra.name.toLowerCase().includes('package') || extra.name.toLowerCase().includes('pkg') ? "none":"block"}}>
                     <img src={extra.image} alt={extra.name} />
                     <div id="name-price">
                       <p id="name">{extra.name}</p>
