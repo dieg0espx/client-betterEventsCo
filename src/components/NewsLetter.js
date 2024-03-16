@@ -11,7 +11,7 @@ function NewsLetter() {
     await addDoc(collection(db, "newsLetter"), {
       email:email
     });
-    alert("Congratulations ! Now you will be receiving the newsletter.")
+    alert("Congratulations ! You will now be receiving the newsletter.")
     setEmail('')
   }
  
