@@ -12,20 +12,19 @@ import PlacesAutocomplete, { geocodeByAddress, getLatLng } from 'react-places-au
 
 function Inflatable() {
   const [inflatable, setInflatable] = useState([])
-  const [name, setName] = useState('')
-  const [lastName, setLastName] = useState('')
-  const [phone, setPhone] = useState('')
-  const [email, setEmail] = useState('')
+  const [name, setName] = useState('Diego')
+  const [lastName, setLastName] = useState('Espinosa')
+  const [phone, setPhone] = useState('9999088639')
+  const [email, setEmail] = useState('espinosa9mx@gmail.com')
   const [inflatableID, setInflatableID] = useState('')
   const [imageInflatable, setImageInflatable] = useState('')
   const [dates, setDates] = useState([])
   const [bookingDates, setBookingDates] = useState([])
   const [busyDates, setBusyDates] = useState([])
   const [popup, setPopup] = useState(false)
-  const [balance, setBalance] = useState(0)
-  const [total, setTotal] = useState(0)
+  const [rent, setRent] = useState(0)
   const [inflatableName, setInflatableName] = useState('')
-  const [address, setAddress] = useState('');
+  const [address, setAddress] = useState('112 South Cherry Street, Cherry Valley, IL, USA');
   const [coordinates, setCoordinates] = useState([])
   const [deliveryAmount, setDeliveryAmount] = useState(0)
   const [tax, setTax] = useState(0)
@@ -188,8 +187,7 @@ function Inflatable() {
   };
   
   useEffect(()=>{
-    setBalance(inflatable.price*bookingDates.length)
-    setTotal(inflatable.price*bookingDates.length)
+    setRent(inflatable.price*bookingDates.length)
     if(popup){
       document.body.style.overflow = 'hidden';
     } else {
@@ -351,9 +349,8 @@ function Inflatable() {
             <div style={{display:popup? "block":"none"}}>
               <div className="overlay" onClick={()=>setPopup(!popup)}/>
               <PaymentGateway 
-                balance={balance} 
+                rent={rent} 
                 popup={popup} 
-                total={total} 
                 deliveryAmount={deliveryAmount} 
                 tax={tax} 
                 state={state}

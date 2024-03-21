@@ -5,6 +5,8 @@ import Inflatable from '../pages/Inflatable'
 import { getFirestore, doc, getDoc, getDocs, updateDoc, collection, addDoc } from 'firebase/firestore';
 import app from '../Firbase'
 
+
+
 function PaymentGateway(props) {
   const db = getFirestore(app);
   const [showDisclaimer, setShowDisclaimer] = useState(false)
@@ -32,7 +34,8 @@ function PaymentGateway(props) {
     inflatableName: sessionStorage.getItem('inflatableName'),
     inflatableImage : sessionStorage.getItem('imageInflatable'),
     balances:balances, 
-    method:'Cash in Office'
+    method:'Cash in Office',
+    paid: paymentMethod == 1? false : true
   }
   useEffect(()=>{
     if (onlyDeposit){
@@ -42,9 +45,9 @@ function PaymentGateway(props) {
     } else {
       setDisableCheck(false)
       if(includeInsurance){
-        setBalance(((props.balance + deliveryFee) * 1.09) + props.deliveryAmount )
+        setBalance(((props.rent + deliveryFee) * 1.09) + props.deliveryAmount )
       } else {
-        setBalance(props.balance + deliveryFee + props.deliveryAmount)
+        setBalance(props.rent + deliveryFee + props.deliveryAmount)
       }
     }
   })
@@ -54,15 +57,15 @@ function PaymentGateway(props) {
 
   useEffect(() => { 
     const newBalances = {
-      rent: props.total + deliveryFee,
-      insurance: includeInsurance ? ((props.total + deliveryFee) * 0.09) : 0,
+      rent: props.rent, 
+      deliveryFee: deliveryFee, 
+      deliveryAmount: props.deliveryAmount, 
       deposit: onlyDeposit ? 100 : 0,
-      paid: paymentMethod == 1? 0: balance + deliveryFee + deliveryAmount, 
-      deliveryFee: deliveryFee,
-      deliveryAmount: props.deliveryAmount
+      insurance: includeInsurance ? (props.rent * 0.09) : 0,
+      tax: props.rent * (props.tax/100),
     };
     setBalances(newBalances);
-  }, [props.total, props.balance, onlyDeposit, includeInsurance, balance, deliveryFee]);
+  }, [props.total, props.rent, onlyDeposit, includeInsurance, balance, deliveryFee]);
   function parseBookingDates(bookingDatesString) {
     try {
       // Attempt to split the string into an array
@@ -93,7 +96,7 @@ function PaymentGateway(props) {
         dates: data.bookingDates,
         reservationID: id,
         image: sessionStorage.getItem('imageInflatable'), 
-        paid: parseFloat(props.balance + deliveryFee).toFixed(2), 
+        paid: parseFloat(props.rent + deliveryFee).toFixed(2), 
     }), headers: {'Content-Type': 'application/json'}})
   }
   async function createInvoice(id){
