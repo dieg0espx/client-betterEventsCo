@@ -47,7 +47,8 @@ function PaymentForm(props) {
       inflatableName: sessionStorage.getItem('inflatableName'),
       inflatableImage : sessionStorage.getItem('imageInflatable'),
       balances:props.balances, 
-      method:"Credit Card"
+      method:"Credit Card", 
+      paid:true
     }
     function parseBookingDates(bookingDatesString) {
       try {
@@ -85,7 +86,6 @@ function PaymentForm(props) {
                   updateBalances(props.bookingId)
                 } else {
                   createReservation()
-                  
                 }
               } else {
                   console.log("ERROR ON PAYMENT", response);
