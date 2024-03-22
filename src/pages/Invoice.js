@@ -4,11 +4,13 @@ import Header from '../components/Header'
 import StripeContainer from '../components/StripeContainer'
 import { getFirestore, doc, getDoc, getDocs, updateDoc, collection, addDoc } from 'firebase/firestore';
 import app from '../Firbase'
+import { isElement } from 'react-dom/test-utils';
 
 
 function Invoice() {
     const [includeInsurance, setIncludeInsurance] = useState(false)
     const [invoice, setInvoice] = useState([])
+    const [total, setTotal] = useState(0)
 
     const db = getFirestore(app);
     const { id } = useParams();
@@ -18,10 +20,28 @@ function Invoice() {
         getInvoice()
     },[])
 
+    useEffect(() => {
+        if (!isEmpty(invoice)) {
+            let deliveryAmount = invoice.balances?.deliveryAmount || 0; // Use optional chaining (?.) to handle undefined properties
+            let deliveryFee = invoice.balances?.deliveryFee || 0;
+            let deposit = invoice.balances?.deposit || 0;
+            let insurance = invoice.balances?.insurance || 0;
+            let rent = invoice.balances?.rent || 0;
+            let tax = invoice.balances?.tax || 0;
+            let sum = deliveryAmount + deliveryFee + deposit + insurance + rent + tax;
+            setTotal(sum);
+            console.log(sum);
+        }
+    }, [invoice]);
+    
+
+    function isEmpty(obj) {
+        return Object.keys(obj).length === 0;
+    }
     async function getInvoice(){
         const docRef = doc(db, "invoices", id);
         const docSnap = await getDoc(docRef);
-    
+
         if (docSnap.exists()) {
           console.log("Document data:", docSnap.data());
           setInvoice(docSnap.data())
@@ -30,7 +50,7 @@ function Invoice() {
         }
     }
 
-      function formatCurrency(amount, currencyCode = 'USD', locale = 'en-US') {
+    function formatCurrency(amount, currencyCode = 'USD', locale = 'en-US') {
         // Use the Intl.NumberFormat to format the number as currency
         const formatter = new Intl.NumberFormat(locale, {
           style: 'currency',
@@ -39,8 +59,9 @@ function Invoice() {
       
         // Return the formatted currency string
         return formatter.format(amount);
-      }
-      return (
+    }
+
+    return (
         <div className='container invoice-page'>
             {Object.keys(invoice).length > 0 && (
                 <div className='invoice'>
@@ -48,15 +69,15 @@ function Invoice() {
                     <hr></hr>
                     <div className='grid'>                        
                         <div id="left">
-                            <img src={invoice.inflatableImage} />
-                            <p> <b>Full Name:</b> {invoice.name} {invoice.lastName} </p>
-                            <p> <b>Phone:</b> {invoice.phone}</p>
-                            <p> <b>Eamil:</b> {invoice.email}</p>
-                            <p> <b>Address:</b> {invoice.address}</p>
-                            <p> <b>Dates:</b> {invoice.dates}</p>
+                            <img src={invoice.data.inflatableImage} />
+                            <p> <b>Full Name:</b> {invoice.data.name} {invoice.data.lastName} </p>
+                            <p> <b>Phone:</b> {invoice.data.phone}</p>
+                            <p> <b>Eamil:</b> {invoice.data.email}</p>
+                            <p> <b>Address:</b> {invoice.data.address}</p>
+                            <p> <b>Dates:</b> {invoice.data.bookingDates}</p>
                         </div>
                         <div>
-                            <h3 id="total"> {formatCurrency(includeInsurance ? invoice.total * 1.09 : invoice.total)} USD </h3>
+                            <h3 id="total"> {formatCurrency(includeInsurance ? (total * 1.09) : total)} USD </h3>
                             <hr></hr>
                             <div className='damageWaiver' style={{ display: !invoice.paid ? "block" : "none" }}>
                                 <h4> Recommended </h4>
@@ -76,7 +97,7 @@ function Invoice() {
                             </div>
                             <div style={{ display: !invoice.paid ? "flex" : "none" }}>
                                 <StripeContainer 
-                                    balance={(includeInsurance ? invoice.total * 1.09 : invoice.total).toFixed(2)} 
+                                    balance={(includeInsurance ? total * 1.09 : total).toFixed(2)} 
                                     isInvoice={true} 
                                     includeInsurance={includeInsurance} 
                                     bookingId={invoice.bookingId}

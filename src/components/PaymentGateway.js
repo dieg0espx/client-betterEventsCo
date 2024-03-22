@@ -6,7 +6,6 @@ import { getFirestore, doc, getDoc, getDocs, updateDoc, collection, addDoc } fro
 import app from '../Firbase'
 
 
-
 function PaymentGateway(props) {
   const db = getFirestore(app);
   const [showDisclaimer, setShowDisclaimer] = useState(false)
@@ -19,8 +18,37 @@ function PaymentGateway(props) {
   const [reservationID, setReservationID] = useState('') 
   const [bookCompleted, setBookCompleted] = useState(false)
   const [deliveryFee, setDeliveryFee] = useState(0)
-  const [deliveryAmount, setDeliveryAmount] = useState(0)
   const [checkedRules, setCheckedRules] = useState(false)
+  const [total, setTotal] = useState(0)
+
+  // ==== UPDATING VARIABLES ==== //
+  useEffect(()=>{
+    if (onlyDeposit){ 
+      setDisableCheck(true)
+      setIncludeInsurance(false)
+    } else {
+      setDisableCheck(false)
+    }
+
+    // GETTING TOTALS 
+    let sum = props.rent + deliveryFee + props.deliveryAmount + (props.rent * (props.tax/100)) 
+    onlyDeposit ? sum = 100 : sum += 0
+    includeInsurance ? sum += (props.rent * 0.09) : sum += 0
+    setTotal(sum)
+  })
+
+  useEffect(() => { 
+    const newBalances = {
+      rent: props.rent, 
+      deliveryFee: deliveryFee, 
+      deliveryAmount: props.deliveryAmount, 
+      deposit: onlyDeposit ? 100 : 0,
+      insurance: includeInsurance ? (props.rent * 0.09) : 0,
+      tax: props.rent * (props.tax/100),
+    };
+    setBalances(newBalances);
+  }, [props.total, props.rent, onlyDeposit, includeInsurance, balance, deliveryFee]);
+
 
   let data = {
     name: sessionStorage.getItem('name'),
@@ -36,36 +64,9 @@ function PaymentGateway(props) {
     balances:balances, 
     method:'Cash in Office',
     paid: paymentMethod == 1? false : true
-  }
-  useEffect(()=>{
-    if (onlyDeposit){
-      setBalance(100)
-      setDisableCheck(true)
-      setIncludeInsurance(false)
-    } else {
-      setDisableCheck(false)
-      if(includeInsurance){
-        setBalance(((props.rent + deliveryFee) * 1.09) + props.deliveryAmount )
-      } else {
-        setBalance(props.rent + deliveryFee + props.deliveryAmount)
-      }
-    }
-  })
-  useEffect(()=>{
-    setBalance(parseFloat(balance + deliveryFee + props.deliveryAmount))
-  },[deliveryFee])
+  }  
+  
 
-  useEffect(() => { 
-    const newBalances = {
-      rent: props.rent, 
-      deliveryFee: deliveryFee, 
-      deliveryAmount: props.deliveryAmount, 
-      deposit: onlyDeposit ? 100 : 0,
-      insurance: includeInsurance ? (props.rent * 0.09) : 0,
-      tax: props.rent * (props.tax/100),
-    };
-    setBalances(newBalances);
-  }, [props.total, props.rent, onlyDeposit, includeInsurance, balance, deliveryFee]);
   function parseBookingDates(bookingDatesString) {
     try {
       // Attempt to split the string into an array
@@ -88,48 +89,26 @@ function PaymentGateway(props) {
     await fetch('https://better-stays-mailer.vercel.app/api/bebookingConfirmation', {
       method: 'POST',
       body: JSON.stringify({ 
-        name : data.name, 
-        lastName: data.lastName, 
-        phone : data.phone, 
-        email: data.email, 
-        address : data.address, 
-        dates: data.bookingDates,
-        reservationID: id,
-        image: sessionStorage.getItem('imageInflatable'), 
-        paid: parseFloat(props.rent + deliveryFee).toFixed(2), 
+        data:data, 
+        reservationID: id
     }), headers: {'Content-Type': 'application/json'}})
   }
+
+  
   async function createInvoice(id){
     let invoiceData = {
-      name: data.name, 
-      lastName:data.lastName, 
-      phone: data.phone, 
-      email:data.email, 
-      address:data.address, 
-      dates:data.bookingDates, 
-      total: data.balances.rent, 
-      inflatableName:data.inflatableName, 
-      inflatableImage: data.inflatableImage, 
-      paid: false, 
+      data:data,
       bookingId:id, 
     }
     const docRef = await addDoc(collection(db, "invoices"), invoiceData);
     sendInvoiceEmail(docRef.id, id)
   }
   async function sendInvoiceEmail(id, bookingId){
-    await fetch('https://better-stays-mailer.vercel.app/api/beinvoice', {
+    // await fetch('https://better-stays-mailer.vercel.app/api/beinvoice', {
+      await fetch('http://localhost:4000/api/beinvoice', {
       method: 'POST',
       body: JSON.stringify({ 
-        name: data.name, 
-        lastName:data.lastName, 
-        phone: data.phone, 
-        email:data.email, 
-        address:data.address, 
-        dates:data.bookingDates, 
-        total: data.balances.rent, 
-        inflatableName:data.inflatableName, 
-        inflatableImage: data.inflatableImage, 
-        paid: false, 
+        data:data, 
         invoiceId:id, 
         bookingId:bookingId
     }), headers: {'Content-Type': 'application/json'}})
@@ -154,8 +133,8 @@ function PaymentGateway(props) {
                   }`: 'Select dates'}
               </p>
               <p><b> Delivery Fee: </b>${props.deliveryAmount.toFixed(2)} USD </p> 
-              <p> <b> TAX ({props.state}): </b>${(balance*(props.tax/100)).toFixed(2)} USD </p>
-              <p> <b> Total : </b> ${(balance + (balance*(props.tax/100))).toFixed(2)} USD</p>
+              <p> <b> TAX ({props.state}): </b>${(props.rent*(props.tax/100)).toFixed(2)} USD </p>
+              <p> <b> Total : </b> ${total.toFixed(2)} USD</p>
             </div>
             </div>
             <div className='amount-options' style={{display:bookCompleted? "none":"grid"}}>
@@ -218,4 +197,3 @@ function PaymentGateway(props) {
 }
 
 export default PaymentGateway
-
