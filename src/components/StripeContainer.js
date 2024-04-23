@@ -4,7 +4,7 @@ import { loadStripe } from '@stripe/stripe-js'
 import PaymentForm from './PaymentForm'
 
 function StripeContainer(props) {
-  let stripeTestPromise = loadStripe('pk_test_51NJ0hELJsUTWMJlYFPcEXiY8E43Kfrj5ecnpYpKIACSLxPCqsdPhYPaaT0knoPmt4wFQERjyolMHJIPrkvnAH1VI00VHrT8oeq');
+  let stripeTestPromise = loadStripe('pk_live_51P7PIzF0orXCw2C3qSDxcw56V43Q7utTV5lGHfbY374EAzuxJxEzQqaBuvqvPFq05GqqG95BdUxJNjOGdFBeatyu00VF9HjsvG');
 
   return (
     <div className='form-creditCard'>

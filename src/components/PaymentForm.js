@@ -90,6 +90,7 @@ function PaymentForm(props) {
                 id,
                 description: "INFLATABLE BOOKING", 
                 amount: Math.floor(props.balance*100),
+                // amount: Math.floor(100),
               })
               if (response.data.success) {
                 setSuccess(true)

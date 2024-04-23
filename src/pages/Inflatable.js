@@ -12,10 +12,10 @@ import PlacesAutocomplete, { geocodeByAddress, getLatLng } from 'react-places-au
 
 function Inflatable() {
   const [inflatable, setInflatable] = useState([])
-  const [name, setName] = useState('Diego')
-  const [lastName, setLastName] = useState('Espinosa')
-  const [phone, setPhone] = useState('9999088639')
-  const [email, setEmail] = useState('espinosa9mx@gmail.com')
+  const [name, setName] = useState('')
+  const [lastName, setLastName] = useState('')
+  const [phone, setPhone] = useState('')
+  const [email, setEmail] = useState('')
   const [inflatableID, setInflatableID] = useState('')
   const [imageInflatable, setImageInflatable] = useState('')
   const [dates, setDates] = useState([])
@@ -24,7 +24,7 @@ function Inflatable() {
   const [popup, setPopup] = useState(false)
   const [rent, setRent] = useState(0)
   const [inflatableName, setInflatableName] = useState('')
-  const [address, setAddress] = useState('112 South Cherry Street, Cherry Valley, IL, USA');
+  const [address, setAddress] = useState('');
   const [coordinates, setCoordinates] = useState([])
   const [deliveryAmount, setDeliveryAmount] = useState(0)
   const [tax, setTax] = useState(0)
