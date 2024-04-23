@@ -26,7 +26,7 @@ function Footer() {
         <h2>Making every event better </h2>
         <p onClick={()=>handlePhoneClick()}> <i className="bi bi-telephone-fill iconPhone"></i>  +1 (815) 200 9715 </p>
         <p onClick={()=>handleEmailClick()}> <i className="bi bi-envelope-fill  iconMail"></i> bettereventsnow@gmail.com </p>
-        <p onClick={()=>openOfficeMaps()}> <i className="bi bi-geo-alt  iconMail"></i> 4911 Hydraulic Rd, Rockford, Il, United States.</p>
+        <p onClick={()=>openOfficeMaps()}> <i className="bi bi-geo-alt  iconMail"></i> 4911 Hydraulic Rd, Rockford, Il, 61109.</p>
       </div>
       <div id="right">
             <p> <i className="bi bi-facebook iconFacebook"></i> <i className="bi bi-instagram iconInstagram"></i> </p>
