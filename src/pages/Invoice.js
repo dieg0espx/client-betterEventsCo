@@ -20,24 +20,24 @@ function Invoice() {
         getInvoice()
     },[])
 
-    useEffect(() => {
+    useEffect(()=>{
         if (!isEmpty(invoice)) {
-            let deliveryAmount = invoice.balances?.deliveryAmount || 0; // Use optional chaining (?.) to handle undefined properties
-            let deliveryFee = invoice.balances?.deliveryFee || 0;
-            let deposit = invoice.balances?.deposit || 0;
-            let insurance = invoice.balances?.insurance || 0;
-            let rent = invoice.balances?.rent || 0;
-            let tax = invoice.balances?.tax || 0;
-            let sum = deliveryAmount + deliveryFee + deposit + insurance + rent + tax;
-            setTotal(sum);
-            console.log(sum);
+            let deliveryAmount = invoice.balances.deliveryAmount
+            let deliveryFee = invoice.balances.deliveryFee
+            let deposit = invoice.balances.deposit
+            let insurance = invoice.balances.insurance
+            let rent = invoice.balances.rent
+            let tax = invoice.balances.tax
+            let sum  = deliveryAmount + deliveryFee + deposit + insurance + rent + tax
+            setTotal(sum)
+            console.log(sum);        
         }
-    }, [invoice]);
-    
+    },[invoice])
 
     function isEmpty(obj) {
         return Object.keys(obj).length === 0;
     }
+
     async function getInvoice(){
         const docRef = doc(db, "invoices", id);
         const docSnap = await getDoc(docRef);

@@ -5,6 +5,7 @@ import cardGif from '../images/creditCard.gif'
 import { getFirestore, doc, getDoc, getDocs, updateDoc, collection, addDoc } from 'firebase/firestore';
 import app from '../Firbase'
 
+
 const CARD_OPTIONS = {
 	style: {
         base: {
@@ -26,7 +27,7 @@ function PaymentForm(props) {
     const db = getFirestore(app);
     const stripeURL = process.env.REACT_APP_STRIPEURL;
     const [success, setSuccess ] = useState(false)
-    const stripe = useStripe()
+    const stripe = useStripe() 
     const elements = useElements()
     const [showBtn, setShowBtn] = useState(true);
     const [failed, setFailed] = useState(false);
@@ -34,6 +35,19 @@ function PaymentForm(props) {
     const [imageUpload, setImageUpload] = useState(props.imageUpload)
     const [showLoader, setShowLoader] = useState(false)
     const [reservationID, setReservationID] = useState('')
+    const [total, setTotal] = useState(0)
+
+    useEffect(()=>{
+      console.log('PAYMENT FORM :' + props.balances);
+      let sum = 0;
+      sum += props.balances.deliveryAmount
+      sum += props.balances.deliveyFee
+      sum += props.balances.deposit
+      sum += props.balances.insurances
+      sum += props.balances.tax
+      console.log(sum);
+      
+    },[])
   
     let data = {
       name: sessionStorage.getItem('name'),
@@ -48,7 +62,8 @@ function PaymentForm(props) {
       inflatableImage : sessionStorage.getItem('imageInflatable'),
       balances:props.balances, 
       method:"Credit Card", 
-      paid:true
+      paid:true, 
+      created: formatDateCreate(new Date())
     }
     function parseBookingDates(bookingDatesString) {
       try {
@@ -171,6 +186,14 @@ function PaymentForm(props) {
       if(data.balances.deposit == 100){
         createInvoice(docRef.id)
       }
+    }
+    function formatDateCreate(date) {
+      const month = (date.getMonth() + 1).toString().padStart(2, '0');
+      const day = date.getDate().toString().padStart(2, '0');
+      const year = date.getFullYear().toString();
+      const hours = date.getHours().toString().padStart(2, '0');
+      const minutes = date.getMinutes().toString().padStart(2, '0');
+      return `${month}/${day}/${year} | ${hours}:${minutes}`;
     }
     return (
         <>

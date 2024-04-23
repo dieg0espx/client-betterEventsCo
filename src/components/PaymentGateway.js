@@ -36,7 +36,6 @@ function PaymentGateway(props) {
     includeInsurance ? sum += (props.rent * 0.09) : sum += 0
     setTotal(sum)
   })
-
   useEffect(() => { 
     const newBalances = {
       rent: props.rent, 
@@ -48,8 +47,6 @@ function PaymentGateway(props) {
     };
     setBalances(newBalances);
   }, [props.total, props.rent, onlyDeposit, includeInsurance, balance, deliveryFee]);
-
-
   let data = {
     name: sessionStorage.getItem('name'),
     lastName: sessionStorage.getItem('lastName'),
@@ -63,10 +60,9 @@ function PaymentGateway(props) {
     inflatableImage : sessionStorage.getItem('imageInflatable'),
     balances:balances, 
     method:'Cash in Office',
-    paid: paymentMethod == 1? false : true
+    paid: paymentMethod == 1? false : true, 
+    created: formatDateCreate(new Date())
   }  
-  
-
   function parseBookingDates(bookingDatesString) {
     try {
       // Attempt to split the string into an array
@@ -93,8 +89,6 @@ function PaymentGateway(props) {
         reservationID: id
     }), headers: {'Content-Type': 'application/json'}})
   }
-
-  
   async function createInvoice(id){
     let invoiceData = {
       data:data,
@@ -104,14 +98,23 @@ function PaymentGateway(props) {
     sendInvoiceEmail(docRef.id, id)
   }
   async function sendInvoiceEmail(id, bookingId){
-    // await fetch('https://better-stays-mailer.vercel.app/api/beinvoice', {
-      await fetch('http://localhost:4000/api/beinvoice', {
+    await fetch('https://better-stays-mailer.vercel.app/api/beinvoice', {
+      // await fetch('http://localhost:4000/api/beinvoice', {
       method: 'POST',
       body: JSON.stringify({ 
         data:data, 
         invoiceId:id, 
         bookingId:bookingId
     }), headers: {'Content-Type': 'application/json'}})
+  }
+
+  function formatDateCreate(date) {
+    const month = (date.getMonth() + 1).toString().padStart(2, '0');
+    const day = date.getDate().toString().padStart(2, '0');
+    const year = date.getFullYear().toString();
+    const hours = date.getHours().toString().padStart(2, '0');
+    const minutes = date.getMinutes().toString().padStart(2, '0');
+    return `${month}/${day}/${year} | ${hours}:${minutes}`;
   }
 
   return (

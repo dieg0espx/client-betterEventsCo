@@ -10,6 +10,11 @@ function Footer() {
       const mailtoLink = `mailto:${emailAddress}`
       window.location.href = mailtoLink;
     };
+    function handlePhoneClick(){
+      const phoneNumber = '+18152009715';
+      const phoneLink = `tel:${phoneNumber}`
+      window.location.href = phoneLink;
+    };
     function openOfficeMaps(){
       window.open('https://maps.app.goo.gl/jBSFwTMirQuWERaF7', '_blank');
     }
@@ -19,7 +24,7 @@ function Footer() {
       <div>
         <img className="logo" src={'https://res.cloudinary.com/dxfi1vj6q/image/upload/v1705007222/BetterEvents-02_gqzykd.png'} />
         <h2>Making every event better </h2>
-        <p> <i className="bi bi-telephone-fill iconPhone"></i>  +1 (630) 370-7422 </p>
+        <p onClick={()=>handlePhoneClick()}> <i className="bi bi-telephone-fill iconPhone"></i>  +1 (815) 200 9715 </p>
         <p onClick={()=>handleEmailClick()}> <i className="bi bi-envelope-fill  iconMail"></i> bettereventsnow@gmail.com </p>
         <p onClick={()=>openOfficeMaps()}> <i className="bi bi-geo-alt  iconMail"></i> 4911 Hydraulic Rd, Rockford, Il, United States.</p>
       </div>

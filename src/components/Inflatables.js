@@ -25,6 +25,7 @@ function Inflatables(props) {
         width: doc.data().width, 
         wetDry:doc.data().wetDry, 
       });
+
     });
     let arrayExtras = []
     const querySnapshot2 = await getDocs(collection(db, "extras"));
@@ -45,8 +46,18 @@ function Inflatables(props) {
     // let bothArrays = arrayInflatables.join(arrayExtras)
    let bothArrays = arrayInflatables.concat(arrayExtras)
 
-    setInflatables(bothArrays)
+    setInflatables(shuffleArray([...bothArrays]))
   }
+
+  function shuffleArray(array) {
+    for (let i = array.length - 1; i > 0; i--) {
+      const j = Math.floor(Math.random() * (i + 1));
+      [array[i], array[j]] = [array[j], array[i]];
+    }
+    return array;
+  }
+
+
 
   useEffect(() => {
     getInflatables();
