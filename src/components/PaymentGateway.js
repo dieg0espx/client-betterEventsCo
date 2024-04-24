@@ -180,7 +180,7 @@ function PaymentGateway(props) {
               <p onClick={()=>setCheckedRules(!checkedRules)}> I have read and accept the <a href='/#/contract'>rules and restrictions.</a> </p>
             </div>
             <div style={{display: paymentMethod == 1 ? "none":"block"}}>
-              <StripeContainer balance={balance} balances={balances} isInvoice={false}/>
+              <StripeContainer balance={balance} balances={balances} isInvoice={false} total={total}/>
               <div className='blocking-btn' style={{display: checkedRules? "none":"block"}}></div>
             </div>
             <div className='cashBookingConfirmation' style={{display: bookCompleted? "flex":"none"}}>

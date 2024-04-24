@@ -89,7 +89,7 @@ function PaymentForm(props) {
               const response = await axios.post(stripeURL + "/paymentInflatables", {
                 id,
                 description: "INFLATABLE BOOKING", 
-                amount: Math.floor(props.balance*100),
+                amount: Math.floor(props.total*100),
                 // amount: Math.floor(100),
               })
               if (response.data.success) {
@@ -215,7 +215,7 @@ function PaymentForm(props) {
             <div style={{display: failed? "block":"none"}}>
                 <p id="failed"> *Payment Failed, try again. </p>
             </div>
-            <button id="btnPay" style={{display: showBtn? "block":"none"}}>Pay ${props.balance} USD</button>
+            <button id="btnPay" style={{display: showBtn? "block":"none"}}>Pay ${props.total.toFixed(2)} USD</button>
         </form>
         :
         <div>
