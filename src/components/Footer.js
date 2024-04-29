@@ -29,7 +29,7 @@ function Footer() {
         <p onClick={()=>openOfficeMaps()}> <i className="bi bi-geo-alt  iconMail"></i> 4911 Hydraulic Rd, Rockford, Il, 61109.</p>
       </div>
       <div id="right">
-            <p> <i className="bi bi-facebook iconFacebook"></i> <i className="bi bi-instagram iconInstagram"></i> </p>
+            <p> <i className="bi bi-facebook iconFacebook"></i> <i className="bi bi-instagram iconInstagram" onClick={()=>window.location.href="https://www.instagram.com/bettereventsnow/?igsh=a214Ynpwcmxhbmgy"}></i> </p>
             <div className='menu'>
                 <Link className="footer-btn" to="/"> Home </Link>
                 <Link className="footer-btn" to="/services"> Services </Link>
