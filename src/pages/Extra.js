@@ -152,7 +152,7 @@ function Extra() {
     }
     async function getBusyDates(id, count){
       let arrayDates = []
-      let bookedDates = []
+      let bookedDates = [new Date('04/29/2024'), new Date('04/30/2024'), new Date('05/01/2024'), new Date('05/02/2024'), new Date('05/03/2024'), new Date('05/04/2024')]
       const querySnapshot = await getDocs(collection(db, "bookings"));
       querySnapshot.forEach((doc) => {
         if(doc.data().inflatableID == id){

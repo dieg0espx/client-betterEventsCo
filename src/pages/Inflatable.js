@@ -127,7 +127,7 @@ function Inflatable() {
   }
   async function getBusyDates(id, count){
     let arrayDates = []
-    let bookedDates = []
+    let bookedDates = [new Date('04/29/2024'), new Date('04/30/2024'), new Date('05/01/2024'), new Date('05/02/2024'), new Date('05/03/2024'), new Date('05/04/2024')]
     let bounceHousesList= [
       '6tfyHwIxoJfyRy4VZKng',
       'MM3qCVRBCHv1wvHOjAyb',
