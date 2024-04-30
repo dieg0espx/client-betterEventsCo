@@ -20,6 +20,7 @@ function PaymentGateway(props) {
   const [deliveryFee, setDeliveryFee] = useState(0)
   const [checkedRules, setCheckedRules] = useState(false)
   const [total, setTotal] = useState(0)
+  const [specificTime, setSpecificTime] = useState('12:00')
 
   // ==== UPDATING VARIABLES ==== //
   useEffect(()=>{
@@ -36,6 +37,9 @@ function PaymentGateway(props) {
     includeInsurance ? sum += (props.rent * 0.09) : sum += 0
     setTotal(sum)
   })
+  useEffect(()=>{
+    sessionStorage.setItem('specificTime', specificTime)
+  },[specificTime])
   useEffect(() => { 
     const newBalances = {
       rent: props.rent, 
@@ -61,7 +65,8 @@ function PaymentGateway(props) {
     balances:balances, 
     method:'Cash in Office',
     paid: paymentMethod == 1? false : true, 
-    created: formatDateCreate(new Date())
+    created: formatDateCreate(new Date()), 
+    specificTime: specificTime
   }  
   function parseBookingDates(bookingDatesString) {
     try {
@@ -147,12 +152,15 @@ function PaymentGateway(props) {
             <div className='specific-time'>
               <h4> Specific Time Delivery </h4> 
               <p> Restrictions means we can deliver as early as 7am and pickup as late as midnight. Please call our office if you have any questions.</p>
-              <select onChange={(e)=>setDeliveryFee(parseInt(e.target.value))}>
-                <option value={0}> No restriction, no charge </option>
-                <option value={125}> YES - Must deliver at an exact time ($125.00)</option>
-                <option value={75}> YES - Must deliver within a 1 hour window ($75.00)</option>
-                <option value={50}> YES - You must deliver within a 2 hours or greater window ($50.00)</option>
-              </select>
+              <div className='grid-specificTime'>
+                <select onChange={(e)=>setDeliveryFee(parseInt(e.target.value))}>
+                  <option value={0}> No restriction, no charge </option>
+                  <option value={125}> YES - Must deliver at an exact time ($125.00)</option>
+                  <option value={75}> YES - Must deliver within a 1 hour window ($75.00)</option>
+                  <option value={50}> YES - You must deliver within a 2 hours or greater window ($50.00)</option>
+                </select>
+                <input type='time' onChange={(e)=> setSpecificTime(e.target.value)} value={specificTime}/>
+              </div>
             </div>
             <div className='damageWaiver' style={{display:bookCompleted? "none":"block"}}>
               <h4> Recommended </h4>

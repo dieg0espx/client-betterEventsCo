@@ -680,7 +680,22 @@ abbr[title] {
   .paymentGateway .specific-time p{
     font-size: 10px;
   }
+  .paymentGateway .specific-time .grid-specificTime {
+    display: grid;
+    grid-template-columns: auto 30%;
+    gap: 5px;
+  }
   .paymentGateway .specific-time select{
+    width: 100%;
+    border: 1px solid lightgray;
+    padding-left: 10px;
+    height: 40px;
+    border-radius: 5px;
+    color: gray;
+    outline: none;
+    font-size: 15px;
+  }
+  .paymentGateway .specific-time input[type='time']{
     width: 100%;
     border: 1px solid lightgray;
     padding-left: 10px;

@@ -63,7 +63,8 @@ function PaymentForm(props) {
       balances:props.balances, 
       method:"Credit Card", 
       paid:true, 
-      created: formatDateCreate(new Date())
+      created: formatDateCreate(new Date()), 
+      specificTime: sessionStorage.getItem('specificTime')
     }
     function parseBookingDates(bookingDatesString) {
       try {
