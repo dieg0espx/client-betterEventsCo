@@ -20,7 +20,7 @@ function PaymentGateway(props) {
   const [deliveryFee, setDeliveryFee] = useState(0)
   const [checkedRules, setCheckedRules] = useState(false)
   const [total, setTotal] = useState(0)
-  const [specificTime, setSpecificTime] = useState('12:00')
+  const [specificTime, setSpecificTime] = useState('')
 
   // ==== UPDATING VARIABLES ==== //
   useEffect(()=>{
