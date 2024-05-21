@@ -218,7 +218,7 @@ function Inflatable() {
       setState('Wisconsin')
       setTax(6.25)
     } else {
-      alert ('Unfornately, We dont do delivery to that area :(')
+      alert ('Unfornately, delivery to that area is not currently available :(')
       window.location.reload()
     }
     console.log('CALCULATUNG DELIVERY DISTANCE ....');
