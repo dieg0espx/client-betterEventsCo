@@ -1432,6 +1432,9 @@ abbr[title] {
   font-weight: bold;
   color: #0089BF;
 }
+.phone-mail .icon {
+  margin-right: 10px;
+}
 
 .contact .container1 .form {
   

@@ -24,6 +24,7 @@ function Footer() {
       <div>
         <img className="logo" src={'https://res.cloudinary.com/dxfi1vj6q/image/upload/v1705007222/BetterEvents-02_gqzykd.png'} />
         <h2>Making every event better </h2>
+        <p onClick={()=>handlePhoneClick()}> <i className="bi bi-clock iconPhone"></i>  Mon - Sun: 8am - 5pm </p>
         <p onClick={()=>handlePhoneClick()}> <i className="bi bi-telephone-fill iconPhone"></i>  +1 (815) 200 9715 </p>
         <p onClick={()=>handleEmailClick()}> <i className="bi bi-envelope-fill  iconMail"></i> bettereventsnow@gmail.com </p>
         <p onClick={()=>openOfficeMaps()}> <i className="bi bi-geo-alt  iconMail"></i> 4911 Hydraulic Rd, Rockford, Il, 61109.</p>
