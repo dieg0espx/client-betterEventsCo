@@ -22,12 +22,12 @@ function Invoice() {
 
     useEffect(()=>{
         if (!isEmpty(invoice)) {
-            let deliveryAmount = invoice.balances.deliveryAmount
-            let deliveryFee = invoice.balances.deliveryFee
-            let deposit = invoice.balances.deposit
-            let insurance = invoice.balances.insurance
-            let rent = invoice.balances.rent
-            let tax = invoice.balances.tax
+            let deliveryAmount = invoice.data.balances.deliveryAmount
+            let deliveryFee = invoice.data.balances.deliveryFee
+            let deposit = invoice.data.balances.deposit
+            let insurance = invoice.data.balances.insurance
+            let rent = invoice.data.balances.rent
+            let tax = invoice.data.balances.tax
             let sum  = deliveryAmount + deliveryFee + deposit + insurance + rent + tax
             setTotal(sum)
             console.log(sum);        
@@ -96,13 +96,13 @@ function Invoice() {
                                 </div>
                             </div>
                             <div style={{ display: !invoice.paid ? "flex" : "none" }}>
-                                <StripeContainer 
+                                {/* <StripeContainer 
                                     balance={(includeInsurance ? total * 1.09 : total).toFixed(2)} 
                                     isInvoice={true} 
                                     includeInsurance={includeInsurance} 
                                     bookingId={invoice.bookingId}
                                     invoiceId={id}
-                                />
+                                /> */}
                             </div>
                         </div>
                     </div>
