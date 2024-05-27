@@ -96,13 +96,13 @@ function Invoice() {
                                 </div>
                             </div>
                             <div style={{ display: !invoice.paid ? "flex" : "none" }}>
-                                {/* <StripeContainer 
-                                    balance={(includeInsurance ? total * 1.09 : total).toFixed(2)} 
+                                <StripeContainer 
+                                    total={(includeInsurance ? total * 1.09 : total)} 
                                     isInvoice={true} 
                                     includeInsurance={includeInsurance} 
                                     bookingId={invoice.bookingId}
                                     invoiceId={id}
-                                /> */}
+                                />
                             </div>
                         </div>
                     </div>

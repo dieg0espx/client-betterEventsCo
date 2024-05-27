@@ -38,15 +38,16 @@ function PaymentForm(props) {
     const [total, setTotal] = useState(0)
 
     useEffect(()=>{
-      console.log('PAYMENT FORM :' + props.balances);
-      let sum = 0;
-      sum += props.balances.deliveryAmount
-      sum += props.balances.deliveyFee
-      sum += props.balances.deposit
-      sum += props.balances.insurances
-      sum += props.balances.tax
-      console.log(sum);
-      
+      if(!props.isInvoice){
+        console.log('PAYMENT FORM :' + props.balances);
+        let sum = 0;
+        sum += props.balances.deliveryAmount
+        sum += props.balances.deliveyFee
+        sum += props.balances.deposit
+        sum += props.balances.insurances
+        sum += props.balances.tax
+        console.log(sum);
+      }    
     },[])
   
     let data = {
@@ -95,11 +96,7 @@ function PaymentForm(props) {
               })
               if (response.data.success) {
                 setSuccess(true)
-                
-                console.log('INVOICE: ' + props.isInvoice);
                 if(props.isInvoice){
-                  // UPDATING BALANCES WHEN INVOICE HAS BEEN PAID
-                  console.log('IS INVOICE -> UPDATING BALANCES');
                   updateBalances(props.bookingId)
                 } else {
                   createReservation()
@@ -171,7 +168,7 @@ function PaymentForm(props) {
         'balances.deposit': parseFloat(100),
         'balances.insurance': props.includeInsurance ? parseFloat(props.balance * 0.09) : 0,
         'balances.paid': props.includeInsurance ? parseFloat(props.balance * 1.09) + 100 : parseFloat(props.balance) + 100,
-        'balances.rent': parseFloat(props.balance),
+        'balances.rent': parseFloat(props.balance)
       });
 
       const invoicesRef = doc(db, "invoices", props.invoiceId);
