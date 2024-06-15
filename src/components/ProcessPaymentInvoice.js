@@ -58,7 +58,7 @@ function ProcessPayment(props) {
                 id,
                 description: "INFLATABLE BOOKING", 
                 // amount: Math.floor(props.total*100),
-                amount: Math.floor(0),
+                amount: Math.floor(10),
               })
               if (response.data.success) {
                   updatePaid()
