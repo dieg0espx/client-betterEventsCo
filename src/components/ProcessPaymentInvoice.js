@@ -127,7 +127,7 @@ function ProcessPayment(props) {
               <i className="bi bi-calendar2-check iconCheck"></i>
               <h2> Payment Completed !</h2>
               <p> Thank you for choosing Better Events for your reservation. </p>
-              <p> A confirmation email containing all the necessary information has been sent to {data.email}. </p>
+              {/* <p> A confirmation email containing all the necessary information has been sent to {data.email}. </p> */}
             </div>
           </div>
         }     
