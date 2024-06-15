@@ -781,18 +781,24 @@ abbr[title] {
   .form-creditCard #btnPay {
     display: block;
     margin: 45px auto 0 auto;
-    width: 50%;
+    width: 100%;
     height: 40px;
     background-color: #0089BF;
     color: white;
-    border: none;
-    border-radius: 10px;
+    border: 1px solid #0089BF;
+    border-radius: 5px;
     box-shadow: rgba(99, 99, 99, 0.2) 0px 2px 8px 0px;
   }
+  
   .form-creditCard #btnPay:hover {
     background-color: white;
     color: #0089BF;
   }
+  .form-creditCard .iconCard {
+    margin-right: 10px;
+    font-size: 15px;
+  }
+
 
   .btn-checkInflatables {
     display: block;
@@ -877,6 +883,9 @@ abbr[title] {
 .header .navBtns :hover  {
   background-color: #0089BF;
   color: white;
+}
+.header .cartIcon {
+  font-size: 20px;
 }
 .nav-mobile-menu {
   display: none;
@@ -1627,6 +1636,7 @@ abbr[title] {
 .booking-inflatable #right .form {
   width: 90%;
   margin: auto;
+  display: none;
 }
 .booking-inflatable #right .form input{
   display: block;
@@ -1812,7 +1822,7 @@ abbr[title] {
 
 
 /* =====  INVOICE PAGE  ======= */
-.invoice-page {
+/* .invoice-page {
   margin-bottom: 50px;
 }
 .invoice {
@@ -1901,7 +1911,149 @@ abbr[title] {
    line-height: 20px;
   }
 
+} */
+
+.invoice-page {
+  /* border: 1px solid red; */
+  margin-top: -110px;
+  padding: 30px;
 }
+.invoice-page .headerImg {
+  height: 50px;
+}
+
+.invoice-page p {
+  margin: 0;
+}
+
+.invoice-page .main-grid {
+  display: grid;
+  grid-template-columns: 60% auto;
+}
+.invoice-page .main-grid #left, 
+.invoice-page .main-grid #right {
+  padding: 20px;
+}
+.invoice-page .main-grid #left{
+  border-right: 1px solid lightgray;
+}
+
+.invoice-page .main-grid h2{
+  margin:30px 0 10px 0;
+  border-bottom: 1px solid lightgray;
+  font-size: 15px;
+  font-weight: 500;
+  color: gray;
+}
+
+
+.invoice-page .main-grid .inflatable-row {
+  border: 1px solid lightgray;
+  margin: 10px 0;
+  padding: 10px;
+  border-radius: 5px;
+  display: flex;
+  gap: 30px;
+  align-items: center;
+}
+
+.invoice-page .main-grid .inflatable-row img{
+  width: 100px;
+}
+
+
+
+
+.invoice-page .main-grid #right .balance {
+  width: 100%;
+  display: flex;
+  justify-content: space-between;
+  border-bottom: 1px solid lightgray;
+  padding: 5px;
+}
+.invoice-page .main-grid #right .balance:hover {
+  background-color: lightgray;
+}
+
+.invoice-page .main-grid #right .balance-payment {
+  text-align: center;
+  margin-top: 30px;
+}
+.invoice-page .main-grid #right .balance-payment p {
+  color: gray;
+}
+.invoice-page .main-grid #right .balance-payment h3{
+  font-size: 80px;
+  font-weight: 400;
+  color: gray;
+  margin-top: -10px;
+}
+
+
+.paymentLoader {
+  
+}
+.paymentLoader img {
+  width: 80%;
+  height: 200px;
+  object-fit: cover;
+  display: block;
+  margin: auto;
+}
+.paymentLoader p {
+  text-align: center;
+  font-size: 20px;
+}
+
+
+
+.invoice-page .confirmation {
+  position: fixed;
+  left: 0;
+  top: 0;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  width: 100%;
+  height: 100%;
+  background-color: white;
+}
+.invoice-page .confirmation .iconCheck {
+  margin-top: -100px;
+}
+
+.invoice-page .confirmation h2 {
+  font-size: 40px;
+  font-weight: bold;
+  border: none;
+}
+.invoice-page .confirmation p {
+  font-size: 20px;
+  max-width: 50%;
+  text-align: center;
+}
+
+@media screen and (max-width:900px){
+  .invoice-page {
+    padding: 0
+  }
+  .invoice-page .main-grid {
+    display: block;
+    padding: 0;
+  }
+  .invoice-page .main-grid #left{
+    border: none;
+  }
+  .invoice-page .inflatable-row {
+    flex-direction: column;
+  }
+  .invoice-page .main-grid .inflatable-row img{
+    width: 150px;
+  }
+}
+
+
 
 
 /* ====== CONTRACT PAGE ======  */
@@ -1926,4 +2078,652 @@ abbr[title] {
       margin-top: -20px;
       margin-bottom: 20px;
     }
+}
+
+
+
+
+
+/* ========= CART PAGE ============*/
+.cart-page .content{
+  min-height: 60vh;
+  padding: 30px;
+}
+.cart-page .content h2 {
+  color: gray;
+  font-size: 40px;
+  font-weight: bold;
+  margin-bottom: 30px;
+}
+.cart-page .emptyCartIcon {
+  font-size: 60px;
+  display: block;
+  color: #0089BF;
+  text-align: center;
+}
+.cart-page #notice {
+  display: block;
+  margin: auto;
+  font-size: 40px;
+  text-align: center;
+  max-width: 60%;
+}
+
+.cart-page .row {
+  display: grid;
+  grid-template-columns: 1fr 1fr 1fr 1fr 50px;
+  align-items: center;
+  margin-bottom: 10px;
+  border: 1px solid lightgray;
+  border-radius: 10px;
+  padding: 10px;
+}
+  .cart-page .row p {
+  text-align: center;
+  margin-bottom: 0;
+}
+.cart-page .row img {
+  height: 100px;
+  object-fit: contain;
+}
+.cart-page .row .iconTrash {
+  text-align: center;
+  font-size: 20px;
+  color: gray;
+  transition: 0.3s;
+}
+.cart-page .row .iconTrash:hover {
+  color: red;
+}
+
+.cart-page .content button {
+  display: block;
+  padding: 3px 20px;
+  background-color: #0089BF;
+  color: white;
+  border: 1px solid transparent;
+  border-radius: 5px;
+  margin: 20px 0 20px auto;
+  transition: 0.4s;
+}
+
+.cart-page .content button:hover {
+  background-color: white;
+  color: #0089BF;
+  border: 1px solid #0089BF;
+}
+
+
+
+
+
+/* ======= CHECKPUT PAGE ======== */
+.checkout-page {
+  padding: 30px;
+  padding-bottom: 0;
+}
+.checkout-page .content h2 {
+  color: gray;
+  font-size: 40px;
+  font-weight: bold;
+  margin-bottom: 10px;
+  padding-left: 20px;
+}
+.checkout-page .main-grid {
+  display: grid;
+  grid-template-columns: auto 30%;
+  margin-bottom: 50px;
+  height: 80vh;
+}
+
+.checkout-page .main-grid #left, 
+.checkout-page .main-grid #right {
+  padding: 20px;
+  overflow:scroll;
+}
+
+
+.checkout-page .main-grid #left {
+  border-right: 1px solid lightgray;
+  padding-bottom: 50px;
+}
+
+.checkout-page .specific-time {
+  margin-bottom: 10px;
+}
+.checkout-page .labels h4 {
+  font-size: 15px;
+}
+.checkout-page .labels p {
+  font-size: 12px;
+  margin: 0;
+}
+.checkout-page .grid-specificTime {
+  display: grid;
+  grid-template-columns: 100% 120px;
+  margin-top: 10px;
+}
+.checkout-page .grid-specificTime select {
+  width: 100%;
+  margin-bottom: 5px;
+  border-radius: 5px;
+  border: 1px solid #0089BF;
+  padding-left: 10px;
+  height: 30px;
+  outline: none;
+  color: gray;
+}
+.checkout-page .grid-specificTime input{
+  width: 130px;
+  height: 30px;
+  margin-left: -130px;
+  border: none;
+  border-top-right-radius: 5px;
+  border-bottom-right-radius: 5px;
+  border-top: 1px solid #0089BF;
+  border-bottom: 1px solid #0089BF;
+  border-right: 1px solid #0089BF;
+  background-color: #0089BF;
+  color: white;
+  outline: none;
+  padding-left: 20px;
+}
+
+.checkout-page .two-col {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 50px;
+}
+.checkout-page .switch {
+ transform: scale(0.7);
+}
+.checkout-page .switch-col {
+  display: grid;
+  grid-template-columns: 70px auto;
+  gap: 0px;
+  align-items: center;
+  border-top: 1px solid lightgray;
+  padding: 20px 10px;
+}
+.checkout-page .switch-col h4 {
+  color: black;
+  font-size: 15px;
+}
+.checkout-page .switch-col p {
+  font-size: 12px;
+  margin-bottom: 0;
+}
+
+.checkout-page  #last {
+  margin-bottom: 20px;
+  border-bottom: 1px solid lightgray;
+}
+
+
+.checkout-page .delivery {
+  display: grid;
+  grid-template-columns: 100% 120px;
+  margin-bottom: 15px;
+  margin-top: 10px;
+  height: 30px;
+  transition: 0.5s;
+}
+.checkout-page .delivery input{
+  width: 100%;
+  border-radius: 5px;
+  border: 1px solid #0089BF;
+  padding-left: 10px;
+  height: 30px;
+  outline: none;
+  color: gray;
+}
+.checkout-page .delivery .suggestions {
+  transition: 0.5s;
+  height: fit-content;
+  overflow-y: scroll;
+  position: relative;
+  background-color: white;
+}
+.checkout-page .delivery button{
+  height: 30px;
+  width: 120px;
+  margin-left: -120px;
+  border: none;
+  background-color: #0089BF;
+  color: white;
+  border-top-right-radius: 5px;
+  border-bottom-right-radius: 5px;
+}
+
+.checkout-page #specific-time,
+.checkout-page #delivery-address {
+  display:flex;
+  flex-direction: column;
+  justify-content: space-between;
+}
+
+.checkout-page .floor-type {
+  padding:20px 10px;
+  border-top: 1px solid lightgray;
+}
+.checkout-page .floor-type .grid {
+  display: grid;
+  grid-template-columns: 1fr 1fr 1fr 1fr;
+  gap: 20px;
+  margin-top: 10px;
+  margin-bottom: 0;
+}
+.checkout-page .floor-type button {
+  background-color: white;
+  color: gray;
+  border: 1px solid #0089BF;
+  border-radius: 5px;
+  height: 30px;
+  transition: 0.5s;
+}
+.checkout-page .floor-type button:hover {
+  background-color: #0089BF;
+  color: white;
+}
+
+.checkout-page .floor-type .selected{
+  background-color: #0089BF;
+  color: white;
+}
+
+.checkout-page .row {
+  display: grid;
+  grid-template-columns: 1fr 1fr 1fr;
+  margin-bottom: 10px;
+  /* border: 1px solid lightgray; */
+  border-radius: 10px;
+  align-items: center;
+}
+.checkout-page .row p {
+  margin-bottom: 0;
+}
+.checkout-page .row img {
+  height: 100px;
+  object-fit: contain;
+}
+
+.checkout-page .row .title {
+  text-align: left;
+  margin-left: 5px;
+}
+.checkout-page .row .description {
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+  text-align: left!important;
+}
+.checkout-page .row .price {
+  text-align: right;
+}
+
+
+
+.checkout-page #total {
+  display: flex;
+  width: 100%;
+  justify-content: space-between;
+}
+.checkout-page .promoCode {
+  display: block;
+  width: 200px;
+  height: 30px;
+  padding-left: 10px;
+  border: 1px solid lightgray;
+  border-radius: 5px;
+  outline: none;
+  text-transform: uppercase;
+  color: #0089BF;
+  font-weight: bold;
+}
+.checkout-page .noTopBorder {
+  border-top: none;
+  padding-top: 0;
+}
+
+
+.checkout-page .payment-method {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 10px;
+  cursor: pointer;
+  margin-bottom: 20px;
+}
+
+.checkout-page .btn-payment {
+  display: flex;
+  flex-direction: row;
+  gap: 15px;
+  border: 1px solid lightgray;
+  align-items: center;
+  justify-content: center;
+  font-size: 15px;
+  padding: 5px 10px;
+  border-radius: 5px;
+}
+
+.checkout-page .payment-method p {
+  margin-bottom: 0;
+}
+
+.checkout-page .payment-method .selected  {
+  display: flex;
+  flex-direction: row;
+  gap: 15px;
+  color: white;
+  border: 1px solid #0089BF;
+  background-color: #0089BF;
+  align-items: center;
+  justify-content: center;
+  font-size: 15px;
+  padding: 5px 10px;
+  border-radius: 5px;
+}
+.checkout-page .payment-method .selected  p{
+  color: white;
+}
+.checkout-page .deposit button {
+  display: block;
+  width: 100%;
+  font-size: 15px;
+  padding: 5px 10px;
+  margin: 5px 0;
+  border: 1px solid lightgray;
+  border-radius: 5px;
+  background-color: white;
+}
+.checkout-page .deposit .selected {
+  background-color: #0089BF;
+  color: white;
+}
+
+.checkout-page .form {
+  border-top: 1px solid lightgray;
+  padding: 20px 0;
+}
+.checkout-page .form input {
+  display: block;
+  width: 100%;
+  margin-bottom: 5px;
+  padding: 5px 10px;
+  border: 1px solid lightgray;
+  border-radius: 5px;
+  outline: none;
+}.checkout-page .form input[type='text'] {
+  text-transform: capitalize;
+}
+.checkout-page .alert-form {
+  display: flex;
+  gap: 10px;
+  background-color: rgba(249, 210, 210, 0.578);
+  border: 1px solid #ff00002a;
+  padding: 5px 15px;
+  margin-bottom: 3px;
+  border-radius: 5px;
+  font-size: 12px;
+  color: red;
+}
+.checkout-page .alert-form p {
+  margin-bottom: 0;
+  color: red;
+} 
+
+
+.checkout-page .booking-methods button {
+  display: block;
+  width: 100%;
+  font-size: 15px;
+  padding: 5px 10px;
+  background-color: white;
+  border: 1px solid #0089BF;
+  color: #0089BF;
+  border-radius: 5px;
+  transition: 0.5s;
+  margin-top: 20px;
+}
+.checkout-page .booking-methods button:hover {
+  background-color: #0089BF;
+  color: white;
+  border: 1px solid #0089BF;
+}
+
+
+.checkout-page .confirmation {
+  position: fixed;
+  left: 0;
+  top: 0;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  width: 100%;
+  height: 100%;
+  background-color: white;
+}
+
+.checkout-page .confirmation h2 {
+  font-size: 40px;
+  font-weight: bold;
+}
+.checkout-page .confirmation p {
+  font-size: 20px;
+  max-width: 50%;
+  text-align: center;
+}
+
+.checkout-page #title-paymentDetails {
+  display: none;
+}
+
+  .booking-actions {
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+  width: 90%;
+  margin: auto
+}
+.booking-actions p{
+  margin: 0;
+  font-size: 15px;
+  font-weight: 500;
+}
+
+
+.booking-actions .btn-action {
+  background-color: white;
+  color: gray;
+  border-radius: 10px;
+  border: 1px solid lightgray;
+  padding: 3px 15px;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  font-size: 20px;
+}
+
+.booking-actions .btn-action:hover {
+  background-color: #0089BF;
+  color: white;
+  border: 1px solid transparent;
+}
+.booking-actions .btn-action:hover p {
+  color: white !important; /* Add this to ensure the text color changes */
+}
+
+.iconBookingActions {
+  transition: 0.8s;
+}
+.booking-actions .btn-action:hover .iconBookingActions {
+  margin-left: 15px;
+}
+
+
+.booking-actions .confirmation {
+  position: fixed;
+  left: 50%; top:50%;
+  transform: translate(-50%, -50%);
+  z-index: 999;
+  width: 500px;
+  height: 300px;
+  background-color: white;
+  border-radius: 20px;
+  padding: 30px;
+  text-align: center;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.booking-actions .confirmation .iconCart{
+  font-size: 40px;
+  color: white;
+  background-color: #0089BF;
+  width: 70px;
+  height: 70px;
+  line-height: 70px;
+  border-radius: 50px;
+  text-align: center;
+  display: block;
+  animation: entrance 0.5s ease-in-out forwards, happy 1s alternate;
+}
+.booking-actions .confirmation h2 {
+  font-size: 20px;
+  color: gray;
+  margin-bottom: 0;
+}
+.booking-actions .confirmation p {
+  font-size: 40px;
+  margin-top: -10px;
+}
+
+.booking-actions .confirmation button {
+  background-color: #0089BF;
+  color: white;
+  border: 1px solid transparent;
+  padding: 5px 30px;
+  border-radius: 10px;
+  transition: 0.5s;
+  animation-name: fadeEffect;
+  animation-duration: 1.5s;
+}
+.booking-actions .confirmation button:hover {
+  background-color: white;
+  border: 1px solid #0089BF;
+  color: #0089BF;
+}
+
+
+@keyframes entrance {
+  0% {
+    opacity: 0;
+    transform: translateY(-100%) scale(0.5);
+}
+100% {
+    opacity: 1;
+    transform: translateY(0) scale(1);
+}
+}
+
+@keyframes happy {
+  0% {
+      transform: translateY(0) rotate(0) scale(1);
+  }
+  25% {
+      transform: translateY(-10px) rotate(-10deg) scale(1.1);
+  }
+  50% {
+      transform: translateY(0) rotate(0) scale(1);
+  }
+  75% {
+      transform: translateY(-5px) rotate(10deg) scale(1.1);
+  }
+  100% {
+      transform: translateY(0) rotate(0) scale(1);
+  }
+}
+
+@keyframes fadeEffect {
+  0% {
+      opacity: 0;
+  }
+  50% {
+    opacity: 0;
+  }
+  100% {
+      opacity: 1;
+  }
+}
+
+@media screen and (max-width:600px) {
+  .booking-actions .confirmation {
+    width: 95%;
+  }
+  .booking-actions .confirmation p {
+    font-size: 30px;
+  }
+
+  .cart-page #notice { 
+    font-size: 20px;
+  }
+
+  .checkout-page {
+    padding: 0;
+  }
+  .checkout-page h2 {
+    text-align: center;
+    margin-bottom: 0px !important;
+    margin-top: -30px;
+  }
+  .checkout-page .main-grid {
+    display: block;
+    height: auto;
+  }
+  .checkout-page .main-grid #left {
+    border: none;
+  }
+  .checkout-page .two-col {
+    display: block;
+  }
+  .checkout-page .floor-type .grid {
+    grid-template-columns: 1fr;
+    gap: 5px;
+  }
+  .checkout-page .floor-type .grid button{
+    height: 40px;
+  }
+  .checkout-page .row {
+    display: block;
+  }
+  .checkout-page .row .title{
+    margin-left: 0;
+  }
+  .checkout-page .row .price{
+    margin-top: -40px;
+    margin-bottom: 30px;
+  }
+  .checkout-page #total {
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    text-align: center;
+    justify-content: center;
+    gap: 10px;
+  }
+  .checkout-page #total input{
+    text-align: center;
+  }
+  .checkout-page #total p {
+    margin: 0;
+  }
+  
+  .footer h2 {
+    margin-top: -5px !important;
+    margin-left: -135px !important;
+    margin-bottom: 10px !important;
+  }
 }

@@ -125,7 +125,7 @@ function Inflatables() {
       <div className="container1">
         <div className="top-nav">
           <select value={currentCategory} onChange={(e) => setCurrentCategory(e.target.value)}>
-            <option value={"all rentals"} selected>All Rentals</option>
+            <option value={"all rentals"} >All Rentals</option>
             <option value={"bounce houses"}> Bounce Houses </option>
             <option value={"combo jumpers"}> Combo Jumpers </option>
             <option value={"slides"}> Slides </option>

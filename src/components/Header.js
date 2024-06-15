@@ -13,6 +13,10 @@ function Header() {
             setPage(3)
         } else if(url.includes('contact')){
             setPage(4)
+        } else if(url.includes('cart')){
+            setPage(5)
+        } else if(url.includes('checkout')){
+            setPage(5)
         } else {
             setPage(1)
         }
@@ -27,6 +31,7 @@ function Header() {
             <Link className={page == 2 ? "btn active":"btn"} onClick={()=>setPage(2)} to="/services"> Services </Link>
             <Link className={page == 3 ? "btn active":"btn"} onClick={()=>setPage(3)} to="/inflatables"> Inflatables </Link>
             <Link className={page == 4 ? "btn active":"btn"} onClick={()=>setPage(4)} to="/contact"> Contact </Link>
+            <Link className={page == 5 ? "btn active":"btn"} onClick={()=>setPage(5)} to="/cart"> <i className="bi bi-cart3 cartIcon"></i> </Link>
         </div>
         <button className="nav-mobile-menu" onClick={()=>setMobileMenu(!mobileMenu)}><i className="bi bi-list"></i> </button>
       
@@ -45,6 +50,7 @@ function Header() {
             <Link className={page == 2 ? "mobile-btn active":"mobile-btn"} onClick={()=>setPage(2)} to="/services"> Services </Link>
             <Link className={page == 3 ? "mobile-btn active":"mobile-btn"} onClick={()=>setPage(3)} to="/inflatables"> Inflatables </Link>
             <Link className={page == 4 ? "mobile-btn active":"mobile-btn"} onClick={()=>setPage(4)} to="/contact"> Contact </Link>
+            <Link className={page == 5 ? "mobile-btn active":"mobile-btn"} onClick={()=>setPage(5)} to="/cart"> <i className="bi bi-cart3 cartIcon"></i> Cart </Link>
         </div>
     </div>
 

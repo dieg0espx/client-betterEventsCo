@@ -9,6 +9,7 @@ import Inflatables from '../components/Inflatables'
 import StripeContainer from '../components/StripeContainer';
 import PaymentGateway from '../components/PaymentGateway';
 import PlacesAutocomplete, { geocodeByAddress, getLatLng } from 'react-places-autocomplete';
+import BookingActions from '../components/BookingActions';
 
 function Inflatable() {
   const [inflatable, setInflatable] = useState([])
@@ -99,6 +100,7 @@ function Inflatable() {
     try {
       const docSnap = await getDoc(docRef);
       if (docSnap.exists()) {
+        // console.log(docSnap.data());
         setInflatable(docSnap.data())
         setImageInflatable(docSnap.data().image)
         setInflatableName(docSnap.data().name)
@@ -127,7 +129,8 @@ function Inflatable() {
   }
   async function getBusyDates(id, count){
     let arrayDates = []
-    let bookedDates = [new Date('04/29/2024'), new Date('04/30/2024'), new Date('05/01/2024'), new Date('05/02/2024'), new Date('05/03/2024'), new Date('05/04/2024'), new Date('05/05/2024'), new Date('05/06/2024'), new Date('05/07/2024') , new Date('05/08/2024') , new Date('05/09/2024')]
+    let bookedDates = []
+  
     let bounceHousesList= [
       '6tfyHwIxoJfyRy4VZKng',
       'MM3qCVRBCHv1wvHOjAyb',
@@ -144,32 +147,74 @@ function Inflatable() {
       'xRvIHgECoPp1lJEMXTM5',
       'yuXTdGRwXy2Wg2ml37Ef'
     ]
-    
-    const querySnapshot = await getDocs(collection(db, "bookings"));
-    querySnapshot.forEach((doc) => {
-      if(doc.data().inflatableID == id){
-        for (let i = 0; i < doc.data().bookingDates.length; i++) {
-          arrayDates.push(new Date(doc.data().bookingDates[i]))
+
+    function findDuplicates(array) {
+      const unique = new Set();
+      const duplicates = new Set();
+  
+      for (const item of array) {
+          if (unique.has(item)) {
+              duplicates.add(item);
+          } else {
+              unique.add(item);
+          }
+      } 
+      return Array.from(duplicates);
+  }
+
+    if(bounceHousesList.includes(id)){
+      console.log('BOUNCE HOUSE');
+      const querySnapshot = await getDocs(collection(db, "bookings-test"));
+      querySnapshot.forEach((doc, i) => {
+        for(let i = 0; i < doc.data().inflatables.length; i ++){
+          if(bounceHousesList.includes(doc.data().inflatables[i].inflatableID)){
+            for (let a = 0; a < doc.data().inflatables[i].bookingDates.length; a ++){
+              arrayDates.push(doc.data().inflatables[i].bookingDates[a])
+            }
+          }
+        }
+      });
+      console.log(findDuplicates(arrayDates));
+      let duplicated = []
+      for(let i = 0; i < findDuplicates(arrayDates).length; i++){
+        duplicated.push(new Date(findDuplicates(arrayDates)[i]))
+      }
+      console.log(duplicated);
+      setBusyDates(duplicated);
+
+    } else {
+      console.log('NOT BOUNCE HOUSE');
+      const querySnapshot = await getDocs(collection(db, "bookings-test"));
+      querySnapshot.forEach((doc, i) => {
+        for(let i = 0; i < doc.data().inflatables.length; i ++){
+          if(doc.data().inflatables[i].inflatableID == id){
+            for (let a = 0; a < doc.data().inflatables[i].bookingDates.length; a ++){
+              arrayDates.push(doc.data().inflatables[i].bookingDates[a])
+            }
+          }
+        }
+  
+      });
+  
+      var counts = {};
+      for (var i = 0; i < arrayDates.length; i++) {
+        var element = arrayDates[i];
+        if (counts[element] === undefined) {
+          counts[element] = 1;
+        } else {
+          counts[element]++;
         }
       }
-    });
-    var counts = {};
-    for (var i = 0; i < arrayDates.length; i++) {
-      var element = arrayDates[i];
-      if (counts[element] === undefined) {
-        counts[element] = 1;
-      } else {
-        counts[element]++;
-      }
-    }
-    for (var key in counts) {
-      if (counts.hasOwnProperty(key)) {
-        if(counts[key] >= count){
-          bookedDates.push(new Date(key))
+      for (var key in counts) {
+        if (counts.hasOwnProperty(key)) {
+          if(counts[key] >= count){
+            bookedDates.push(new Date(key))
+          }
         }
       }
+      setBusyDates(bookedDates)
     }
-    setBusyDates(bookedDates)
+
   };
   const tileDisabled = ({ date, view }) => {
     const isBeforeToday = date < new Date();
@@ -312,7 +357,9 @@ function Inflatable() {
             </div>
           </div>
           <div id="right">  
-            <Calendar selectRange={true} onChange={setDates}  tileDisabled={tileDisabled} />
+            <Calendar selectRange={true} onChange={setDates}  tileDisabled={tileDisabled} /> 
+            <BookingActions inflatableID={id} dates={bookingDates} inflatableName={inflatable.name} />
+
             <div className='form'>
                 <input value={name} onChange={(e)=>setName(e.target.value)} type='text' placeholder='First Name' />
                 <input value={lastName} onChange={(e)=>setLastName(e.target.value)} type='text' placeholder='Last Name' />
@@ -348,13 +395,13 @@ function Inflatable() {
             </div>
             <div style={{display:popup? "block":"none"}}>
               <div className="overlay" onClick={()=>setPopup(!popup)}/>
-              <PaymentGateway 
+              {/* <PaymentGateway 
                 rent={rent} 
                 popup={popup} 
                 deliveryAmount={deliveryAmount} 
                 tax={tax} 
                 state={state}
-              />
+              /> */}
             </div>
           </div>
         </div>

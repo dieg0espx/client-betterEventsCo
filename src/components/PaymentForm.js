@@ -6,6 +6,7 @@ import { getFirestore, doc, getDoc, getDocs, updateDoc, collection, addDoc } fro
 import app from '../Firbase'
 
 
+
 const CARD_OPTIONS = {
 	style: {
         base: {
@@ -36,46 +37,21 @@ function PaymentForm(props) {
     const [showLoader, setShowLoader] = useState(false)
     const [reservationID, setReservationID] = useState('')
     const [total, setTotal] = useState(0)
+    const [data, setData] = useState()
 
     useEffect(()=>{
-      if(!props.isInvoice){
-        console.log('PAYMENT FORM :' + props.balances);
-        let sum = 0;
-        sum += props.balances.deliveryAmount
-        sum += props.balances.deliveyFee
-        sum += props.balances.deposit
-        sum += props.balances.insurances
-        sum += props.balances.tax
-        console.log(sum);
-      }    
+      setData(props.data)
+      console.log(props.data);
     },[])
-  
-    let data = {
-      name: sessionStorage.getItem('name'),
-      lastName: sessionStorage.getItem('lastName'),
-      phone: sessionStorage.getItem('phone'),
-      email: sessionStorage.getItem('email'),
-      address: sessionStorage.getItem('address'),
-      coordinates: sessionStorage.getItem('coordinates'),
-      bookingDates: parseBookingDates(sessionStorage.getItem('bookingDates')),
-      inflatableID: sessionStorage.getItem('infatableID'),
-      inflatableName: sessionStorage.getItem('inflatableName'),
-      inflatableImage : sessionStorage.getItem('imageInflatable'),
-      balances:props.balances, 
-      method:"Credit Card", 
-      paid:true, 
-      created: formatDateCreate(new Date()), 
-      specificTime: sessionStorage.getItem('specificTime')
-    }
-    function parseBookingDates(bookingDatesString) {
-      try {
-        // Attempt to split the string into an array
-        return bookingDatesString ? bookingDatesString.split(',') : [];
-      } catch (error) {
-        console.error("Error parsing booking dates:", error);
-        return [];
+
+    useEffect(()=>{
+      if(data.length >0){
+        let tot = data.total;
+        setTotal(tot)
       }
-    }
+    },[data])
+  
+
     const handleSubmit = async (e) => {
       setShowBtn(false)
       // ADD TWO-STEP VERIFICATION ON BUSY DATES HERE 
@@ -91,8 +67,8 @@ function PaymentForm(props) {
               const response = await axios.post(stripeURL + "/paymentInflatables", {
                 id,
                 description: "INFLATABLE BOOKING", 
-                amount: Math.floor(props.total*100),
-                // amount: Math.floor(100),
+                // amount: Math.floor(props.total*100),
+                amount: Math.floor(100),
               })
               if (response.data.success) {
                 setSuccess(true)
@@ -202,7 +178,7 @@ function PaymentForm(props) {
         </div>
         {!success ? 
         <form onSubmit={handleSubmit}>
-            <h3> Payment Details  </h3>
+            <h3 id='title-paymentDetails'> Payment Details  </h3>
             <div className="card-details">
                 <fieldset className="FormGroup">
                     <div className="FormRow">
@@ -213,7 +189,7 @@ function PaymentForm(props) {
             <div style={{display: failed? "block":"none"}}>
                 <p id="failed"> *Payment Failed, try again. </p>
             </div>
-            <button id="btnPay" style={{display: showBtn? "block":"none"}}>Pay ${props.total.toFixed(2)} USD</button>
+            <button id="btnPay" style={{display: showBtn? "block":"none"}}>Pay ${data.total.toFixed(2)} USD</button>
         </form>
         :
         <div>
