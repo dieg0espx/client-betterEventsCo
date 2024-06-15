@@ -56,7 +56,7 @@ function ProcessPayment(props) {
               const {id} = paymentMethod
               const response = await axios.post(stripeURL + "/paymentInflatables", {
                 id,
-                description: "INVOICE - INFLATABLE BOOKING | Name: " + data.name + " LastName: " + data.lastName, 
+                description: "INVOICE - INFLATABLE BOOKING | Name: " + data.name + " " + data.lastName, 
                 // amount: Math.floor(props.total*100),
                 amount: Math.floor(100),
               })
