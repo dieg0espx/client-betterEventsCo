@@ -90,9 +90,9 @@ function Cart() {
                 <i className="bi bi-trash iconTrash" onClick={()=>removeProduct(i)}></i>
               </div>
             ))}
-            <div id='notice'>
+            <div id='notice' style={{display: cartEmpty ? "block":"none"}}>
             <i className="bi bi-cart-x emptyCartIcon"></i>
-            <p style={{display: cartEmpty ? "block":"none"}}> Your shopping cart is empty at the moment. Please consider adding products. </p>
+            <p> Your shopping cart is empty at the moment. Please consider adding products. </p>
             </div>
             <button onClick={()=>window.location.href = '/#/checkout'} style={{display: cartEmpty ? 'none':'block'}}> Check Out <i className="bi bi-chevron-right iconCheckOut"></i> </button>
         </div>
