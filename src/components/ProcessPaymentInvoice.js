@@ -49,7 +49,7 @@ function ProcessPayment(props) {
               type: "card",
               card: elements.getElement(CardElement)
         })
-        if(error) {
+        if(!error) {
           setShowLoader(true)
           setShowBtn(false)
           try {
