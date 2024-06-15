@@ -43,6 +43,9 @@ function Cart() {
       });
     });
     setInflatables(arrayInflatables);
+    if(arrayInflatables.length > 0){
+      setCartEmpty(false)
+    }
   }
 
   function getSelectedInflatables() {
