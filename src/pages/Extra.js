@@ -9,7 +9,7 @@ import Inflatables from '../components/Inflatables'
 import StripeContainer from '../components/StripeContainer';
 import PaymentGateway from '../components/PaymentGateway';
 import PlacesAutocomplete, { geocodeByAddress, getLatLng } from 'react-places-autocomplete';
-import { calculateNewValue } from '@testing-library/user-event/dist/utils';
+import BookingActions from '../components/BookingActions';
 
 function Extra() {
     const [extra, setExtra] = useState([])
@@ -260,6 +260,8 @@ function Extra() {
               <div id="right" >  
                 <div style={{display: isHouse? "none":"block"}}>
                   <Calendar selectRange={true} onChange={setDates}  tileDisabled={tileDisabled} />
+                  <BookingActions inflatableID={id} dates={bookingDates} inflatableName={extra.name} />
+
                   <div className='form'>
                     <input value={name} onChange={(e)=>setName(e.target.value)} type='text' placeholder='First Name' />
                     <input value={lastName} onChange={(e)=>setLastName(e.target.value)} type='text' placeholder='Last Name' />

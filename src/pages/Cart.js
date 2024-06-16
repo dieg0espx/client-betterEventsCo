@@ -10,6 +10,8 @@ function Cart() {
   const [cart, setCart] = useState([]);
   const [inflatables, setInflatables] = useState([]);
   const [selectedInflatables, setSelectedInflatables] = useState([]);
+  const [extras, setExtras] = useState([])
+  const [selectedExtras, setSelectedExtras] = useState([]);
   const [cartEmpty, setCartEmpty] = useState(true)
 
   useEffect(() => {
@@ -17,12 +19,14 @@ function Cart() {
     if (storedCart) {
       setCart(JSON.parse(storedCart));
       getInflatables();
+      getExtras()
     }
   }, []);
 
   useEffect(()=>{
     getSelectedInflatables()
-  },[cart, inflatables])
+    getSelectedExtras()
+  },[cart, inflatables, extras])
 
 
   async function getInflatables() {
@@ -48,6 +52,26 @@ function Cart() {
     }
   }
 
+  async function getExtras() {
+    let arrayExtras = [];
+    const querySnapshot = await getDocs(collection(db, 'extras'));
+    querySnapshot.forEach((doc) => {
+      arrayExtras.push({
+        id: doc.id,
+        description: doc.data().description,
+        image: doc.data().image,
+        name: doc.data().name,
+        price: doc.data().price,
+        category: doc.data().category,
+      });
+    });
+    setExtras(arrayExtras);
+    if(arrayExtras.length > 0){
+      setCartEmpty(false)
+    }
+  }
+
+
   function getSelectedInflatables() {
     const selected = [];
     for (let i = 0; i < cart.length; i++) {
@@ -61,6 +85,22 @@ function Cart() {
       }
     }
     setSelectedInflatables(selected);
+  }
+
+
+  function getSelectedExtras() {
+    const selected = [];
+    for (let i = 0; i < cart.length; i++) {
+      const cartItem = cart[i];
+      const selectedInflatable = extras.find(
+        inflatable => inflatable.id === cartItem.inflatableID
+      );
+      if (selectedInflatable) {
+        selectedInflatable.dates = cartItem.dates;
+        selected.push(selectedInflatable);
+      }
+    }
+    setSelectedExtras(selected);
   }
 
   function removeProduct(i){
@@ -78,6 +118,19 @@ function Cart() {
         <div className='content'>
             <h2> Cart  </h2>
             {selectedInflatables.map((inflatable, i) => (
+              <div className="row" key={inflatable.id}>
+                <img src={inflatable.image} />
+                <p>{inflatable.name}</p>
+                <p>${inflatable.price} USD / day</p>
+                <div>
+                  {inflatable.dates.map((date, index) => (
+                    <p key={index}>{date}</p>
+                  ))}
+                </div>
+                <i className="bi bi-trash iconTrash" onClick={()=>removeProduct(i)}></i>
+              </div>
+            ))}
+            {selectedExtras.map((inflatable, i) => (
               <div className="row" key={inflatable.id}>
                 <img src={inflatable.image} />
                 <p>{inflatable.name}</p>

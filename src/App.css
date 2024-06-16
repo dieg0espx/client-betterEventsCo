@@ -2308,7 +2308,7 @@ abbr[title] {
 }
 .checkout-page .floor-type .grid {
   display: grid;
-  grid-template-columns: 1fr 1fr 1fr 1fr;
+  grid-template-columns: 1fr 1fr 1fr;
   gap: 20px;
   margin-top: 10px;
   margin-bottom: 0;

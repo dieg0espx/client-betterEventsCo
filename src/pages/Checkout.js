@@ -15,6 +15,8 @@ function Checkout() {
     const [cart, setCart] = useState([]);
     const [inflatables, setInflatables] = useState([]);
     const [selectedInflatables, setSelectedInflatables] = useState([]);
+    const [extras, setExtras] = useState([]);
+    const [selectedExtras, setSelectedExtras] = useState([]);
     const [totalRent, setTotalRent] = useState(0);
     const [address, setAddress] = useState('');
     const [coordinates, setCoordinates] = useState([])
@@ -54,12 +56,14 @@ function Checkout() {
       if (storedCart) {
         setCart(JSON.parse(storedCart));
         getInflatables();
+        getExtras()
       }
     }, []);
   
     useEffect(()=>{
       getSelectedInflatables()
-    },[cart, inflatables])
+      getSelectedExtras()
+    },[cart, inflatables, extras])
 
     useEffect(() => {
         calculateTotalPrice();
@@ -114,6 +118,13 @@ function Checkout() {
     inflatableImage: inflatable.image,
     }));
 
+    let extrasData = selectedExtras.map(extra => ({
+      bookingDates: extra.dates,
+      inflatableID: extra.id,
+      inflatableName: extra.name,
+      inflatableImage: extra.image,
+      }));
+
     let data = {
       name: name,
       lastName: lastName,
@@ -121,6 +132,7 @@ function Checkout() {
       email: email,
       address: address,
       inflatables: inflatablesData,  // Add the inflatables array here
+      extras: extrasData,  // Add the inflatables array here
       balances: balances, 
       method: paymentMethod,
       paid: paymentMethod == 'Credit Card' && !depositOnly ? true : false, 
@@ -165,10 +177,45 @@ function Checkout() {
       setSelectedInflatables(selected);
     }
 
+    async function getExtras() {
+      let arrayExtras = [];
+      const querySnapshot = await getDocs(collection(db, 'extras'));
+      querySnapshot.forEach((doc) => {
+        arrayExtras.push({
+          id: doc.id,
+          description: doc.data().description,
+          image: doc.data().image,
+          name: doc.data().name,
+          price: doc.data().price,
+          category: doc.data().category,
+        });
+      });
+      setExtras(arrayExtras);
+    }
+
+    function getSelectedExtras() {
+      const selected = [];
+      for (let i = 0; i < cart.length; i++) {
+        const cartItem = cart[i];
+        const selectedInflatable = extras.find(
+          inflatable => inflatable.id === cartItem.inflatableID
+        );
+        if (selectedInflatable) {
+          selectedInflatable.dates = cartItem.dates;
+          selected.push(selectedInflatable);
+        }
+      }
+      setSelectedExtras(selected);
+    }
+
+
     function calculateTotalPrice() {
-        const total = selectedInflatables.reduce((sum, inflatable) => {
+        let total = selectedInflatables.reduce((sum, inflatable) => {
             return sum + (inflatable.price * inflatable.dates.length);
         }, 0);
+        total += selectedExtras.reduce((sum, inflatable) => {
+          return sum + (inflatable.price * inflatable.dates.length);
+      }, 0);
         setTotalRent(total);
     }
     const formatter = new Intl.NumberFormat('en-US', {
@@ -486,7 +533,6 @@ function Checkout() {
                           <p> Kindly choose the surface where our team will position the inflatable. This enables us to guarantee a correct installation and observe safety protocols.</p>
                         </div>
                         <div className='grid'>
-                          <button className={floorType == 'underground' ? 'selected':''} onClick={()=>setFloorType('underground')}> Underground </button>
                           <button className={floorType == 'grass' ? 'selected':''} onClick={()=>setFloorType('grass')}> Grass </button>
                           <button className={floorType == 'concrete' ? 'selected':''} onClick={()=>setFloorType('concrete')}> Concrete / Asphalt </button>
                           <button className={floorType == 'indoor' ? 'selected':''} onClick={()=>setFloorType('indoor')}> Indoor </button>
@@ -533,9 +579,20 @@ function Checkout() {
                             <p className='price'>{formatter.format(inflatable.price * inflatable.dates.length)} USD </p> 
                           </div>
                       ))}
+                      {selectedExtras.map((inflatable, i) => (
+                          <div className="row" key={inflatable.id}>
+                            <p className='title'>{inflatable.name}</p>
+                            <div>
+                              {inflatable.dates.map((date, index) => (
+                                <p key={index}>Rent: {formatDate(date)}</p>
+                              ))}
+                            </div>
+                            <p className='price'>{formatter.format(inflatable.price * inflatable.dates.length)} USD </p> 
+                          </div>
+                      ))}
                        <div className='row'>
                           <p className='title'> Damage Waiver</p>
-                          <p className='description'> Damage waiver </p>
+                          <p className='description'> Optional 9% non-refundable </p>
                           <p className='price'> {formatter.format(damageWaiverAmount)} USD </p>
                        </div>
                        <div className='row'>
