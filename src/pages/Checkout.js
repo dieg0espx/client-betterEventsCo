@@ -83,10 +83,12 @@ function Checkout() {
 
     useEffect(()=>{
       const discountedRent = discount !== 0 ? totalRent - ((totalRent * discount) / 100) : totalRent
-      const calculatedTaxFee = discountedRent * (taxFee / 100);
+      const calculatedTaxFee = discountedRent * (tax / 100);
       const calculatedTotal = discountedRent + calculatedTaxFee + deliveryFee + timeFrame + 
                               (damageWaiver ? discountedRent * 0.09 : 0) + 
                               (insuranceCertificate ? 45 : 0);
+
+
   
       setTotal(calculatedTotal); 
       

@@ -71,7 +71,6 @@ function Cart() {
     }
   }
 
-
   function getSelectedInflatables() {
     const selected = [];
     for (let i = 0; i < cart.length; i++) {
