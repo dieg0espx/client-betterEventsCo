@@ -3,6 +3,7 @@ import Header from '../components/Header'
 import Footer from '../components/Footer'
 import { getFirestore } from 'firebase/firestore';
 import { collection, getDocs, addDoc } from "firebase/firestore";
+import { doc, getDoc } from "firebase/firestore";
 import app from '../Firbase';
 import PlacesAutocomplete, { geocodeByAddress, getLatLng } from 'react-places-autocomplete';
 import Switch from "react-switch";
@@ -45,6 +46,7 @@ function Checkout() {
     const [confirmationID, setConfirmationID] = useState('')
     const [bookCompleted, setBookCompleted] = useState(false)
     const [isVerified, setIsVerified] = useState(false);
+    const [requestBooking, setRequestBooking] = useState(false)
 
     const handleContinue = () => {
         const result = verifyForm();
@@ -58,6 +60,8 @@ function Checkout() {
         getInflatables();
         getExtras()
       }
+
+      getRequestBookingStatus()
     }, []);
   
     useEffect(()=>{
@@ -143,6 +147,16 @@ function Checkout() {
       floorType: floorType, 
     };
   
+    async function getRequestBookingStatus(){
+      const docRef = doc(db, "config", "requestBooking");
+      const docSnap = await getDoc(docRef);
+
+      if (docSnap.exists()) {
+        setRequestBooking(docSnap.data().status)
+      } else {
+        console.log("ERROR: REQUEST BOOKING STATUS NOT FOUND IN DATABASE");
+      }
+    }
   
     async function getInflatables() {
       let arrayInflatables = [];
@@ -464,6 +478,9 @@ function Checkout() {
       }
     }
 
+    async function sendBookingRequest(){
+      console.log("Request Booking Sent");
+    }
     
   return (
     <div className='checkout-page'>
@@ -687,15 +704,21 @@ function Checkout() {
                       <div className="booking-methods">
                           <button onClick={handleContinue} style={{display: isVerified ? "none":"block"}}>Continue</button>
 
-                          {isVerified && paymentMethod === 'Cash In Office' && (
+                          {!requestBooking && isVerified && paymentMethod === 'Cash In Office' && (
                               <div>
                                   <button onClick={() => createCashReservation()}>Book Now</button>
                               </div>
                           )}
 
-                          {isVerified && paymentMethod === 'Credit Card' && (
+                          {!requestBooking &&isVerified && paymentMethod === 'Credit Card' && (
                               <div>
                                   <StripeContainer data={data} total={depositOnly ? 100 : total.toFixed(2)}/>
+                              </div>
+                          )}
+
+                          {requestBooking && isVerified && (
+                              <div>
+                                  <button onClick={() => sendBookingRequest()}>Request Book Now</button>
                               </div>
                           )}
                       </div>
