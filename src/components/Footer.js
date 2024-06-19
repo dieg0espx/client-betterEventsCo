@@ -6,7 +6,7 @@ import { Link } from "react-router-dom";
 function Footer() {
   
     function handleEmailClick(){
-      const emailAddress = 'bettereventsnow@gmail..com';
+      const emailAddress = 'bettereventsnow@gmail.com';
       const mailtoLink = `mailto:${emailAddress}`
       window.location.href = mailtoLink;
     };
