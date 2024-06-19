@@ -633,7 +633,7 @@ function Checkout() {
                        <div className='row'>
                           <p className='title'> Damage Waiver</p>
                           <p className='description'> Optional 9% non-refundable </p>
-                          <p className='price'> {formatter.format(damageWaiverAmount)} USD </p>
+                          <p className='price'> {damageWaiver ? formatter.format(damageWaiverAmount) : formatter.format(0)} USD </p>
                        </div>
                        <div className='row'>
                           <p className='title'> Insurance Certificate</p>
