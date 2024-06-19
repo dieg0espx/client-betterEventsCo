@@ -44,7 +44,7 @@ function Checkout() {
     const [phone, setPhone] = useState('')
     const [alerts, setAlerts] = useState([])
     const [confirmationID, setConfirmationID] = useState('')
-    const [bookCompleted, setBookCompleted] = useState(true)
+    const [bookCompleted, setBookCompleted] = useState(false)
     const [isVerified, setIsVerified] = useState(false);
     const [requestBooking, setRequestBooking] = useState(false)
 
