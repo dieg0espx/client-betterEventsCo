@@ -145,7 +145,7 @@ function Invoice() {
                         <div key={index} className="inflatable-row">
                          <img src={inflatable.inflatableImage} alt={inflatable.inflatableName} />
                           <div>
-                            <p><b>Extra Name:</b> {inflatable.inflatableName}</p>
+                            <p><b>Extra:</b> {inflatable.inflatableName}</p>
                             <p><b>Booked Dates:</b> {inflatable.bookedDates.join(' > ')}</p>
                           </div>
                         </div>
