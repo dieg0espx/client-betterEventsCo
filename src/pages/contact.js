@@ -72,7 +72,7 @@ function Contact() {
         <div className='details'>
           <p className='subTitle'> Contact Us</p>
           <p> We are committed to providing exceptional customer service and reliable solutions. We look forward to assisting you and ensuring your needs are met to the highest standards. Your inquiries and feedback are valuable to us, so please don’t hesitate to reach out. </p>
-          <p className='phone-mail' onClick={()=>handlePhoneClick()}> <i className="icon bi bi-clock"></i> Mon - Sun: 8am - 5pm</p>
+          <p className='phone-mail' onClick={()=>handlePhoneClick()}> <i className="icon bi bi-clock"></i> Mon - Sat: 8am - 5pm</p>
           <p className='phone-mail' onClick={()=>handlePhoneClick()}> <i className="icon bi bi-telephone-fill"></i> +1 (815) 200 9715</p>
           <p className='phone-mail' onClick={()=>handleEmailClick()}> <i className="icon bi bi-envelope-fill"></i> bettereventsnow@gmail.com </p>
           <p className='phone-mail' onClick={()=>openOfficeMaps()}>   <i className="icon bi bi-geo-alt"></i> 4911 Hydraulic Rd, Rockford, Il, 61109. </p>
