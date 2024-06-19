@@ -72,7 +72,13 @@ function Invoice() {
               inflatableID: inflatable.inflatableID,
               inflatableName: inflatable.inflatableName,
               inflatableImage: inflatable.inflatableImage
-            }))
+            })),
+            extras: booking.extras ? booking.extras.map((inflatable) => ({
+              bookedDates: inflatable.bookingDates ? [...inflatable.bookingDates] : [],
+              inflatableID: inflatable.inflatableID,
+              inflatableName: inflatable.inflatableName,
+              inflatableImage: inflatable.inflatableImage
+            })) : []
           }
           setBooking(arrayBooking)
         } else {
@@ -134,6 +140,19 @@ function Invoice() {
                     ) : (
                       <p>No inflatables booked.</p>
                     )}
+                     {booking && booking.extras ? (
+                      booking.extras.map((inflatable, index) => (
+                        <div key={index} className="inflatable-row">
+                         <img src={inflatable.inflatableImage} alt={inflatable.inflatableName} />
+                          <div>
+                            <p><b>Extra Name:</b> {inflatable.inflatableName}</p>
+                            <p><b>Booked Dates:</b> {inflatable.bookedDates.join(' > ')}</p>
+                          </div>
+                        </div>
+                      ))
+                      ) : (
+                        <p>No inflatables booked.</p>
+                      )}
                 </div>
                 <div id="right">
                     <div className='balance-payment'>

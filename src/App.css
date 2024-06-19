@@ -1959,6 +1959,8 @@ abbr[title] {
 
 .invoice-page .main-grid .inflatable-row img{
   width: 100px;
+  height: 80px;
+  object-fit: contain;
 }
 
 
