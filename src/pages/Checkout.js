@@ -100,7 +100,7 @@ function Checkout() {
         rent: discountedRent, 
         deliveryFee: deliveryFee,
         deliveryAmount: timeFrame,
-        deposit: depositOnly ? 100 : 0,
+        deposit: !requestBooking & depositOnly ? 100 : 0,
         insurance: insuranceCertificate ? 45 : 0,
         tax: calculatedTaxFee,
         damageWaiver:damageWaiver ? (discountedRent * 0.09) : 0,
