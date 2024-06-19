@@ -44,7 +44,7 @@ function Checkout() {
     const [phone, setPhone] = useState('')
     const [alerts, setAlerts] = useState([])
     const [confirmationID, setConfirmationID] = useState('')
-    const [bookCompleted, setBookCompleted] = useState(false)
+    const [bookCompleted, setBookCompleted] = useState(true)
     const [isVerified, setIsVerified] = useState(false);
     const [requestBooking, setRequestBooking] = useState(false)
 
@@ -483,6 +483,7 @@ function Checkout() {
       console.log("Request Booking Sent");
       const docRef = await addDoc(collection(db, "bookings-test"), data);
       setBookCompleted(true)
+      setConfirmationID(docRef.id)
       sessionStorage.removeItem('cart');
       // SENDING REQUEST-CONFIRMATION EMAIL
       try {
@@ -754,7 +755,9 @@ function Checkout() {
 
               <p> <b> Confirmation ID:</b> {confirmationID} </p>
             </div>
-        <Footer />
+        <div style={{visibility: bookCompleted ? "hidden":"visible"}}>
+         <Footer />                          
+        </div>           
     </div>
   )
 }

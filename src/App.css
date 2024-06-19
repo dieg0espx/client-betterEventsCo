@@ -965,6 +965,9 @@ abbr[title] {
     grid-template-columns: 50% auto;
   }
   .header img {
+    height: 40px;
+    object-fit: contain;
+
     /* border: 1px solid red; */
   }
   .nav-mobile-menu {
@@ -2734,5 +2737,19 @@ abbr[title] {
   .cart-page .row {
     grid-template-columns: 1fr;
     gap: 5px;
+  }
+  .checkout-page .confirmation {
+    padding: 10px;
+    gap: 20px;
+  }
+  .checkout-page .confirmation p, 
+  .checkout-page .confirmation h2 {
+    max-width: 600px;
+  }
+  .checkout-page .confirmation p {
+    font-size: 20px;
+  }
+  .checkout-page .confirmation h2 {
+    font-size: 20px;
   }
 }
