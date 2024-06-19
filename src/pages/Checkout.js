@@ -141,10 +141,11 @@ function Checkout() {
       extras: extrasData,  // Add the inflatables array here
       balances: balances, 
       method: paymentMethod,
-      paid: paymentMethod == 'Credit Card' && !depositOnly ? true : false, 
+      paid: paymentMethod == 'Credit Card' && !depositOnly && !requestBooking ? true : false, 
       created: formatDateCreate(new Date()), 
       specificTime: specificTime,
       floorType: floorType, 
+      approved : requestBooking ? 'Waiting' : 'True'
     };
   
     async function getRequestBookingStatus(){
@@ -480,6 +481,26 @@ function Checkout() {
 
     async function sendBookingRequest(){
       console.log("Request Booking Sent");
+      const docRef = await addDoc(collection(db, "bookings-test"), data);
+      setBookCompleted(true)
+      sessionStorage.removeItem('cart');
+      // SENDING REQUEST-CONFIRMATION EMAIL
+      try {
+        let response = await fetch('https://better-stays-mailer.vercel.app/api/bebookingRequested', {
+            method: 'POST',
+            headers: { 'Content-Type': 'application/json' },
+            body: JSON.stringify({ 
+                data: data,
+                reservationID: docRef.id
+            })
+        });
+
+        return response.status == 200 ? true : false;
+      } catch (error) {
+          console.error('Error sending email confirmation:', error);
+          alert('Error sending email confirmation:', error)
+          throw error;
+      }
     }
     
   return (
