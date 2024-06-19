@@ -2729,3 +2729,10 @@ abbr[title] {
     margin-bottom: 10px !important;
   }
 }
+
+@media screen and (max-width:800px) {
+  .cart-page .row {
+    grid-template-columns: 1fr;
+    gap: 5px;
+  }
+}
