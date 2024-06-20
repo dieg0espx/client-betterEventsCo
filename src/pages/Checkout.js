@@ -245,15 +245,24 @@ function Checkout() {
     const currentState = address.split(',')[2]
     
     // SETTING UP TAX BASED ON THE STATE
-    if (currentState == ' Illinois' || currentState == ' IL'){
+    if (requestBooking){
       setState('Illinois')
       setTax(8.75)
-    } else if (currentState == ' Wisconsin' || currentState == ' WI'){
-      setState('Wisconsin')
-      setTax(6.25)
     } else {
-      alert ('Unfornately, delivery to that area is not currently available :(')
+      if (currentState == ' Illinois' || currentState == ' IL'){
+        setState('Illinois')
+        setTax(8.75)
+      } else if (currentState == ' Wisconsin' || currentState == ' WI'){
+        setState('Wisconsin')
+        setTax(6.25)
+      } else {
+        alert ('Unfornately, delivery to that area is not currently available :(')
+      }
     }
+   
+
+
+
     console.log('CALCULATUNG DELIVERY DISTANCE ....');
     console.log("City:" + currentCity);
     console.log("State:" + currentState);
