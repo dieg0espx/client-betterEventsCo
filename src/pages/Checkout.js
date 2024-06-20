@@ -663,7 +663,7 @@ function Checkout() {
                       </div>
                         <hr></hr>
                         <div id='total'>
-                            <input type='text' placeholder='Promo Code' className='promoCode' onChange={(e)=>getDiscount(e.target.value)}/>
+                            <input type='text' placeholder='Promo Code' className='promoCode' onChange={(e)=>getDiscount(e.target.value.toLowerCase())}/>
                             <p><b>Total:</b></p>
                             <p>{formatter.format(total)} USD</p>
                         </div>
