@@ -58,8 +58,8 @@ function ProcessPayment(props) {
                 const response = await axios.post(stripeURL + "/paymentInflatables", {
                   id,
                   description: "INFLATABLE BOOKING | Name: " + data.name + " " + data.lastName, 
-                  // amount: Math.floor(props.total*100),
-                  amount: Math.floor(100),
+                  amount: Math.floor(props.total*100),
+                  // amount: Math.floor(100),
                 })
                 if (response.data.success) {
                     setSuccess(true)
