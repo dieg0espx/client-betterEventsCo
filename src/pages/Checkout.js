@@ -572,7 +572,7 @@ function Checkout() {
                                 <option value={75}> YES - Must deliver within a 1 hour window ($75.00)</option>
                                 <option value={50}> YES - You must deliver within a 2 hours or greater window ($50.00)</option>
                               </select>
-                              <input type='time' onChange={(e)=> setSpecificTime(e.target.value)} value={specificTime}/>
+                              <input type='time' onChange={(e)=> setSpecificTime(e.target.value)} value={specificTime} style={{display: timeFrame !== 0 ? 'block':'none'}}/>
                             </div>
                           </div>
                         </div>
